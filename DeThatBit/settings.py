@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'single_pages',
+    'free_board',
+    #'review_board',
 ]
 
 MIDDLEWARE = [
