@@ -8,8 +8,13 @@
 </head>
 <body>
     <div class="loginBtns">
-        <button>Login</button>
-        <button>Join</button>
+        {% if user.is_active %}
+        <p>Welcome {{ user.username }}</p>
+        <a href="accounts/logout/">LogOut</a>
+        {% else %}
+        <a href="accounts/login/">Login</a>
+        <a href="/sign_up/">Join</a>
+        {% endif %}
     </div>
     <h1>DeThatBit</h1>
     <ul class="nav">

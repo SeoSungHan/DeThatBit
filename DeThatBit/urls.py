@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('single_pages.urls')),
     path('free/', include('free_board.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     #path('review/', include('review_board.urls')),
 ]
 
