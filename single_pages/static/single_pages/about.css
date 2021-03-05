@@ -1,0 +1,27 @@
+.about {
+  background-color: rgb(202, 241, 241);
+  text-align: center;
+  margin: 100px auto 0px auto;
+  width: 800px;
+  padding: 20px;
+  border-radius: 10px;
+}
+h1 {
+  margin: 0px auto 0px auto;
+  text-align: center;
+  font-weight: 300;
+  font-size: 90px;
+}
+h2 {
+  margin-top: 60px;
+}
+.home {
+  margin: 20px auto 0px auto;
+  text-align: center;
+  font-size: 50px;
+  font-weight: 900;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
