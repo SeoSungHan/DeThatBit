@@ -1,0 +1,43 @@
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+.home {
+  margin: 20px auto 0px auto;
+  text-align: center;
+  font-size: 50px;
+  font-weight: 900;
+}
+.freeBoard {
+  text-align: center;
+  background-color: aliceblue;
+}
+table {
+  margin: 10px auto 0px auto;
+  background-color: antiquewhite;
+}
+table tr {
+  border-bottom: solid black 1px;
+}
+table tr th {
+  border-bottom: solid black 1px;
+  text-align: left;
+}
+table tr td {
+  padding: 5px;
+  padding-bottom: 3px;
+}
+.td_num {
+  padding-right: 30px;
+}
+.td_title {
+  padding-right: 300px;
+}
+.td_writer {
+  padding-right: 50px;
+}

@@ -3,25 +3,25 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Landing Pages</title>
+    <title>DeThatBit</title>
     <link rel="stylesheet" href="{% static 'single_pages/style.css' %}" media="screen"/>
 </head>
 <body>
     <div class="loginBtns">
         {% if user.is_active %}
         <p>Welcome {{ user.username }}</p>
-        <a href="accounts/logout/">LogOut</a>
+        <button><a href="accounts/logout/">LogOut</a></button>
         {% else %}
-        <a href="accounts/login/">Login</a>
-        <a href="/sign_up/">Join</a>
+        <button><a href="accounts/login/">Login</a></button>
+        <button><a href="/sign_up/">Join</a></button>
         {% endif %}
     </div>
     <h1>DeThatBit</h1>
     <ul class="nav">
-        <li>About</li>
+        <li><a href="/about_this/">About</a></li>
         <li>Album</li>
         <li>Artists</li>
-        <li>Freeboard</li>
+        <li><a href="/free/">Freeboard</a></li>
         <li>Review</li>
     </ul>
     <div class="homeBox">

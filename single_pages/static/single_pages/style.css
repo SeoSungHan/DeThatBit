@@ -7,7 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: aliceblue;
 }
-
+a {
+  text-decoration: none;
+  color: black;
+}
 .loginBtns {
   position: fixed;
   top: 10px;
@@ -19,8 +22,8 @@ body {
   padding: 2px 6px 2px 6px;
   cursor: pointer;
 }
-.loginBtns button:active {
-  transform: scale(0.98);
+.loginBtns button:hover {
+  background-color: black;
 }
 h1 {
   margin: 30px auto 0px auto;
