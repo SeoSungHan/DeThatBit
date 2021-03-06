@@ -3,6 +3,7 @@
 <title>{{free_post.title}}</title>
 <meta charset="utf-8" />
 <link rel="stylesheet" href="{% static 'free_board/free_board.css' %}" media="screen" />
+<link rel="icon" type="image/png" href="{% static 'img/favicon.ico'%}">
 
 </head>
 
@@ -14,7 +15,7 @@
         <div class="contentBox">
             <div class="contentBox_header">
                 <h2>{{free_post.title}}</h2>
-                <h5>{{ user.username }}</h5>
+                <h5>작성자</h5>
             </div>
             <div class="contentBox_body">
                 <p>{{free_post.content}}</p>
@@ -26,7 +27,7 @@
         <div class="container">
           <p class="m-0 text-center text-white">Copyright &copy; 
             <i class="fas fa-file-signature"></i>  
-            NADA
+            SEOSUNGHAN
           </p>
         </div>
         <!-- /.container -->
