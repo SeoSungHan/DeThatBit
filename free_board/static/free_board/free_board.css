@@ -3,6 +3,9 @@ body {
   height: 100%;
   margin: 0;
 }
+footer {
+  text-align: center;
+}
 a {
   text-decoration: none;
   color: black;
@@ -40,4 +43,26 @@ table tr td {
 }
 .td_writer {
   padding-right: 50px;
+}
+
+/*detail.html*/
+.content {
+  text-align: center;
+  background-color: aliceblue;
+}
+.contentBox {
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+  border: solid 1px black;
+  background-color: antiquewhite;
+}
+.contentBox_header {
+  padding-left: 20px;
+  text-align: left;
+  border: solid 2px brown;
+}
+.contentBox_body {
+  text-align: left;
+  padding: 0px 20px 0px 20px;
 }

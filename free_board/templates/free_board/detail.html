@@ -1,14 +1,36 @@
 <html>
-    {% load static %}
-    <title>{{free_post.title}}</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="{% static 'free_board/free_board.css' %}" media="screen"/>
+{% load static %}
+<title>{{free_post.title}}</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="{% static 'free_board/free_board.css' %}" media="screen" />
 
-    </head>
-    <body>
-        <div><a href="/">DeThatBit</a></div>
+</head>
+
+<body>
+    <div class="home"><a href="/">DeThatBit</a></div>
+    <div class="content">
+        
         <h1><a href="/free/">FreeBoard</a></h1>
-        <h2>{{free_post.title}}</h2>
-        <p>{{free_post.content}}</p>
-    </body>
+        <div class="contentBox">
+            <div class="contentBox_header">
+                <h2>{{free_post.title}}</h2>
+                <h5>{{ user.username }}</h5>
+            </div>
+            <div class="contentBox_body">
+                <p>{{free_post.content}}</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-5 bg-dark">
+        <div class="container">
+          <p class="m-0 text-center text-white">Copyright &copy; 
+            <i class="fas fa-file-signature"></i>  
+            NADA
+          </p>
+        </div>
+        <!-- /.container -->
+    </footer>
+</body>
+
 </html>
