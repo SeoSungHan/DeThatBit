@@ -23,7 +23,9 @@ urlpatterns = [
     path('', include('single_pages.urls')),
     path('free/', include('free_board.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    #path('review/', include('review_board.urls')),
+    path('review/', include('review_board.urls')),
+    path('albums/', include('albums.urls')),
+    path('artists/', include('artists.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
