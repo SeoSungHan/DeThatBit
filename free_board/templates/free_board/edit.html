@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DeThatBit | New Free Post </title>
+    <link rel="stylesheet" href="{% static 'free_board/free_board.css' %}" media="screen" />
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.ico'%}">
+</head>
+
+<body>
+    <div class="home"><a href="/">DeThatBit</a></div>
+    <div class="container my-5">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{user.username}}
+            <table>{{form.as_p}}</table>
+            
+            <button class="btn btn-info mt-3" type="submit"> Submit </button>
+            <a href="../">Back</a>
+        </form>
+    </div>
+    <footer class="py-5 bg-dark">
+        <div class="container">
+          <p class="m-0 text-center text-white">Copyright &copy; 
+            <i class="fas fa-file-signature"></i>  
+            SEOSUNGHAN
+          </p>
+        </div>
+        <!-- /.container -->
+    </footer>
+</body>
+
+</html>
