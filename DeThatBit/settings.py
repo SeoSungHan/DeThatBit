@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'single_pages',
     'free_board',
-    #'review_board',
+    'review_board',
+    'albums',
+    'artists',
 ]
 
 MIDDLEWARE = [

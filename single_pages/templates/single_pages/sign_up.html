@@ -1,27 +1,46 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <title>Join Pages</title>
-    <link rel="stylesheet" href="{% static 'single_pages/style.css' %}" media="screen"/>
+    <link rel="stylesheet" href="{% static 'single_pages/style.css' %}" media="screen" />
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.ico'%}">
 </head>
+
 <body>
-    <h3>회원 가입</h3>
-    <form method="POST">{% csrf_token %}
-        <div>
-            <label for="username">Username: </label>
-            <input type="text" name="username" value="{{form.username.value|default_if_none:''}}" placeholder="username">
+    <div class="home"><a href="/">DeThatBit</a></div>
+    <div class="signUpBox">
+        <h3>회원 가입</h3>
+        <form method="POST" class="signUpForm">{% csrf_token %}
+            <div>
+                <label for="username">Username: </label>
+                <input type="text" name="username" value="{{form.username.value|default_if_none:''}}"
+                    placeholder="username">
+            </div>
+            <div>
+                <label for="password1">Password: </label>
+                <input type="password" name="password1" value="{{form.password1.value|default_if_none:''}}"
+                    placeholder="password1">
+            </div>
+            <div>
+                <label for="password2">Password Confirm: </label>
+                <input type="password" name="password2" value="{{form.password2.value|default_if_none:''}}"
+                    placeholder="password2">
+            </div>
+            <input type="submit" value="Submit"></input>
+        </form>
+    </div>
+    <footer class="py-5 bg-dark">
+        <div class="container">
+          <p class="m-0 text-center text-white">Copyright &copy; 
+            <i class="fas fa-file-signature"></i>  
+            SEOSUNGHAN
+          </p>
         </div>
-        <div>
-            <label for="password1">Password: </label>
-            <input type="password" name="password1" value="{{form.password1.value|default_if_none:''}}" placeholder="password1">
-        </div>
-        <div>
-            <label for="password2">Password Confirm: </label>
-            <input type="password" name="password2" value="{{form.password2.value|default_if_none:''}}" placeholder="password2">
-        </div>
-        <input type="submit" value="Submit"></input>
-    </form>   
+        <!-- /.container -->
+    </footer>
 </body>
+
 </html>

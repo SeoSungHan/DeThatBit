@@ -1,6 +1,6 @@
 <html>
 {% load static %}
-<title>{{free_post.title}}</title>
+<title>{{review_post.title}}</title>
 <meta charset="utf-8" />
 <link rel="stylesheet" href="{% static 'free_board/free_board.css' %}" media="screen" />
 <link rel="icon" type="image/png" href="{% static 'img/favicon.ico'%}">
@@ -11,14 +11,14 @@
     <div class="home"><a href="/">DeThatBit</a></div>
     <div class="content">
         
-        <h1><a href="/free/">FreeBoard</a></h1>
+        <h1><a href="/free/">Review Board</a></h1>
         <div class="contentBox">
             <div class="contentBox_header">
-                <h2>{{free_post.title}}</h2>
-                <h5>{{free_post.author}}</h5>
+                <h2>{{review_post.title}}</h2>
+                <h5>{{review_post.author}}</h5>
             </div>
             <div class="contentBox_body">
-                <p>{{free_post.content}}</p>
+                <p>{{review_post.content}}</p>
             </div>
         </div>
     </div>
