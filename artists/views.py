@@ -1,4 +1,5 @@
 from django.shortcuts import render
+
 from django.views.generic import ListView, DetailView
 
 def artists_home(request):
@@ -6,3 +7,4 @@ def artists_home(request):
         request,
         'artists/index.html'
     )
+
