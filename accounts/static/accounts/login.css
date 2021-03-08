@@ -1,0 +1,53 @@
+.my-5 {
+  background-color: lightblue;
+  text-align: center;
+  margin: 100px auto;
+  width: 300px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 2px lightblue;
+}
+.my-5 button {
+  border: transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 5px 2px;
+  padding: 3px;
+}
+.my-5 button:hover {
+  background-color: rgb(13, 60, 63);
+  color: white;
+}
+.mt-1 > input {
+  background-color: transparent;
+  color: white;
+}
+.my-3 {
+  padding: 10px;
+  margin: 0;
+}
+.my-5 > form {
+  padding-left: 50px;
+  text-align: left;
+}
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+.home {
+  margin: 20px auto 0px auto;
+  text-align: center;
+  font-size: 50px;
+  font-weight: 900;
+}

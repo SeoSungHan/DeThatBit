@@ -12,18 +12,23 @@ a {
   color: black;
 }
 .loginBtns {
+  display: flex;
   position: fixed;
-  top: 10px;
+  top: 0px;
   right: 10px;
+}
+.loginBtns p {
+  padding: 3px 2px 3px 2px;
 }
 .loginBtns button {
   border: transparent;
-  margin: 5px;
-  padding: 2px 6px 2px 6px;
+  margin: 20px;
+  padding: 3px 2px 3px 2px;
   cursor: pointer;
 }
 .loginBtns button:hover {
-  background-color: black;
+  background-color: darkgray;
+  color: white;
 }
 h1 {
   margin: 30px auto 0px auto;
@@ -46,9 +51,32 @@ h1 {
   background-color: rgb(224, 220, 220);
   margin: auto;
   width: 1200px;
-  height: 700px;
+  height: 650px;
 }
 .homeBox img {
   height: 100%;
   width: 100%;
+}
+/*sign_up*/
+.home {
+  margin: 20px auto 0px auto;
+  text-align: center;
+  font-size: 50px;
+  font-weight: 900;
+}
+
+.signUpBox {
+  margin: 100px auto;
+  text-align: center;
+  width: 400px;
+  height: 300px;
+}
+.signUpForm {
+  text-align: left;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }

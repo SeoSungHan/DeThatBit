@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>DeThatBit</title>
     <link rel="stylesheet" href="{% static 'single_pages/style.css' %}" media="screen"/>
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.ico'%}">
 </head>
 <body>
     <div class="loginBtns">
@@ -16,16 +17,25 @@
         <button><a href="/sign_up/">Join</a></button>
         {% endif %}
     </div>
-    <h1>DeThatBit</h1>
+    <h1><a href="/">DeThatBit</a></h1>
     <ul class="nav">
         <li><a href="/about_this/">About</a></li>
-        <li>Album</li>
-        <li>Artists</li>
+        <li><a href=/albums/">Album</a></li>
+        <li><a href=/artists/">Artists</a></li>
         <li><a href="/free/">Freeboard</a></li>
-        <li>Review</li>
+        <li><a href="/review/">Review</a></li>
     </ul>
     <div class="homeBox">
         <img src="https://t3.ftcdn.net/jpg/02/81/66/20/240_F_281662026_5WLYXaos1hSWDPHEWeP89Yr5NEpGP13K.jpg" alt="hiphop image">
     </div>
+    <footer class="py-5 bg-dark">
+        <div class="container">
+          <p class="m-0 text-center text-white">Copyright &copy; 
+            <i class="fas fa-file-signature"></i>  
+            SEOSUNGHAN
+          </p>
+        </div>
+        <!-- /.container -->
+    </footer>
 </body>
 </html>
