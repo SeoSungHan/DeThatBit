@@ -1,47 +1,43 @@
-<html>
+{% extends "base.html" %}
+
 {% load static %}
-<title>{{free_post.title}}</title>
-<meta charset="utf-8" />
+{% block title%}
+{{free_post.title}} | DeThatBit
+{% endblock %}
+{% block extra_head %}
 <link rel="stylesheet" href="{% static 'free_board/free_board.css' %}" media="screen" />
-<link rel="icon" type="image/png" href="{% static 'img/favicon.ico'%}">
+{% endblock %}
 
-</head>
-
-<body>
-    <div class="home"><a href="/">DeThatBit</a></div>
-    <div class="content">
-        
-        <h1><a href="/free/">FreeBoard</a></h1>
-        <div class="contentBox">
-            <div class="contentBox_header">
+{% block contents%}
+<div class="home"><a href="/">DeThatBit</a></div>
+<div class="content">
+    <h1><a href="/free/">FreeBoard</a></h1>
+    <div class="contentBox">
+        <div class="contentBox_header">
+            <div class="updateBtns">
                 <button><a href="/free/{{free_post.pk}}/update/">Modify</a></button>
                 <button onclick="alert_del()"><a href="/free/{{free_post.pk}}/delete/">Delete</a></button>
-                <h2>{{free_post.title}}</h2>
-                <h5>{{free_post.author}}</h5>
+            </div>
+            <h2>{{free_post.title}}</h2>
+            <h5>{{free_post.author.username}}</h5>
 
-            </div>
-            <div class="contentBox_body">
-                <p>{{free_post.content}}</p>
-            </div>
+        </div>
+        <div class="contentBox_body">
+            <p>{{free_post.content}}</p>
         </div>
     </div>
+</div>
 
-    <footer class="py-5 bg-dark">
-        <div class="container">
-          <p class="m-0 text-center text-white">Copyright &copy; 
-            <i class="fas fa-file-signature"></i>  
-            SEOSUNGHAN
-          </p>
-        </div>
-        <!-- /.container -->
-    </footer>
-
-    <script>
-        function alert_del(){
-            alert("삭제하시겠습니까?");
+<script>
+    function alert_del() {
+        alert("삭제하시겠습니까?");
+    }
+    function isAuthor() {
+        if ("{{free_post.author.id}}" != "{{user.id}}") {
+            const btns = document.querySelector(".updateBtns");
+            btns.classList.add("hidden");
         }
-    </script>
-
-</body>
-
-</html>
+    }
+    isAuthor();
+</script>
+{% endblock %}

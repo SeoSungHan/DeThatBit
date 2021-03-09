@@ -1,10 +1,14 @@
-<html>
-    {% load static %}
-<head>
-</head>
+{% extends "base.html" %}
 
-<body>
-    Not Working :: This area is for Artist Library
-</body>
+{% load static %}
+{% block title%}
+Albums | DeThatBit
+{% endblock %}
 
-</html>
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'artists/artists.css' %}" media="screen" />
+{% endblock %}
+
+{% block contents%}
+<div class="home"><a href="/">DeThatBit</a></div>
+{% endblock %}

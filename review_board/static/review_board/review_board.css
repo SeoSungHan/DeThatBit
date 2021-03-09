@@ -22,7 +22,7 @@ a {
   font-size: 50px;
   font-weight: 900;
 }
-.freeBoard {
+.reviewBoard {
   text-align: center;
   width: 900px;
   margin: 0px auto;
@@ -96,13 +96,12 @@ table tr td {
   padding: 2px 6px 2px 6px;
   margin: 0 20px 0 20px;
 }
-.nav_free {
+.nav_review {
   background-color: black;
 }
-.nav_free a {
+.nav_review a {
   color: white;
 }
-
 /*edit.html*/
 .new_post {
   background-color: aliceblue;
