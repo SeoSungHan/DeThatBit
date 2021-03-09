@@ -14,8 +14,9 @@
         <h1><a href="/free/">FreeBoard</a></h1>
         <div class="contentBox">
             <div class="contentBox_header">
+                <button><a href="/free/{{free_post.pk}}/update/">Modify</a></button>
+                <button onclick="alert_del()"><a href="/free/{{free_post.pk}}/delete/">Delete</a></button>
                 <h2>{{free_post.title}}</h2>
-
                 <h5>{{free_post.author}}</h5>
 
             </div>
@@ -34,6 +35,13 @@
         </div>
         <!-- /.container -->
     </footer>
+
+    <script>
+        function alert_del(){
+            alert("삭제하시겠습니까?");
+        }
+    </script>
+
 </body>
 
 </html>
