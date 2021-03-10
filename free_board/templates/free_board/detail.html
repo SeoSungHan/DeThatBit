@@ -27,6 +27,29 @@
     </div>
 </div>
 
+
+<form method="POST" action="/free/{{free_post.pk}}/comment_create/">
+    {% csrf_token %}
+    <input type="hidden" value="{{free_post.pk}}" name="free_post">
+    댓글 작성 : <input type="text" name="text"></input>
+    <button type="submit" class="btn btn-secondary">작성</button>
+</form>
+
+
+<div class="comment">
+    {% if free_post.free_comment_set.count > 0 %}
+        {% for comment in free_post.free_comment_set.all %}
+        {{ comment.writer }}
+        {{ comment.text }}
+        {{ comment.created_at }}
+        <hr>
+        {% endfor%}
+    {% else %}
+    <h1>댓글 없음</h1>
+    {% endif %}
+</div>
+
+
 <script>
     function alert_del() {
         alert("삭제하시겠습니까?");

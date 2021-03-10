@@ -1,8 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView
-from .models import Free_Post
-from .forms import PostForm
+from .models import Free_Post, Free_Comment
+from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
  
 class Free_List(ListView):
@@ -10,10 +10,22 @@ class Free_List(ListView):
     template_name = 'free_board/list.html'
     ordering = '-pk'
 
-
 class Free_Detail(DetailView):
     model = Free_Post
     template_name = 'free_board/detail.html'
+    form_class=CommentForm
+   
+@login_required
+def Free_Comment_Create(request, pk):
+    if request.method == 'POST':
+                comment = Free_Comment()
+                comment.text = request.POST['text']
+                comment.free_post = Free_Post.objects.get(pk=request.POST['free_post'])       
+                comment.writer = request.user
+                comment.save()
+                return redirect('../')
+    else :
+                return redirect('../')
 
 @login_required
 def Free_Post_Create(request):
@@ -27,7 +39,6 @@ def Free_Post_Create(request):
     else:
         form = PostForm()
         return render(request, 'free_board/edit.html', {'form': form})
-
 
 @login_required
 def Free_Post_Update(request, pk):

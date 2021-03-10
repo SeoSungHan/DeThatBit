@@ -21,7 +21,7 @@
         </ul>
         <div class="loginBtns">
             {% if user.is_active %}
-            <p>Welcome <span class="username">{{ user.username }}</span></p>
+
             <button><a href="/accounts/logout/">LogOut</a></button>
             {% else %}
             <button><a href="/accounts/login/">Login</a></button>
