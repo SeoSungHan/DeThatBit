@@ -20,9 +20,9 @@
         <div class="loginBtns">
             {% if user.is_active %}
             <p>Welcome {{ user.username }}</p>
-            <button><a href="accounts/logout/">LogOut</a></button>
+            <button><a href="/accounts/logout/">LogOut</a></button>
             {% else %}
-            <button><a href="accounts/login/">Login</a></button>
+            <button><a href="/accounts/login/">Login</a></button>
             <button><a href="/sign_up/">Join</a></button>
             {% endif %}
         </div>

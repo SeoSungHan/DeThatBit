@@ -28,7 +28,6 @@ def Free_Post_Create(request):
         form = PostForm()
         return render(request, 'free_board/edit.html', {'form': form})
 
-
 @login_required
 def Free_Post_Update(request, pk):
     post = get_object_or_404(Free_Post, pk=pk)
