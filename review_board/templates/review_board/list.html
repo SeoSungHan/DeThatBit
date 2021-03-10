@@ -1,52 +1,44 @@
-<html>
-    {% load static %}
-<head>
-    <title>Free Board | DeThatBit</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="{% static 'free_board/free_board.css' %}" media="screen"/>
-    <link rel="icon" type="image/png" href="{% static 'img/favicon.ico'%}">
-</head>
+{% extends "base.html" %}
 
-<body>
-    <div class="home"><a href="/">DeThatBit</a></div>
-    <div class="freeBoard">
-        <h1><a href="/free/">ReviewBoard</a></h1>
-        <table>
-            {%if review_post_list.exists%}
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    
-                    <th>Writer</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                {%for p in review_post_list%}
-                <tr>
-                    <td class="td_num">{{p.get_review_url}}</td>
-                    <td class="td_title"><a href="{{p.get_review_url}}">{{p.title}}</a></td>
-                    <!--<td class="td_content">{{p.content | truncatewords:30}}</td>-->
-                    <td class="td_writer">{{p.author}}</td>
-                    <td class="td_time">{{p.created_at}}</td>
-                </tr>
-                {%endfor%}
-            </tbody>
-            {%else%}
-            <tr>No Content</tr>
-            {%endif%}
-        </table>
-    </div>
-    <footer class="py-5 bg-dark">
-        <div class="container">
-          <p class="m-0 text-center text-white">Copyright &copy; 
-            <i class="fas fa-file-signature"></i>  
-            SEOSUNGHAN
-          </p>
-        </div>
-        <!-- /.container -->
-    </footer>
-</body>
+{% load static %}
+{% block title%}
+Review Board | DeThatBit
+{% endblock %}
 
-</html>
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'review_board/review_board.css' %}" media="screen" />
+{% endblock %}
+
+{% block contents%}
+<div class="home"><a href="/">DeThatBit</a></div>
+<div class="reviewBoard">
+    <h1><a href="/review/">Review Board</a></h1>
+    <table>
+        {%if review_post_list.exists%}
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+
+                <th>Writer</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for p in review_post_list%}
+            <tr>
+                <td class="td_num">{{p.get_review_url}}</td>
+                <td class="td_title"><a href="{{p.get_review_url}}">{{p.title}}</a></td>
+                <!--<td class="td_content">{{p.content | truncatewords:30}}</td>-->
+                <td class="td_writer">{{p.author}}</td>
+                <td class="td_time">{{p.created_at}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+        {%else%}
+        <tr>No Content</tr>
+        {%endif%}
+    </table>
+    <button class="create_btn"><a href="/review/create/">Create</a></button>
+</div>
+{% endblock %}
