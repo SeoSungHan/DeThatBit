@@ -13,10 +13,29 @@ class Free_List(ListView):
 class Free_Detail(DetailView):
     model = Free_Post
     template_name = 'free_board/detail.html'
-    form_class=CommentForm
-   
+    
+    def get_context_data(self, **kwargs):
+       context=super(Free_Detail, self).get_context_data()
+       context['comment_form']=CommentForm
+       return context
+
 @login_required
 def Free_Comment_Create(request, pk):
+    post=get_object_or_404(Free_Post, pk=pk)
+
+    if request.method == 'POST':
+                comment_form=CommentForm(request.POST)
+                if comment_form.is_valid():
+                    comment=comment_form.save(commit=False)
+                    comment.free_post=post
+                    comment.author=request.user
+                    comment.save()
+                    return redirect(comment.get_absolute_url())
+    else :
+                return redirect(post.get_free_url())
+
+@login_required
+def Free_Comment_Update(request, pk):
     if request.method == 'POST':
                 comment = Free_Comment()
                 comment.text = request.POST['text']
@@ -26,6 +45,15 @@ def Free_Comment_Create(request, pk):
                 return redirect('../')
     else :
                 return redirect('../')
+
+@login_required
+def Free_Comment_Delete(request, pk):
+    comment = Free_Comment.objects.get(pk=pk)
+    if request.user==comment.writer:
+        comment.delete()
+        return redirect('../')
+    else:
+        return redirect('../')
 
 @login_required
 def Free_Post_Create(request):

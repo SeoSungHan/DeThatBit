@@ -1,10 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
+from markdownx.models import MarkdownxField
+from markdownx.utils import markdown
 import os
 
 class Free_Post(models.Model):
     title=models.CharField(max_length=30)
-    content=models.TextField()
+    content=MarkdownxField()
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     author=models.ForeignKey(User, null=True, on_delete=models.CASCADE)
@@ -13,7 +15,10 @@ class Free_Post(models.Model):
         return f'[{self.pk}]{self.title}by{self.author}'
 
     def get_free_url(self):
-        return f'{self.pk}/'
+        return f'/free/{self.pk}/'
+
+    def get_content_markdown(self):
+        return markdown(self.content)
 
 class Free_Comment(models.Model):
     writer=models.ForeignKey(User, null=True, on_delete=models.CASCADE)
@@ -24,5 +29,8 @@ class Free_Comment(models.Model):
 
     def __str__(self):
         return self.writer.username+'::'+self.text
+
+    def get_absolute_url(self):
+        return f'{self.free_post.get_free_url()}#comment-{self.pk}'
 
 
