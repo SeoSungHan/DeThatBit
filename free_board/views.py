@@ -28,32 +28,21 @@ def Free_Comment_Create(request, pk):
                 if comment_form.is_valid():
                     comment=comment_form.save(commit=False)
                     comment.free_post=post
-                    comment.author=request.user
+                    comment.writer=request.user
                     comment.save()
                     return redirect(comment.get_absolute_url())
     else :
                 return redirect(post.get_free_url())
 
 @login_required
-def Free_Comment_Update(request, pk):
-    if request.method == 'POST':
-                comment = Free_Comment()
-                comment.text = request.POST['text']
-                comment.free_post = Free_Post.objects.get(pk=request.POST['free_post'])       
-                comment.writer = request.user
-                comment.save()
-                return redirect('../')
-    else :
-                return redirect('../')
-
-@login_required
 def Free_Comment_Delete(request, pk):
-    comment = Free_Comment.objects.get(pk=pk)
+    comment=get_object_or_404(Free_Comment, pk=pk)
+    post=comment.free_post
     if request.user==comment.writer:
         comment.delete()
-        return redirect('../')
+        return redirect(post.get_free_url())
     else:
-        return redirect('../')
+        return redirect(comment.get_absolute_url())
 
 @login_required
 def Free_Post_Create(request):

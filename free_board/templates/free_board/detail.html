@@ -28,7 +28,7 @@
 </div>
 
 
-<div class="cooment_form">
+<div class="comment_form">
     <form action="/free/{{free_post.pk}}/comment_create/" method="POST">
         {% csrf_token %}
         {{comment_form}}
@@ -43,8 +43,9 @@
             {{ comment.writer }}
             <p>{{ comment.text | linebreaks }}</p>
             <small>{{ comment.created_at }}</small>
-            <button><a href="/free/{{free_post.pk}}/comment_update/">Modify</a></button>
-            <button onclick="alert_del()"><a href="/free/{{free_post.pk}}/comment_delete/">Delete</a></button>
+            <a role="button" href="/free/comment_delete/{{comment.pk}}/">
+                Delete
+            </a>
             <hr>
         </div>
         {% endfor%}
@@ -52,6 +53,7 @@
     <h1>댓글 없음</h1>
     {% endif %}
 </div>
+
 
 
 <script>
