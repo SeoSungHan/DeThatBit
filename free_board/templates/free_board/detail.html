@@ -43,6 +43,7 @@
             {{ comment.writer }}
             <p>{{ comment.text | linebreaks }}</p>
             <small>{{ comment.created_at }}</small>
+            <button class="comment-modify">Modify</button>
             <a role="button" href="/free/comment_delete/{{comment.pk}}/">
                 Delete
             </a>
@@ -53,8 +54,6 @@
     <h1>댓글 없음</h1>
     {% endif %}
 </div>
-
-
 
 <script>
     function alert_del() {
