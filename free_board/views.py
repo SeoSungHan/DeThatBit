@@ -37,15 +37,17 @@ def Free_Comment_Create(request, pk):
 @login_required
 def Free_Comment_Update(request, pk):
     comment=get_object_or_404(Free_Comment, pk=pk)
-
-    if request.method == 'POST':
-        comment_form=CommentForm(request.POST, instance=comment)
-        if comment_form.is_valid():
-            comment=comment_form.save(commit=False)
-            comment.save()
+    if request.user==comment.writer:
+        if request.method == 'POST':
+            comment_form=CommentForm(request.POST, instance=comment)
+            if comment_form.is_valid():
+                comment=comment_form.save(commit=False)
+                comment.save()
+                return redirect(comment.get_absolute_url())
+        else :
+            comment_form=CommentForm(instance=comment)
             return redirect(comment.get_absolute_url())
-    else :
-        comment_form=CommentForm(instance=comment)
+    else:
         return redirect(comment.get_absolute_url())
 
 @login_required
