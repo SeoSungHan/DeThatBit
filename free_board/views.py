@@ -35,6 +35,20 @@ def Free_Comment_Create(request, pk):
                 return redirect(post.get_free_url())
 
 @login_required
+def Free_Comment_Update(request, pk):
+    comment=get_object_or_404(Free_Comment, pk=pk)
+
+    if request.method == 'POST':
+        comment_form=CommentForm(request.POST, instance=comment)
+        if comment_form.is_valid():
+            comment=comment_form.save(commit=False)
+            comment.save()
+            return redirect(comment.get_absolute_url())
+    else :
+        comment_form=CommentForm(instance=comment)
+        return redirect(comment.get_absolute_url())
+
+@login_required
 def Free_Comment_Delete(request, pk):
     comment=get_object_or_404(Free_Comment, pk=pk)
     post=comment.free_post
