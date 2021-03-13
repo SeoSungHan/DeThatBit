@@ -66,6 +66,12 @@ table tr td {
   text-align: left;
   padding: 0px 20px 0px 20px;
 }
+.showing {
+  display:block;
+}
+.unshowing {
+  display:none;
+}
 
 /*edit.html*/
 .new_post {

@@ -43,10 +43,20 @@
             {{ comment.writer }}
             <p>{{ comment.text | linebreaks }}</p>
             <small>{{ comment.created_at }}</small>
-            <button class="comment-modify">Modify</button>
+            <button class="comment-modify-{{comment.pk}}" name="try-edit" value="{{comment.pk}}">Modify</button>
             <a role="button" href="/free/comment_delete/{{comment.pk}}/">
                 Delete
             </a>
+
+            <div class="comment-edit-form-{{comment.pk}} hidden">
+                <form action="/free/comment_update/{{comment.pk}}/" method="POST">
+                    {% csrf_token %}
+                    {{comment_form}}
+                    <button class="btn btn-info mt-3" type="submit"> Submit </button>
+                </form>
+                <button class="comment-edit-back" name="edit-back" value="{{comment.pk}}"> Back </button>
+            </div>
+
             <hr>
         </div>
         {% endfor%}
@@ -54,7 +64,7 @@
     <h1>댓글 없음</h1>
     {% endif %}
 </div>
-
+<script src="{% static 'free_board/comment_edit.js' %}"></script>
 <script>
     function alert_del() {
         alert("삭제하시겠습니까?");
@@ -66,5 +76,6 @@
         }
     }
     isAuthor();
+    
 </script>
 {% endblock %}
