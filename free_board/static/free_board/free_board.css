@@ -8,16 +8,25 @@
 .freeBoard {
   text-align: center;
   width: 900px;
-  margin: 0px auto;
-  background-color: aliceblue;
+  margin: 50px auto;
+  border: solid black 2px;
+  border-radius: 15px;
+  padding: 0px 10px;
+}
+.freeboard h1 {
+  text-align: left;
 }
 table {
   width: 900px;
   margin: 10px auto 0px auto;
-  background-color: antiquewhite;
+  background-color: white;
+  border-radius: 5px;
 }
 table tr {
   border-bottom: solid black 1px;
+}
+table thead tr {
+  padding-bottom: 50px;
 }
 table tr th {
   border-bottom: solid black 1px;
