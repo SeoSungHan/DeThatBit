@@ -16,23 +16,25 @@ Free Board | DeThatBit
         {%if free_post_list.exists%}
         <thead>
             <tr>
-                <th>#</th>
-                <th>Title</th>
-                
-                <th>Writer</th>
-                <th>Time</th>
+                <th class="th_num">#</th>
+                <th class="th_title">Title</th>
+                <th class="th_writer">Writer</th>
+                <th class="th_time">Time</th>
             </tr>
         </thead>
         <tbody>
             {%for p in free_post_list%}
             <tr>
-                <td class="td_num">{{p.get_free_url}}</td>
+                <td class="td_num">{{p.pk}}</td>
                 <td class="td_title"><a href="{{p.get_free_url}}">{{p.title}}</a></td>
                 <!--<td class="td_content">{{p.content | truncatewords:30}}</td>-->
 
-                <td class="td_writer">{{p.author}}</td>
+                <td class="td_writer">{{p.author.username}}</td>
 
-                <td class="td_time">{{p.created_at}}</td>
+                <td class="td_time">
+                    <div class="td_time_date">{{p.created_at.year}}. {{p.created_at.month}}. {{p.created_at.day}}.</div>
+                    <div class="td_time_time">{{p.created_at.hour}}:{{p.created_at.minute}}</div>
+                </td>
             </tr>
             {%endfor%}
         </tbody>
@@ -40,6 +42,25 @@ Free Board | DeThatBit
         <tr>No Content</tr>
         {%endif%}
     </table>
-    <button class="create_btn"><a href="/free/create/">Create</a></button>
+    <button class="create_btn" onclick="location.href='/free/create/'">Create</a></button>
 </div>
+<script>
+    function setTime(){
+        const postDate = document.querySelectorAll(".td_time_date");
+        const postTime = document.querySelectorAll(".td_time_time");
+        const nowDate = new Date();
+        const toDay = nowDate.toLocaleDateString();
+        
+        for (let i=0; i<postDate.length; i++){
+            const postDateText = postDate[i].innerHTML;
+            if (postDateText === toDay){
+                postDate[i].classList.add("hidden");
+            }
+            else{
+                postTime[i].classList.add("hidden");
+            }
+        }
+    }
+    setTime();
+</script>
 {% endblock %}
