@@ -67,10 +67,10 @@ table tr td {
   padding: 0px 20px 0px 20px;
 }
 .showing {
-  display:block;
+  display: block;
 }
 .unshowing {
-  display:none;
+  display: none;
 }
 
 /*edit.html*/
