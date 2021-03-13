@@ -35,8 +35,7 @@
                 <span class="cm_writer">{{ comment.writer }}</span>
                 <p class="cm_text">{{ comment.text | linebreaks }}</p>
                 <small class="cm_time">
-                    {{ comment.created_at.month }}/{{ comment.created_at.day }} {{ comment.created_at.hour }}:
-                    {{comment.created_at.minute }}
+                    {{ comment.created_at.month }}/{{ comment.created_at.day }} {{ comment.created_at.hour }}:{{comment.created_at.minute }}
                 </small>
                 <ul class="cm_btns">
                     <li><button class="comment-modify-{{comment.pk}}" name="try-edit"
