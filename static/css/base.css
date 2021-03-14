@@ -17,7 +17,9 @@ button {
   border: transparent;
   border-radius: 3px;
   cursor: pointer;
+  transition: all 0.75s cubic-bezier(0.19, 1, 0.22, 1);
 }
+
 .loginBtns {
   position: absolute;
   display: flex;
@@ -91,4 +93,12 @@ a {
 }
 .home a {
   color: white;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
