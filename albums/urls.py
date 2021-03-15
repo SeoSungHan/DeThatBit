@@ -2,5 +2,5 @@ from django.urls import path
 from . import views
 
 urlpatterns=[
-    path('',views.albums_home),
+    path('',views.Albums_List.as_view()),
 ]
