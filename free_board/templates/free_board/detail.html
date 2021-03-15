@@ -32,19 +32,23 @@
             {% if free_post.free_comment_set.count > 0 %}
             {% for comment in free_post.free_comment_set.all %}
             <div id="comment-{{comment.pk}}" class="cm_row">
-                <span class="cm_writer">{{ comment.writer }}</span>
-                <p class="cm_text">{{ comment.text | linebreaks }}</p>
-                <small class="cm_time">
-                    {{ comment.created_at.month }}/{{ comment.created_at.day }} {{ comment.created_at.hour }}:{{comment.created_at.minute }}
-                </small>
-                <ul class="cm_btns">
-                    <li><button class="comment-modify-{{comment.pk}}" name="try-edit"
-                            value="{{comment.pk}}">Modify</button></li>
-                    <li><button onclick="location.href='/free/comment_delete/{{comment.pk}}/'">
-                            Delete
-                        </button></li>
-                </ul>
-                <div class="comment-edit-form-{{comment.pk}} hidden">
+                <div class="comment_box comment_box-{{comment.pk}}">
+                    <span class="cm_writer">{{ comment.writer }}</span>
+                    <p class="cm_text">{{ comment.text | linebreaks }}</p>
+                    <small class="cm_time">
+                        <div>{{ comment.created_at.month }}/{{ comment.created_at.day }}</div>{{ comment.created_at.hour}}:{{comment.created_at.minute }}
+                    </small>
+                    {% if user.id == comment.writer.id%}
+                    <ul class="cm_btns">
+                        <li><button class="comment-modify-{{comment.pk}}" name="try-edit"
+                                value="{{comment.pk}}">Modify</button></li>
+                        <li><button onclick="location.href='/free/comment_delete/{{comment.pk}}/'">
+                                Delete
+                            </button></li>
+                    </ul>
+                    {% endif %}
+                </div>
+                <div class="comment-edit-form-{{comment.pk}} comment-edit-form hidden">
                     <form action="/free/comment_update/{{comment.pk}}/" method="POST">
                         {% csrf_token %}
                         {{comment_form}}
