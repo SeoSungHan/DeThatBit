@@ -10,6 +10,9 @@ function handleClick(e) {
   if (e_type === "try-edit") {
     form.classList.remove("hidden");
     commentBox.classList.add("hidden");
+    const textarea = form.querySelector("#id_text");
+    const nowText = commentBox.querySelectorAll("p")[1].innerHTML;
+    textarea.value = nowText;
   } else if (e_type === "edit-back") {
     form.classList.add("hidden");
     commentBox.classList.remove("hidden");
