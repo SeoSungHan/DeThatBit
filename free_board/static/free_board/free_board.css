@@ -153,15 +153,15 @@ table tr td {
   width: 80px;
 }
 .cm_row p:nth-child(3) {
-  width: 350px;
+  width: 390px;
   text-align: left;
 }
 .cm_time {
-  width: 100px;
+  width: 50px;
 }
 .cm_btns {
   position: sticky;
-  right: 100px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   transition: all 0.75s cubic-bezier(0.19, 1, 0.22, 1);

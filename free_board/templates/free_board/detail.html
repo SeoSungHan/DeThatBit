@@ -37,6 +37,7 @@
                 <small class="cm_time">
                     {{ comment.created_at.month }}/{{ comment.created_at.day }} {{ comment.created_at.hour }}:{{comment.created_at.minute }}
                 </small>
+                {% if user.id == comment.writer.id%}
                 <ul class="cm_btns">
                     <li><button class="comment-modify-{{comment.pk}}" name="try-edit"
                             value="{{comment.pk}}">Modify</button></li>
@@ -44,6 +45,7 @@
                             Delete
                         </button></li>
                 </ul>
+                {% endif %}
                 <div class="comment-edit-form-{{comment.pk}} hidden">
                     <form action="/free/comment_update/{{comment.pk}}/" method="POST">
                         {% csrf_token %}
