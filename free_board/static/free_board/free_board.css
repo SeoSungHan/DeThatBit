@@ -134,7 +134,21 @@ table tr td {
 .comment {
   border-radius: 10px;
 }
-
+.comment_box{
+  display: flex;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+textarea#id_text{
+  margin: 10px;
+  width: 450px;
+  height: 70px;
+  border-radius: 5px;
+}
+.comment-edit-form{
+  margin: 0 auto;
+}
 .comment_form textarea {
   margin: 10px;
   width: 450px;
@@ -144,13 +158,15 @@ table tr td {
 .cm_row {
   display: flex;
   flex-direction: row;
+  text-align: center;
   align-items: center;
   justify-content: space-between;
   flex-grow: 1 10px;
   border-bottom: 1px dotted black;
 }
 .cm_writer {
-  width: 80px;
+  width: 75px;
+  font-size: 13px;
 }
 .cm_row p:nth-child(3) {
   width: 390px;
@@ -187,7 +203,9 @@ button:hover {
 .unshowing {
   display: none;
 }
-
+.hidden {
+  display: none;
+}
 /*edit.html*/
 .new_post {
   background-color: aliceblue;
