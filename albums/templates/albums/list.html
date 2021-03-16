@@ -29,7 +29,7 @@ Albums | DeThatBit
     </li>
     {% if start_page %}
     <li class="page-item">
-        <a href="?page={{start_page}}">Before {{start_page}}</a>
+        <a href="?page={{start_page}}">Before</a>
     </li>
     {% endif %}
     {% for page in page_range %}
@@ -37,7 +37,7 @@ Albums | DeThatBit
         <a href="?page={{ page }}">{{ page }}</a>
     </li>
     {% endfor %}
-    {% if page_obj.has_next %}
+    {% if last_page < page_obj.paginator.num_pages %}
     <li class="page-item">
         <a href="?page={{ last_page|add:'1' }}">Next</a>
     </li>
