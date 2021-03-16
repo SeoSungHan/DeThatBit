@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title%}
+Albums | DeThatBit
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'albums/albums.css' %}" media="screen" />
+{% endblock %}
+
+{% block contents%}
+{% if albums_list.exists %}
+    {% for a in albums_list %} 
+    <p>
+        <img src="{{a.cover}}" alt="{{a.album}}">
+        <td class="td_writer">{{a.artist}}</td>
+        <td class="td_writer">{{a.type}}-{{a.album}}</td>
+        <td class="td_writer">{{a.date}}</td>
+        <hr>
+    </p>
+    {% endfor%}
+{% endif %}
+
+{% if is_paginated %}
+<ul class="paginations">
+    <li class="page-item">
+        <a href="?page=1">맨 앞으로</a>
+    </li>
+    {% if start_page %}
+    <li class="page-item">
+        <a href="?page={{start_page}}">Before {{start_page}}</a>
+    </li>
+    {% endif %}
+    {% for page in page_range %}
+    <li class="page-item">
+        <a href="?page={{ page }}">{{ page }}</a>
+    </li>
+    {% endfor %}
+    {% if page_obj.has_next %}
+    <li class="page-item">
+        <a href="?page={{ last_page|add:'1' }}">Next</a>
+    </li>
+    {% endif %}
+
+    <li class="page-item">
+        <a href="?page={{ page_obj.paginator.num_pages }}">맨 뒤로</a>
+    </li>
+</ul>
+{% endif %}
+ 
+{% endblock %}
