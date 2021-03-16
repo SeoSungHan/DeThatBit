@@ -1,7 +1,5 @@
-.home {
+.home{
   padding: 50px;
-}
-.home a {
   font-size: 80px;
 }
 .homeBox {
@@ -13,15 +11,4 @@
 .homeBox img {
   height: 100%;
   width: 100%;
-}
-/*sign_up*/
-
-.signUpBox {
-  margin: 100px auto;
-  text-align: center;
-  width: 400px;
-  height: 300px;
-}
-.signUpForm {
-  text-align: left;
 }

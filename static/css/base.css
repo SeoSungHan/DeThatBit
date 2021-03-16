@@ -24,40 +24,45 @@ button {
   position: absolute;
   display: flex;
   justify-content: flex-end;
-  top: 0px;
-  right: 10px;
+  top: 10px;
+  right: 20px;
 }
 .loginBtns p {
   color: white;
   padding: 3px 2px 3px 2px;
+  margin: 5px;
 }
 .username {
   font-weight: 700;
 }
 .loginBtns button {
   border: transparent;
+  box-sizing:content-box;
+  font-size: 12px;
   background-color: rgb(61, 57, 57);
-  margin: 15px 20px;
+  color: white;
+  width: 45px;
+  height: 20px;
+  margin: 5px;
   padding: 3px 2px 3px 2px;
   cursor: pointer;
 }
 .loginBtns button:hover {
   background-color: rgb(100, 94, 94);
   color: white;
+  animation: fadeIn 0.5s linear;
+  box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.5);
+  transform: scale(0.9);
 }
-.loginBtns a {
-  color: white;
-}
+
 .nav_bar {
   display: flex;
   justify-content: center;
-
   margin: 0;
 }
 .nav_list {
   padding: 0px;
   margin: 0;
-
   list-style: none;
   display: flex;
   justify-content: center;

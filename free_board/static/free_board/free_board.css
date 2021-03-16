@@ -88,7 +88,7 @@ table tr td {
   border-radius: 10px;
 }
 .contentBox_header {
-  padding-left: 20px;
+  
   text-align: left;
   border-bottom: black dashed 2px;
 }
@@ -110,7 +110,7 @@ table tr td {
   margin: 10px 0px 10px 0px;
 }
 .contentBox_header .author {
-  margin: 0px 0px 20px 0px;
+  margin: 0px 0px 20px 5px;
 }
 .contentBox_body {
   text-align: left;

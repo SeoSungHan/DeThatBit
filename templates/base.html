@@ -22,10 +22,10 @@
         <div class="loginBtns">
             {% if user.is_active %}
             <p>Welcome <span class="username">{{ user.username }}</span></p>
-            <button><a href="/accounts/logout/">LogOut</a></button>
+            <button onclick="location.href='/accounts/logout/'">Log out</button>
             {% else %}
-            <button><a href="/accounts/login/">Login</a></button>
-            <button><a href="/sign_up/">Join</a></button>
+            <button onclick="location.href='/accounts/login/'">Log in</button>
+            <button onclick="location.href='/sign_up/'">Join</button>
             {% endif %}
         </div>
     </nav>
