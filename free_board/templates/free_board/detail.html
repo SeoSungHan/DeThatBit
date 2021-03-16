@@ -14,55 +14,64 @@
     <div class="contentBox">
         <div class="contentBox_header">
             <div class="updateBtns">
-                <button><a href="/free/{{free_post.pk}}/update/">Modify</a></button>
-                <button onclick="alert_del()"><a href="/free/{{free_post.pk}}/delete/">Delete</a></button>
+                <button onclick="location.href='/free/{{free_post.pk}}/update/'">Modify</button>
+                <button onclick="alert_del(); locatoin.href='/free/{{free_post.pk}}/delete/'">Delete</a></button>
             </div>
-            <h2>{{free_post.title}}</h2>
-            <h5>{{free_post.author.username}}</h5>
-
+            <h2 class="title">{{free_post.title}}</h2>
+            <h5 class="author">{{free_post.author.username}}</h5>
         </div>
         <div class="contentBox_body">
             <p>{{free_post.get_content_markdown|safe}}</p>
         </div>
     </div>
-</div>
 
 
-<div class="comment_form">
-    <form action="/free/{{free_post.pk}}/comment_create/" method="POST">
-        {% csrf_token %}
-        {{comment_form}}
-        <button class="btn btn-info mt-3" type="submit"> Submit </button>
-    </form>
-</div>
+    <!--comment 부분-->
+    <div class="commentBox">
+        <div class="comment">
+            {% if free_post.free_comment_set.count > 0 %}
+            {% for comment in free_post.free_comment_set.all %}
+            <div id="comment-{{comment.pk}}" class="cm_row">
+                <div class="comment_box comment_box-{{comment.pk}}">
+                    <span class="cm_writer">{{ comment.writer }}</span>
+                    <p class="cm_text">{{ comment.text | linebreaks }}</p>
+                    <small class="cm_time">
+                        <div>{{ comment.created_at.month }}/{{ comment.created_at.day }}</div>{{ comment.created_at.hour}}:{{comment.created_at.minute }}
+                    </small>
+                    {% if user.id == comment.writer.id%}
+                    <ul class="cm_btns">
+                        <li><button class="comment-modify-{{comment.pk}}" name="try-edit"
+                                value="{{comment.pk}}">Modify</button></li>
+                        <li><button onclick="location.href='/free/comment_delete/{{comment.pk}}/'">
+                                Delete
+                            </button></li>
+                    </ul>
+                    {% endif %}
+                </div>
+                <div class="comment-edit-form-{{comment.pk}} comment-edit-form hidden">
+                    <form action="/free/comment_update/{{comment.pk}}/" method="POST">
+                        {% csrf_token %}
+                        {{comment_form}}
+                        <button class="btn btn-info mt-3" type="submit"> Submit </button>
+                    </form>
+                    <button class="comment-edit-back" name="edit-back" value="{{comment.pk}}"> Back </button>
+                </div>
 
-<div class="comment">
-    {% if free_post.free_comment_set.count > 0 %}
-        {% for comment in free_post.free_comment_set.all %}
-        <div id="comment-{{comment.pk}}">
-            {{ comment.writer }}
-            <p>{{ comment.text | linebreaks }}</p>
-            <small>{{ comment.created_at }}</small>
-            <button class="comment-modify-{{comment.pk}}" name="try-edit" value="{{comment.pk}}">Modify</button>
-            <a role="button" href="/free/comment_delete/{{comment.pk}}/">
-                Delete
-            </a>
-
-            <div class="comment-edit-form-{{comment.pk}} hidden">
-                <form action="/free/comment_update/{{comment.pk}}/" method="POST">
-                    {% csrf_token %}
-                    {{comment_form}}
-                    <button class="btn btn-info mt-3" type="submit"> Submit </button>
-                </form>
-                <button class="comment-edit-back" name="edit-back" value="{{comment.pk}}"> Back </button>
+                <hr>
             </div>
-
-            <hr>
+            {% endfor%}
+            {% else %}
+            <h1>댓글 없음</h1>
+            {% endif %}
         </div>
-        {% endfor%}
-    {% else %}
-    <h1>댓글 없음</h1>
-    {% endif %}
+        <div class="comment_form">
+            <form action="/free/{{free_post.pk}}/comment_create/" method="POST">
+                {% csrf_token %}
+                {{comment_form}}
+                <button class="btn btn-info mt-3 submitBtn" type="submit"> Submit </button>
+            </form>
+        </div>
+    </div>
 </div>
 <script src="{% static 'free_board/comment_edit.js' %}"></script>
 <script>
@@ -76,6 +85,6 @@
         }
     }
     isAuthor();
-    
+
 </script>
 {% endblock %}
