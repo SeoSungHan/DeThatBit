@@ -10,14 +10,23 @@ New Post | DeThatBit
 {% endblock %}
 
 {% block contents%}
-<div class="new_post my-5">
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <table>{{form.as_table}}</table>
+<div class="content">
+    <h1><a href="/free/">FreeBoard</a></h1>
+    <div class="contentBox_header"></div>
+    <div class="contentBox_body">
+        <div class="new_post my-5">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table>{{form.as_table}}</table>
+                <div class="editBtns">
+                    <button class="btn btn-info mt-3" type="submit"> Submit </button>
+                    <button><a href="../">Back</a></button>
+                </div>
+            </form>
 
-        <button class="btn btn-info mt-3" type="submit"> Submit </button>
-        <button><a href="../">Back</a></button>
-    </form>
-    {{form.media}}
+        </div>
+    </div>
+
 </div>
+
 {% endblock %}
