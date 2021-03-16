@@ -1,11 +1,10 @@
-.nav_free {
+.nav_review {
   background-color: black;
 }
-.nav_free a {
+.nav_review a {
   color: white;
 }
-
-.freeBoard {
+.reviewBoard {
   text-align: center;
   width: 900px;
   margin: 0px auto;
@@ -65,12 +64,6 @@ table tr td {
 .contentBox_body {
   text-align: left;
   padding: 0px 20px 0px 20px;
-}
-.showing {
-  display:block;
-}
-.unshowing {
-  display:none;
 }
 
 /*edit.html*/

@@ -1,43 +1,17 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+
 {% load static %}
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>DeThatBit</title>
-    <link rel="stylesheet" href="{% static 'single_pages/style.css' %}" media="screen"/>
-    <link rel="icon" type="image/png" href="{% static 'img/favicon.ico'%}">
-</head>
-<body>
-    <div class="loginBtns">
-        {% if user.is_active %}
-        <p>Welcome {{ user.username }}</p>
-        <button><a href="accounts/logout/">LogOut</a></button>
-        {% else %}
-        <button><a href="accounts/login/">Login</a></button>
-        <button><a href="/sign_up/">Join</a></button>
-        {% endif %}
-    </div>
-    <h1><a href="/">DeThatBit</a></h1>
-    <ul class="nav">
-        <li><a href="/about_this/">About</a></li>
+{% block title%}
+DeThatBit
+{% endblock %}
 
-        <li><a href="/albums/">Album</a></li>
-        <li><a href="/artists/">Artists</a></li>
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'single_pages/style.css' %}" media="screen" />
+{% endblock %}
 
-        <li><a href="/free/">Freeboard</a></li>
-        <li><a href="/review/">Review</a></li>
-    </ul>
-    <div class="homeBox">
-        <img src="https://t3.ftcdn.net/jpg/02/81/66/20/240_F_281662026_5WLYXaos1hSWDPHEWeP89Yr5NEpGP13K.jpg" alt="hiphop image">
-    </div>
-    <footer class="py-5 bg-dark">
-        <div class="container">
-          <p class="m-0 text-center text-white">Copyright &copy; 
-            <i class="fas fa-file-signature"></i>  
-            SEOSUNGHAN
-          </p>
-        </div>
-        <!-- /.container -->
-    </footer>
-</body>
-</html>
+{% block contents %}
+<div class="homeBox">
+    <img src="https://t3.ftcdn.net/jpg/02/81/66/20/240_F_281662026_5WLYXaos1hSWDPHEWeP89Yr5NEpGP13K.jpg" alt="hiphop image">
+</div>
+{% endblock %}
+

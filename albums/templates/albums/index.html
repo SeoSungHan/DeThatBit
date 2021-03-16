@@ -1,10 +1,14 @@
-<html>
+{% extends "base.html" %}
+
 {% load static %}
-<head>
-</head>
+{% block title%}
+Albums | DeThatBit
+{% endblock %}
 
-<body>
-    Not Working :: This area is for Album Library
-</body>
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'albums/albums.css' %}" media="screen" />
+{% endblock %}
 
-</html>
+{% block contents%}
+
+{% endblock %}

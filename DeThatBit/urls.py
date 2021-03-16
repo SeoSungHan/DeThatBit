@@ -26,6 +26,7 @@ urlpatterns = [
     path('review/', include('review_board.urls')),
     path('albums/', include('albums.urls')),
     path('artists/', include('artists.urls')),
+    path('markdownx/', include('markdownx.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

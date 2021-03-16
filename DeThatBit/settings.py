@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'markdownx',
+
     'single_pages',
     'free_board',
     'review_board',
@@ -61,7 +64,7 @@ ROOT_URLCONF = 'DeThatBit.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,4 +134,4 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")
 
 LOGIN_REDIRECT_URL = '../../'
-LOGOUT_REDIRECT_URL='../../'
+LOGOUT_REDIRECT_URL = '../../'

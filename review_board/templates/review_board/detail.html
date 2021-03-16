@@ -1,37 +1,42 @@
-<html>
+{% extends "base.html" %}
+
 {% load static %}
-<title>{{review_post.title}}</title>
-<meta charset="utf-8" />
-<link rel="stylesheet" href="{% static 'free_board/free_board.css' %}" media="screen" />
-<link rel="icon" type="image/png" href="{% static 'img/favicon.ico'%}">
+{% block title%}
+{{review_post.title}} | DeThatBit
+{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'review_board/review_board.css' %}" media="screen" />
+{% endblock %}
 
-</head>
-
-<body>
-    <div class="home"><a href="/">DeThatBit</a></div>
-    <div class="content">
+{% block contents%}
+<div class="content">
         
-        <h1><a href="/free/">Review Board</a></h1>
-        <div class="contentBox">
-            <div class="contentBox_header">
-                <h2>{{review_post.title}}</h2>
-                <h5>{{review_post.author}}</h5>
-            </div>
-            <div class="contentBox_body">
-                <p>{{review_post.content}}</p>
-            </div>
+    <h1><a href="/review/">Review Board</a></h1>
+    <div class="contentBox">
+        <div class="updateBtns">
+            <button><a href="/review/{{review_post.pk}}/update/">Modify</a></button>
+            <button onclick="alert_del()"><a href="/review/{{review_post.pk}}/delete/">Delete</a></button>
+        </div>
+        <div class="contentBox_header">
+            <h2>{{review_post.title}}</h2>
+            <h5>{{review_post.author}}</h5>
+        </div>
+        <div class="contentBox_body">
+            <p>{{review_post.content}}</p>
         </div>
     </div>
+</div>
+<script>
+    function alert_del() {
+        alert("삭제하시겠습니까?");
+    }
+    function isAuthor() {
+        if ("{{review_post.author.id}}" != "{{user.id}}") {
+            const btns = document.querySelector(".updateBtns");
+            btns.classList.add("hidden");
+        }
+    }
+    isAuthor();
+</script>
+{% endblock %}
 
-    <footer class="py-5 bg-dark">
-        <div class="container">
-          <p class="m-0 text-center text-white">Copyright &copy; 
-            <i class="fas fa-file-signature"></i>  
-            SEOSUNGHAN
-          </p>
-        </div>
-        <!-- /.container -->
-    </footer>
-</body>
-
-</html>

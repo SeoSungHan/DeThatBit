@@ -1,0 +1,36 @@
+<html>
+    {% load static %}
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" media="screen" />
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.ico'%}">
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    <div class="home"><a href="/">DeThatBit</a></div>
+    <nav class="nav_bar">
+        
+        <ul class="nav_list">
+            <li class="nav_about"><a href="/about_this/">About</a></li>
+            <li class="nav_albums"><a href="/albums/">Album</a></li>
+            <li class="nav_artists"><a href="/artists/">Artists</a></li>
+            <li class="nav_free"><a href="/free/">Freeboard</a></li>
+            <li class="nav_review"><a href="/review/">Review</a></li>
+        </ul>
+        <div class="loginBtns">
+            {% if user.is_active %}
+            <p>Welcome <span class="username">{{ user.username }}</span></p>
+            <button><a href="/accounts/logout/">LogOut</a></button>
+            {% else %}
+            <button><a href="/accounts/login/">Login</a></button>
+            <button><a href="/sign_up/">Join</a></button>
+            {% endif %}
+        </div>
+    </nav>
+    {% block contents %}{% endblock %}
+    {% include './footer.html'%}
+</body>
+
+</html>

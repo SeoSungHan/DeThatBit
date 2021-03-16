@@ -1,8 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView
-from .models import Free_Post
-from .forms import PostForm
+from .models import Free_Post, Free_Comment
+from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
  
 class Free_List(ListView):
@@ -10,10 +10,55 @@ class Free_List(ListView):
     template_name = 'free_board/list.html'
     ordering = '-pk'
 
-
 class Free_Detail(DetailView):
     model = Free_Post
     template_name = 'free_board/detail.html'
+    
+    def get_context_data(self, **kwargs):
+       context=super(Free_Detail, self).get_context_data()
+       context['comment_form']=CommentForm
+       return context
+
+@login_required
+def Free_Comment_Create(request, pk):
+    post=get_object_or_404(Free_Post, pk=pk)
+
+    if request.method == 'POST':
+                comment_form=CommentForm(request.POST)
+                if comment_form.is_valid():
+                    comment=comment_form.save(commit=False)
+                    comment.free_post=post
+                    comment.writer=request.user
+                    comment.save()
+                    return redirect(comment.get_absolute_url())
+    else :
+                return redirect(post.get_free_url())
+
+@login_required
+def Free_Comment_Update(request, pk):
+    comment=get_object_or_404(Free_Comment, pk=pk)
+    if request.user==comment.writer:
+        if request.method == 'POST':
+            comment_form=CommentForm(request.POST, instance=comment)
+            if comment_form.is_valid():
+                comment=comment_form.save(commit=False)
+                comment.save()
+                return redirect(comment.get_absolute_url())
+        else :
+            comment_form=CommentForm(instance=comment)
+            return redirect(comment.get_absolute_url())
+    else:
+        return redirect(comment.get_absolute_url())
+
+@login_required
+def Free_Comment_Delete(request, pk):
+    comment=get_object_or_404(Free_Comment, pk=pk)
+    post=comment.free_post
+    if request.user==comment.writer:
+        comment.delete()
+        return redirect(post.get_free_url())
+    else:
+        return redirect(comment.get_absolute_url())
 
 @login_required
 def Free_Post_Create(request):
@@ -27,7 +72,6 @@ def Free_Post_Create(request):
     else:
         form = PostForm()
         return render(request, 'free_board/edit.html', {'form': form})
-
 
 @login_required
 def Free_Post_Update(request, pk):
