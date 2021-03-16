@@ -6,29 +6,33 @@ Join | DeThatBit
 {% endblock %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="{% static 'single_pages/style.css' %}" media="screen" />
+<link rel="stylesheet" href="{% static 'single_pages/sign_up.css' %}" media="screen" />
 {% endblock %}
 
 {% block contents %}
     <div class="signUpBox">
-        <h3>회원 가입</h3>
+        <h3 class="signUpHeader">회원 가입</h3>
+        <hr>
         <form method="POST" class="signUpForm">{% csrf_token %}
             <div>
-                <label for="username">Username: </label>
-                <input type="text" name="username" value="{{form.username.value|default_if_none:''}}"
-                    placeholder="username">
+                <label for="username">ID: </label>
+                <input type="text" id="username" name="username" value="{{form.username.value|default_if_none:''}}"
+                    placeholder="ID">
             </div>
             <div>
                 <label for="password1">Password: </label>
-                <input type="password" name="password1" value="{{form.password1.value|default_if_none:''}}"
-                    placeholder="password1">
+                <input type="password" id="password1" name="password1" value="{{form.password1.value|default_if_none:''}}"
+                    placeholder="password">
             </div>
             <div>
                 <label for="password2">Password Confirm: </label>
-                <input type="password" name="password2" value="{{form.password2.value|default_if_none:''}}"
-                    placeholder="password2">
+                <input type="password" id="password2" name="password2" value="{{form.password2.value|default_if_none:''}}"
+                    placeholder="password">
             </div>
-            <input type="submit" value="Submit"></input>
+            <div class=submitBtn>
+                <input type="submit" value="Submit"></input>
+            </div>
+            
         </form>
     </div>
     <script >

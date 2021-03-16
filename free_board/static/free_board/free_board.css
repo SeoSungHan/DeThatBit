@@ -22,13 +22,8 @@ table {
   background-color: white;
   border-radius: 5px;
 }
-table tr {
-  border-bottom: solid black 50px;
-}
-table tbody tr {
-  padding-bottom: 50px;
-  border-bottom: solid red 50px;
-}
+
+
 table tr th {
   border-bottom: solid black 1px;
   text-align: left;
@@ -93,7 +88,7 @@ table tr td {
   border-radius: 10px;
 }
 .contentBox_header {
-  padding-left: 20px;
+  
   text-align: left;
   border-bottom: black dashed 2px;
 }
@@ -115,7 +110,7 @@ table tr td {
   margin: 10px 0px 10px 0px;
 }
 .contentBox_header .author {
-  margin: 0px 0px 20px 0px;
+  margin: 0px 0px 20px 5px;
 }
 .contentBox_body {
   text-align: left;
@@ -208,7 +203,49 @@ button:hover {
 }
 /*edit.html*/
 .new_post {
-  background-color: aliceblue;
+  background-color: white;
   text-align: center;
-  margin: 0 auto;
+  margin: 10px auto;
+  border-radius: 10px;
+}
+.contentBox_body{
+  padding: 0;
+}
+.new_post table{
+  margin: 0;
+  width: 600px;
+
+}
+.new_post form{
+ margin: 0;
+}
+.new_post table th{
+  margin: 0;
+  width: 75px;
+  border-bottom: transparent;
+  padding:10px 0;
+  text-align: center;
+}
+.new_post table td{
+  border-bottom: transparent;
+  display: flex;
+  align-items: center;
+  padding:10px 0;
+}
+.new_post table tr{
+  display: flex;
+  justify-content:left;
+  align-items: center;
+  border-bottom: dashed 1px;
+}
+textarea#id_content{
+  width: 500px;
+  height: 400px;
+}
+input#id_title{
+  margin: auto 0px;
+  width: 300px;
+}
+.editBtns{
+  padding: 5px;
 }
