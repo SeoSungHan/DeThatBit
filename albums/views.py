@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
+from .models import Albums
 
-def albums_home(request):
-    return render(
-        request,
-        'albums/index.html'
-    )
+class Albums_List(ListView):
+    model = Albums
+    template_name = 'albums/index.html'
+    ordering = '-pk'
+    paginate_by=20
 

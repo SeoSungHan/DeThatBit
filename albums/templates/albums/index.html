@@ -10,5 +10,15 @@ Albums | DeThatBit
 {% endblock %}
 
 {% block contents%}
-
+{% if albums_list.exists %}
+    {% for a in albums_list %} 
+    <p>
+        <img src="{{a.cover}}" alt="{{a.album}}">
+        <td class="td_writer">{{a.artist}}</td>
+        <td class="td_writer">{{a.type}}-{{a.album}}</td>
+        <td class="td_writer">{{a.date}}</td>
+        <hr>
+    </p>
+    {% endfor%}
+{% endif %}
 {% endblock %}
