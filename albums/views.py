@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import Albums
+from django.db.models import Q
 
 class Albums_List(ListView):
     model = Albums
     template_name = 'albums/list.html'
     ordering = '-pk'
-    paginate_by=20
+    paginate_by=10
 
     def get_context_data(self, **kwargs):
         context = super(Albums_List, self).get_context_data(**kwargs)
@@ -28,3 +29,19 @@ class Albums_List(ListView):
         context['last_page']=end_index
         return context
 
+class Albums_Search(Albums_List):
+    paginate_by=10
+
+    def get_queryset(self):
+        q=self.kwargs['q']
+        albums_list=Albums.objects.filter(
+            Q(artist__contains=q) | Q(album__contains=q)
+        ).distinct()
+        return albums_list
+
+    def get_context_data(self,**kwargs):
+        context=super(Albums_Search,self).get_context_data()
+        q=self.kwargs['q']
+        context['search_info']=f'Search: {q} ({self.get_queryset().count()})'
+        
+        return context

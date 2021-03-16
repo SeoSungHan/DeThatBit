@@ -22,6 +22,7 @@ Albums | DeThatBit
     {% endfor%}
 {% endif %}
 
+<div>
 {% if is_paginated %}
 <ul class="paginations">
     <li class="page-item">
@@ -48,5 +49,31 @@ Albums | DeThatBit
     </li>
 </ul>
 {% endif %}
- 
+</div>
+
+<div>
+    <form>
+        <input type="text" id="search-album">
+        <button type="button" onclick="search()">Search</button>
+    </form>
+</div>
+
+<script>
+    function search(){
+        let val=document.getElementById('search-album').value.trim()
+        if(val.length>1){
+            location.href="/albums/search/"+val+"/"
+        }
+        else{
+            alert('검색어가 너무 짧습니다. 두글자 이상 입력해야합니다.')
+        }
+    }
+
+    /*document.getElementById('search-album').addEventListener('keyup', function(e){
+        if(e.key==='Enter'){
+            search();
+        }
+    });*/
+</script>
+
 {% endblock %}
