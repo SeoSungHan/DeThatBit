@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title%}
+New Post | DeThatBit
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'review_board/review_board.css' %}" media="screen" />
+{% endblock %}
+
+{% block contents%}
+<div class="new_post my-5">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>{{form.as_table}}</table>
+
+        <button class="btn btn-info mt-3" type="submit"> Submit </button>
+        <button><a href="../">Back</a></button>
+    </form>
+    {{form.media}}
+</div>
+{% endblock %}

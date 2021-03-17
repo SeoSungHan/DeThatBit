@@ -18,7 +18,10 @@
             <button onclick="alert_del()"><a href="/review/{{review_post.pk}}/delete/">Delete</a></button>
         </div>
         <div class="contentBox_header">
+            <img src="{{ review_post.album.cover }}">
             <h2>{{review_post.title}}</h2>
+            <h3>{{review_post.album.album}}</h3>
+            <h4>{{review_post.rating}}</h4>
             <h5>{{review_post.author}}</h5>
         </div>
         <div class="contentBox_body">
@@ -26,6 +29,53 @@
         </div>
     </div>
 </div>
+
+<div class="commentBox">
+    <div class="comment">
+        {% if review_post.review_comment_set.count > 0 %}
+        {% for comment in review_post.review_comment_set.all %}
+        <div id="comment-{{comment.pk}}" class="cm_row">
+            <div class="comment_box comment_box-{{comment.pk}}">
+                <span class="cm_writer">{{ comment.writer }}</span>
+                <p class="cm_text">{{ comment.text | linebreaks }}</p>
+                <small class="cm_time">
+                    <div>{{ comment.created_at.month }}/{{ comment.created_at.day }}</div>{{ comment.created_at.hour}}:{{comment.created_at.minute }}
+                </small>
+                {% if user.id == comment.writer.id%}
+                <ul class="cm_btns">
+                    <li><button class="comment-modify-{{comment.pk}}" name="try-edit"
+                            value="{{comment.pk}}">Modify</button></li>
+                    <li><button onclick="location.href='/review/comment_delete/{{comment.pk}}/'">
+                            Delete
+                        </button></li>
+                </ul>
+                {% endif %}
+            </div>
+            <div class="comment-edit-form-{{comment.pk}} comment-edit-form hidden">
+                <form action="/review/comment_update/{{comment.pk}}/" method="POST">
+                    {% csrf_token %}
+                    {{comment_form}}
+                    <button class="btn btn-info mt-3" type="submit"> Submit </button>
+                </form>
+                <button class="comment-edit-back" name="edit-back" value="{{comment.pk}}"> Back </button>
+            </div>
+
+            <hr>
+        </div>
+        {% endfor%}
+        {% else %}
+        <h1>댓글 없음</h1>
+        {% endif %}
+    </div>
+    <div class="comment_form">
+        <form action="/review/{{review_post.pk}}/comment_create/" method="POST">
+            {% csrf_token %}
+            {{comment_form}}
+            <button class="btn btn-info mt-3 submitBtn" type="submit"> Submit </button>
+        </form>
+    </div>
+</div>
+<script src="{% static 'review_board/comment_edit.js' %}"></script>
 <script>
     function alert_del() {
         alert("삭제하시겠습니까?");
@@ -37,6 +87,6 @@
         }
     }
     isAuthor();
+
 </script>
 {% endblock %}
-
