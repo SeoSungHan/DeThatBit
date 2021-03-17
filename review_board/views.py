@@ -19,19 +19,6 @@ class Review_Detail(DetailView):
        return context
 
 @login_required
-def Review_Post_Create(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect('../', pk=post.pk)
-    else:
-        form = PostForm()
-        return render(request, 'review_board/edit.html', {'form': form})
-
-@login_required
 def Review_Comment_Create(request, pk):
     post=get_object_or_404(Review_Post, pk=pk)
 
@@ -73,6 +60,24 @@ def Review_Comment_Delete(request, pk):
         return redirect(comment.get_absolute_url())
 
 @login_required
+def Review_Post_Create(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            album = post.album
+            album.rating=album.rating*album.review_cnt+post.rating
+            album.review_cnt+=1
+            album.rating/=album.review_cnt
+            album.save()
+            return redirect('../', pk=post.pk)
+    else:
+        form = PostForm()
+        return render(request, 'review_board/edit.html', {'form': form})
+
+@login_required
 def Review_Post_Update(request, pk):
     post = get_object_or_404(Review_Post, pk=pk)
     if request.user==post.author:
@@ -92,6 +97,7 @@ def Review_Post_Update(request, pk):
 def Review_Post_Delete(request, pk):
     post = Review_Post.objects.get(pk=pk)
     if request.user==post.author:
+        delete_rating=post.rating
         post.delete()
         return redirect('../../')
     else:

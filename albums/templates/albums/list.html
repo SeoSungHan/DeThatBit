@@ -13,6 +13,7 @@ Albums | DeThatBit
 {% if albums_list.exists %}
     {% for a in albums_list %} 
     <p>
+        <h2>{{a.rating}}</h2>
         <img src="{{a.cover}}" alt="{{a.album}}">
         <td class="td_writer">{{a.artist}}</td>
         <td class="td_writer">{{a.type}}-{{a.album}}</td>
