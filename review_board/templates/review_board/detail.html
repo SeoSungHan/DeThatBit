@@ -18,7 +18,10 @@
             <button onclick="alert_del()"><a href="/review/{{review_post.pk}}/delete/">Delete</a></button>
         </div>
         <div class="contentBox_header">
+            <img src="{{ review_post.album.cover }}">
             <h2>{{review_post.title}}</h2>
+            <h3>{{review_post.album.album}}</h3>
+            <h4>{{review_post.rating}}</h4>
             <h5>{{review_post.author}}</h5>
         </div>
         <div class="contentBox_body">

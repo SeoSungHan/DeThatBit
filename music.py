@@ -1,4 +1,4 @@
-
+import re
 from typing import get_args
 import requests
 from bs4 import BeautifulSoup
@@ -14,7 +14,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 header = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko'}
 
-url_melon = 'https://www.melon.com/genre/album_listPaging.htm?startIndex=1&pageSize=3000&gnrCode=GN0300'
+url_melon = 'https://www.melon.com/genre/album_listPaging.htm?startIndex=1&pageSize=10000&gnrCode=GN0300'
+url_detail = 'https://www.melon.com/album/detail.htm?albumId='
 
 def get_melon():
     result = requests.get(
@@ -25,6 +26,10 @@ def get_melon():
     # print(albums)
     album_list = []
     for album in albums:
+        link_ = album.find("a", {"class": "album_name"})["href"]
+        link_id = re.findall("\d+", link_)[0]
+        link = f'{url_detail}{link_id}'
+
         cover = album.find("div", {"class": "thumb"}).find("img")["src"]
         artist = album.find(
             "span", {"class": "checkEllipsis"}).get_text(strip=True)
@@ -33,7 +38,7 @@ def get_melon():
         type = album.find("span", {"class": "vdo_name"}).get_text(strip=True)
         date = album.find("span", {"class": "reg_date"}).get_text(strip=True)
         album_list.append(
-            {'cover': cover, 'artist': artist, 'type': type, 'album': album_name, 'date': date})
+            {'link':link, 'cover': cover, 'artist': artist, 'type': type, 'album': album_name, 'date': date})
 
     return album_list
 
@@ -43,4 +48,4 @@ if __name__=='__main__':
         tmp=data['date'].split('.')
         date_tmp=tmp[0]+'-'+tmp[1]+'-'+tmp[2]
         Albums(artist=data['artist'], a_type=data['type'], 
-            album=data['album'], date=date_tmp, cover=data['cover']).save()
+            album=data['album'], date=date_tmp, cover=data['cover'], link=data['link']).save()
