@@ -4,36 +4,56 @@
 .nav_review a {
   color: white;
 }
+
 .reviewBoard {
   text-align: center;
-  width: 900px;
-  margin: 0px auto;
-  background-color: aliceblue;
+  width: 800px;
+  margin: 50px auto;
+  border: solid black 2px;
+  border-radius: 15px;
+  padding: 0px 10px;
+}
+.reviewboard h1 {
+  text-align: left;
 }
 table {
-  width: 900px;
+  width: 800px;
   margin: 10px auto 0px auto;
-  background-color: antiquewhite;
+  background-color: white;
+  border-radius: 5px;
 }
 table tr {
-  border-bottom: solid black 1px;
+  border-bottom: solid black 50px;
+}
+table tbody tr {
+  padding-bottom: 50px;
+  border-bottom: solid red 50px;
 }
 table tr th {
   border-bottom: solid black 1px;
   text-align: left;
 }
 table tr td {
-  padding: 5px;
+  padding-top: 15px;
   padding-bottom: 3px;
+  border-bottom: solid black 1px;
 }
-.td_num {
-  padding-right: 10px;
+.th_num {
+  width: 50px;
+  padding-right: 0px;
 }
-.td_title {
-  padding-right: 30px;
+.th_title {
+  width: 500px;
+  padding-right: 50px;
 }
-.td_writer {
-  padding-right: 20px;
+.th_writer {
+  width: 80px;
+  padding-right: 0px;
+}
+.th_time {
+  width: 80px;
+  font-size: 13px;
+  padding-right: 0px;
 }
 .create_btn {
   display: flex;
@@ -41,37 +61,154 @@ table tr td {
   border: transparent;
   margin: 10px 92%;
   padding: 5px 3px 5px 3px;
-  cursor: pointer;
+  transition: all 0.75s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.create_btn:hover {
+  background-color: black;
+  box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.5);
+  transform: scale(0.9);
+  color: white;
+  animation: fadeIn 0.5s linear;
 }
 
 /*detail.html*/
 .content {
   text-align: center;
-  background-color: aliceblue;
+  width: 600px;
+  margin: 50px auto 10px auto;
+  border: solid black 2px;
+  border-radius: 15px;
+  padding: 0px 10px;
+}
+.content h1 {
+  font-size: 20px;
+  text-align: left;
 }
 .contentBox {
-  width: 600px;
-  height: 600px;
-  margin: 0 auto;
-  border: solid 1px black;
-  background-color: antiquewhite;
+  width: 580px;
+  padding: 10px;
+  margin: 10px auto;
+
+  background-color: white;
+  border-radius: 10px;
 }
 .contentBox_header {
   padding-left: 20px;
   text-align: left;
-  border: solid 2px brown;
+  border-bottom: black dashed 2px;
+}
+.contentBox_header .updateBtns {
+  text-align: right;
+  margin-right: 5px;
+  transition: all 0.75s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.updateBtns button:hover {
+  background-color: black;
+  box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.5);
+  transform: scale(0.9);
+  color: white;
+  animation: fadeIn 0.5s linear;
+}
+.contentBox_header .title {
+  font-size: 35px;
+  margin: 10px 0px 10px 0px;
+}
+.contentBox_header .author {
+  margin: 0px 0px 20px 0px;
 }
 .contentBox_body {
   text-align: left;
   padding: 0px 20px 0px 20px;
 }
 
+/*Comment*/
+.commentBox {
+  text-align: center;
+  width: 580px;
+  margin: 10px auto;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+.comment {
+  border-radius: 10px;
+}
+.comment_box{
+  display: flex;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+textarea#id_text{
+  margin: 10px;
+  width: 450px;
+  height: 70px;
+  border-radius: 5px;
+}
+.comment-edit-form{
+  margin: 0 auto;
+}
+.comment_form textarea {
+  margin: 10px;
+  width: 450px;
+  height: 70px;
+  border-radius: 5px;
+}
+.cm_row {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1 10px;
+  border-bottom: 1px dotted black;
+}
+.cm_writer {
+  width: 75px;
+  font-size: 13px;
+}
+.cm_row p:nth-child(3) {
+  width: 390px;
+  text-align: left;
+}
+.cm_time {
+  width: 50px;
+}
+.cm_btns {
+  position: sticky;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.75s cubic-bezier(0.19, 1, 0.22, 1);
+}
+ul {
+  margin: 5px;
+  list-style: none;
+}
+.cm_btns button {
+  font-size: 10px;
+  margin: 2px;
+}
+button:hover {
+  background-color: black;
+  box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.5);
+  transform: scale(0.9);
+  color: white;
+  animation: fadeIn 0.5s linear;
+}
+.showing {
+  display: block;
+}
+.unshowing {
+  display: none;
+}
+.hidden {
+  display: none;
+}
 /*edit.html*/
 .new_post {
   background-color: aliceblue;
   text-align: center;
   margin: 0 auto;
-}
-p {
-  color: darkgreen;
 }

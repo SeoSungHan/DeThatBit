@@ -18,3 +18,16 @@ class Review_Post(models.Model):
 
     def get_review_url(self):
         return f'/review/{self.pk}/'
+
+class Review_Comment(models.Model):
+    writer=models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    review_post=models.ForeignKey(Review_Post, on_delete=models.CASCADE)
+    text=models.TextField()
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.writer.username+'::'+self.text
+
+    def get_absolute_url(self):
+        return f'{self.review_post.get_review_url()}#comment-{self.pk}'
