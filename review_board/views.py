@@ -26,6 +26,11 @@ def Review_Post_Create(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
+            album=post.album
+            album.rating=album.rating*album.reviews + post.rating
+            album.reviews+=1
+            album.rating/=album.reviews
+            album.save()
             return redirect('../', pk=post.pk)
     else:
         form = PostForm()
@@ -92,6 +97,11 @@ def Review_Post_Update(request, pk):
 def Review_Post_Delete(request, pk):
     post = Review_Post.objects.get(pk=pk)
     if request.user==post.author:
+        album=post.album
+        album.rating=album.rating*album.reviews - post.rating
+        album.reviews-=1
+        album.rating/=album.reviews
+        album.save()
         post.delete()
         return redirect('../../')
     else:
