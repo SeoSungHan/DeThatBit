@@ -10,4 +10,5 @@ urlpatterns=[
     path('create/',views.Review_Post_Create,name="review_create"),
     path('<int:pk>/update/',views.Review_Post_Update,name="review_update"),
     path('<int:pk>/delete/',views.Review_Post_Delete,name="review_delete"),
+    path('like/',views.Review_Post_Like,name="review_post_like"),
 ]

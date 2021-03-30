@@ -1,10 +1,12 @@
+import json
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView
 from .models import Free_Post, Free_Comment
 from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
- 
+from django.http import HttpResponse
+
 class Free_List(ListView):
     model = Free_Post
     template_name = 'free_board/list.html'
@@ -18,6 +20,23 @@ class Free_Detail(DetailView):
        context=super(Free_Detail, self).get_context_data()
        context['comment_form']=CommentForm
        return context
+
+@login_required
+def Free_Post_Like(request):
+    pk=request.POST.get('pk',None)
+    post=get_object_or_404(Free_Post, pk=pk)
+    user=request.user
+
+    if post.likes.filter(id=user.id).exists():
+        post.likes.remove(user)
+        message="좋아요 취소"
+    else:
+        post.likes.add(user)
+        message="좋아요"
+
+    context={'likes_cnt':post.get_likes_num(),'message':message}
+
+    return HttpResponse(json.dumps(context), content_type="application/json")
 
 @login_required
 def Free_Comment_Create(request, pk):
