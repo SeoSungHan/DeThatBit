@@ -5,6 +5,8 @@ from .models import Review_Post, Review_Comment
 from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from albums.models import Albums
+from django.db.models import Q
 
 class Review_List(ListView):
     model = Review_Post
@@ -19,6 +21,40 @@ class Review_Detail(DetailView):
        context=super(Review_Detail, self).get_context_data()
        context['comment_form']=CommentForm
        return context
+
+def Album_Select(request):
+    word=request.POST.get('q',None)
+    if word:
+        results=Albums.objects.filter(Q(album__contains=word)).distinct()
+
+        limit=len(results)
+        if limit>5: limit=5
+
+        album_select=""
+        
+        for i in range(limit):
+            if i==limit-1:album_select+=results[i].album
+            else:album_select+=results[i].album + ','
+
+        context={'album_select':album_select}
+        return HttpResponse(json.dumps(context), content_type="application/json")
+
+@login_required
+def Review_Post_Like(request):
+    pk=request.POST.get('pk',None)
+    post=get_object_or_404(Review_Post, pk=pk)
+    user=request.user
+
+    if post.likes.filter(id=user.id).exists():
+        post.likes.remove(user)
+        message="좋아요 취소"
+    else:
+        post.likes.add(user)
+        message="좋아요"
+
+    context={'likes_cnt':post.get_likes_num(),'message':message}
+
+    return HttpResponse(json.dumps(context), content_type="application/json")
 
 @login_required
 def Review_Post_Like(request):
@@ -40,17 +76,21 @@ def Review_Post_Like(request):
 @login_required
 def Review_Post_Create(request):
     if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            album=post.album
-            album.rating=album.rating*album.reviews + post.rating
-            album.reviews+=1
-            album.rating/=album.reviews
-            album.save()
-            return redirect('../', pk=post.pk)
+        album = request.POST.get('album',None)
+        if album:
+            result=Albums.objects.filter(Q(album=album))
+            form = PostForm(request.POST)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.album=result[0]
+                post.author = request.user
+                post.save()
+                album=post.album
+                album.rating=album.rating*album.reviews + post.rating
+                album.reviews+=1
+                album.rating/=album.reviews
+                album.save()
+                return redirect('../', pk=post.pk)
     else:
         form = PostForm()
         return render(request, 'review_board/edit.html', {'form': form})

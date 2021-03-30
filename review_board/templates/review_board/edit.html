@@ -13,11 +13,78 @@ New Post | DeThatBit
 <div class="new_post my-5">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <div>
+            <input type="text" class="album-select" name="album" placeholder="Album_Search">
+            <p id="album"></p>
+        </div>
+                
+        </script>
         <table>{{form.as_table}}</table>
 
         <button class="btn btn-info mt-3" type="submit"> Submit </button>
         <button onclick="location.href='../'">Back</button>
     </form>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript">
+            let old=""
+
+            function albumClick(e){
+                e.preventDefault()
+                //console.log(e.target.innerText)
+
+                document.getElementsByClassName("album-select")[0].value=e.target.innerText
+                //console.log(k)
+            }
+
+            $(".album-select").on("propertychange change keyup paste input", function(){
+                const now = $(this).val();
+                if(now == old) {
+                    return;
+                }
+                if(now == "") {
+                    return;
+                }
+                //console.log(now)
+                old=now
+                // 여기까진 값이 바뀔때마다 인식하는 부분
+                const reset=document.getElementById('album-list')
+                if(reset){
+                    document.getElementById('album').removeChild(reset)
+                }
+                $.ajax({
+                    type:"POST",
+                    url:"{% url 'album_select' %}",
+                    data:{'q':now, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                    dataType: "json",
+                    success: function (response) {
+                        //alert(response.message);
+                        album_select=response.album_select.split(',')
+                        let list=document.createElement('ul')
+                        list.id="album-list"
+                        album_select.forEach(element => {
+                            console.log(element)
+                            let li=document.createElement('li')
+                            let btn=document.createElement('button')
+                            btn.innerText=element
+                            btn.addEventListener("click", albumClick)
+                            li.appendChild(btn)
+                            list.appendChild(li)
+                        });
+                        console.log(list)
+                        document.getElementById('album').appendChild(list);
+                        //$("#album").html(response.album_select);
+                        //console.log(album_select)
+                    },
+                    error: function (request, status, error){
+                        alert("Fail")
+                        window.location.replace("")
+                    },
+                });
+            })
+        </script>
     {{form.media}}
+
+    
 </div>
 {% endblock %}
