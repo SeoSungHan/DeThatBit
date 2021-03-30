@@ -15,11 +15,7 @@ class Review_Post(models.Model):
     album=models.ForeignKey(Albums, null=True, on_delete=models.SET_NULL)
     author=models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
-    likes=models.ManyToManyField(
-        User,
-        blank=True,
-        related_name='review_likes'
-    )
+    likes=models.ManyToManyField(User, blank=True, related_name='review_likes')
 
     def __str__(self):
         return f'[{self.pk}]{self.title}by{self.author}'
