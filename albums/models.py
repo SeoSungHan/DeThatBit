@@ -10,6 +10,7 @@ class Albums(models.Model):
     link=models.CharField(max_length=500, null = True)
 
     rating=models.FloatField(default=0)
+    reviews=models.IntegerField(default=0)
 
     def __str__(self):
         return self.artist+'::'+self.album
