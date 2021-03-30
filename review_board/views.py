@@ -57,6 +57,23 @@ def Review_Post_Like(request):
     return HttpResponse(json.dumps(context), content_type="application/json")
 
 @login_required
+def Review_Post_Like(request):
+    pk=request.POST.get('pk',None)
+    post=get_object_or_404(Review_Post, pk=pk)
+    user=request.user
+
+    if post.likes.filter(id=user.id).exists():
+        post.likes.remove(user)
+        message="좋아요 취소"
+    else:
+        post.likes.add(user)
+        message="좋아요"
+
+    context={'likes_cnt':post.get_likes_num(),'message':message}
+
+    return HttpResponse(json.dumps(context), content_type="application/json")
+
+@login_required
 def Review_Post_Create(request):
     if request.method == "POST":
         album = request.POST.get('album',None)
