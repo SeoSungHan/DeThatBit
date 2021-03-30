@@ -10,62 +10,84 @@ Albums | DeThatBit
 {% endblock %}
 
 {% block contents%}
-{% if albums_list.exists %}
-    {% for a in albums_list %}
-    <h5>{{a.rating}}</h5> <br> <h5>{{a.reviews}}</h5> 
-    <p>
-        <img src="{{a.cover}}" alt="{{a.album}}">
-        <td class="td_writer">{{a.artist}}</td>
-        <td class="td_writer">{{a.type}}-{{a.album}}</td>
-        <td class="td_writer">{{a.date}}</td>
-        <hr>
-    </p>
-    {% endfor%}
-{% endif %}
-
-<div>
-{% if is_paginated %}
-<ul class="paginations">
-    <li class="page-item">
-        <a href="?page=1">맨 앞으로</a>
-    </li>
-    {% if start_page %}
-    <li class="page-item">
-        <a href="?page={{start_page}}">Before</a>
-    </li>
-    {% endif %}
-    {% for page in page_range %}
-    <li class="page-item">
-        <a href="?page={{ page }}">{{ page }}</a>
-    </li>
-    {% endfor %}
-    {% if last_page < page_obj.paginator.num_pages %}
-    <li class="page-item">
-        <a href="?page={{ last_page|add:'1' }}">Next</a>
-    </li>
-    {% endif %}
-
-    <li class="page-item">
-        <a href="?page={{ page_obj.paginator.num_pages }}">맨 뒤로</a>
-    </li>
-</ul>
-{% endif %}
+<div class="album">
+    <div class="album_header">
+        <h1><a href="/albums/">Albums</a></h1>
+        <div class="search_album">
+            <form>
+                <input type="text" id="search-album">
+                <button type="button" onclick="search()">Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="albumBox">
+        {% if albums_list.exists %}
+        <li class="albumList">
+            {% for a in albums_list %}
+            <ul class="albumContent">
+                <div class=album_image">
+                    <img class="album_cover" src="{{a.cover}}" alt="{{a.album}}">
+                </div>
+                <div class="album_meta">
+                    <div class="wrapper_album_meta_review">
+                        <li class="album_meta_review">
+                            <ul class="album_rating">⭐ {{a.rating}}</ul>
+                            <ul class="album_reviews">💬 {{a.reviews}}</ul>
+                        </li>
+                    </div>
+                    <div class="wrapper_album_meta_info">
+                        <li class="album_meta_info">
+                            <ul class="album_name">{{a.a_type}} {{a.album}}</ul>
+                            <ul class="album_artist">{{a.artist}}</ul>
+                            <ul class="album_date">{{a.date}}</ul>
+                        </li>
+                    </div>
+                </div>
+            </ul>
+            {% endfor%}
+        </li>
+        {% endif %}
+    </div>
 </div>
 
-<div>
-    <form>
-        <input type="text" id="search-album">
-        <button type="button" onclick="search()">Search</button>
-    </form>
+<div class="wrapper_paginations">
+    {% if is_paginated %}
+    <ul class="paginations">
+        <li class="page-item">
+            <button onclick="location.href='?page=1'">
+                << </button>
+        </li>
+        {% if start_page %}
+        <li class="page-item">
+            <button onclick="location.href='?page={{start_page}}'">
+                < </button>
+        </li>
+        {% endif %}
+        {% for page in page_range %}
+        <li class="page-item">
+            <button onclick="location.href='?page={{ page }}'">{{ page }}</button>
+        </li>
+        {% endfor %}
+        {% if last_page < page_obj.paginator.num_pages %} <li class="page-item">
+            <button onclick="location.href='?page={{ last_page|add:1 }}'">></button>
+            </li>
+            {% endif %}
+            <li class="page-item">
+                <button onclick="location.href='?page={{ page_obj.paginator.num_pages }}'">>></button>
+            </li>
+    </ul>
+    {% endif %}
 </div>
+
+
 
 <script>
-    function search(){
-        let val=document.getElementById('search-album').value.trim()
-        if(val.length>1){
-            location.href="/albums/search/"+val+"/"
+    function search() {
+        let val = document.getElementById('search-album').value.trim()
+        if (val.length > 1) {
+            location.href = "/albums/search/" + val + "/"
         }
-        else{
+        else {
             alert('검색어가 너무 짧습니다. 두글자 이상 입력해야합니다.')
         }
     }
