@@ -87,16 +87,25 @@ table tr td {
   background-color: white;
   border-radius: 10px;
 }
+.contentBox p {
+  overflow: hidden;
+  word-wrap: break-word;
+}
 .contentBox_header {
+  display: flex;
+  justify-content: space-between;
   text-align: left;
   border-bottom: black dashed 2px;
 }
+
 .contentBox_header .updateBtns {
   text-align: right;
   margin-right: 5px;
   transition: all 0.75s cubic-bezier(0.19, 1, 0.22, 1);
 }
-
+.updateBtns button {
+  margin-bottom: 5px;
+}
 .updateBtns button:hover {
   background-color: black;
   box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.5);
@@ -106,10 +115,13 @@ table tr td {
 }
 .contentBox_header .title {
   font-size: 35px;
-  margin: 10px 0px 10px 0px;
+  width: 500px;
+  margin: 5px 0px;
+  overflow: hidden;
+  word-wrap: break-word;
 }
 .contentBox_header .author {
-  margin: 0px 0px 20px 5px;
+  margin: 10px 0px 10px 5px;
 }
 .contentBox_body {
   text-align: left;
@@ -247,4 +259,18 @@ input#id_title {
 }
 .editBtns {
   padding: 5px;
+}
+.like_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.like_wrapper .like {
+  font-size: 13px;
+  padding: 3px 7px;
+  margin-right: 20px;
+}
+.like_wrapper p {
+  margin: 2px 0px;
+  font-size: 13px;
 }
