@@ -21,8 +21,8 @@ table {
   margin: 10px auto 0px auto;
   background-color: white;
   border-radius: 5px;
+  box-shadow: 0px 0px 3px 2px white;
 }
-
 
 table tr th {
   border-bottom: solid black 1px;
@@ -83,12 +83,11 @@ table tr td {
   width: 580px;
   padding: 10px;
   margin: 10px auto;
-
+  box-shadow: 0px 0px 3px 2px white;
   background-color: white;
   border-radius: 10px;
 }
 .contentBox_header {
-  
   text-align: left;
   border-bottom: black dashed 2px;
 }
@@ -123,25 +122,26 @@ table tr td {
   width: 580px;
   margin: 10px auto;
   background-color: white;
+  box-shadow: 0px 0px 3px 2px white;
   padding: 10px;
   border-radius: 10px;
 }
 .comment {
   border-radius: 10px;
 }
-.comment_box{
+.comment_box {
   display: flex;
   margin: 0;
   padding: 0;
   align-items: center;
 }
-textarea#id_text{
+textarea#id_text {
   margin: 10px;
   width: 450px;
   height: 70px;
   border-radius: 5px;
 }
-.comment-edit-form{
+.comment-edit-form {
   margin: 0 auto;
 }
 .comment_form textarea {
@@ -208,44 +208,43 @@ button:hover {
   margin: 10px auto;
   border-radius: 10px;
 }
-.contentBox_body{
+.contentBox_body {
   padding: 0;
 }
-.new_post table{
+.new_post table {
   margin: 0;
   width: 600px;
-
 }
-.new_post form{
- margin: 0;
+.new_post form {
+  margin: 0;
 }
-.new_post table th{
+.new_post table th {
   margin: 0;
   width: 75px;
   border-bottom: transparent;
-  padding:10px 0;
+  padding: 10px 0;
   text-align: center;
 }
-.new_post table td{
+.new_post table td {
   border-bottom: transparent;
   display: flex;
   align-items: center;
-  padding:10px 0;
+  padding: 10px 0;
 }
-.new_post table tr{
+.new_post table tr {
   display: flex;
-  justify-content:left;
+  justify-content: left;
   align-items: center;
   border-bottom: dashed 1px;
 }
-textarea#id_content{
+textarea#id_content {
   width: 500px;
   height: 400px;
 }
-input#id_title{
+input#id_title {
   margin: auto 0px;
   width: 300px;
 }
-.editBtns{
+.editBtns {
   padding: 5px;
 }
