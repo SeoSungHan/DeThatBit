@@ -10,6 +10,11 @@ class Free_Post(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     author=models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    likes=models.ManyToManyField(
+        User,
+        blank=True,
+        related_name='free_likes'
+    )
 
     def __str__(self):
         return f'[{self.pk}]{self.title}by{self.author}'
@@ -19,6 +24,9 @@ class Free_Post(models.Model):
 
     def get_content_markdown(self):
         return markdown(self.content)
+
+    def get_likes_num(self):
+        return self.likes.count()
 
 class Free_Comment(models.Model):
     writer=models.ForeignKey(User, null=True, on_delete=models.CASCADE)

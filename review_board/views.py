@@ -1,8 +1,10 @@
+import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView
 from .models import Review_Post, Review_Comment
 from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 class Review_List(ListView):
     model = Review_Post
@@ -17,6 +19,23 @@ class Review_Detail(DetailView):
        context=super(Review_Detail, self).get_context_data()
        context['comment_form']=CommentForm
        return context
+
+@login_required
+def Review_Post_Like(request):
+    pk=request.POST.get('pk',None)
+    post=get_object_or_404(Review_Post, pk=pk)
+    user=request.user
+
+    if post.likes.filter(id=user.id).exists():
+        post.likes.remove(user)
+        message="좋아요 취소"
+    else:
+        post.likes.add(user)
+        message="좋아요"
+
+    context={'likes_cnt':post.get_likes_num(),'message':message}
+
+    return HttpResponse(json.dumps(context), content_type="application/json")
 
 @login_required
 def Review_Post_Create(request):
