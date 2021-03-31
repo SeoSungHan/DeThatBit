@@ -13,38 +13,41 @@
     <h1><a href="/free/">FreeBoard</a></h1>
     <div class="contentBox">
         <div class="contentBox_header">
+            <div class="header_info">
+                <h2 class="title">{{free_post.title}}</h2>
+                <h5 class="author">{{free_post.author.username}}</h5>
+            </div>
             <div class="updateBtns">
                 <button onclick="location.href='/free/{{free_post.pk}}/update/'">Modify</button>
                 <button onclick="alert_del(); location.href='/free/{{free_post.pk}}/delete/'">Delete</button>
             </div>
-            <h2 class="title">{{free_post.title}}</h2>
-            <h5 class="author">{{free_post.author.username}}</h5>
         </div>
         <div class="contentBox_body">
             <p>{{free_post.get_content_markdown|safe}}</p>
         </div>
+        <!--좋아요 부분-->
+        <div class="like_wrapper">
+            <button class="like" name="{{free_post.pk}}" value="추천">추천</button>
+            <p id="count-{{free_post.pk}}"> 🙏🏻 {{free_post.likes.all.count}}개</p>
+        </div>
     </div>
 
-    <!--좋아요 부분-->
-    <div>
-        <input type="button" class="like" name="{{free_post.pk}}" value="추천">
-        <p id="count-{{free_post.pk}}"> 좋아요&nbsp;{{free_post.likes.all.count}}개</p>
-    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
-        $(".like").click(function(){
-            const pk=$(this).attr('name')
+        $(".like").click(function () {
+            const pk = $(this).attr('name')
             $.ajax({
-                type:"POST",
-                url:"{% url 'free_post_like' %}",
-                data:{'pk':pk, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                type: "POST",
+                url: "{% url 'free_post_like' %}",
+                data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' },
                 dataType: "json",
                 success: function (response) {
                     alert(response.message);
-                    $("#count-"+pk).html("좋아요&nbsp;"+ response.likes_cnt + "개");
+                    $("#count-" + pk).html("좋아요&nbsp;" + response.likes_cnt + "개");
                 },
-                error: function (request, status, error){
+                error: function (request, status, error) {
                     alert("로그인이 필요합니다")
                     window.location.replace("")
                 },
@@ -62,7 +65,7 @@
                     <span class="cm_writer">{{ comment.writer }}</span>
                     <p class="cm_text">{{ comment.text | linebreaks }}</p>
                     <small class="cm_time">
-                        <div>{{ comment.created_at.month }}/{{ comment.created_at.day }}</div>{{ comment.created_at.hour}}:{{comment.created_at.minute }}
+                        <div>{{ comment.created_at.month }}/{{ comment.created_at.day }}</div>{{comment.created_at.hour}}:{{comment.created_at.minute }}
                     </small>
                     {% if user.id == comment.writer.id%}
                     <ul class="cm_btns">
