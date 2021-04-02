@@ -15,7 +15,7 @@ Albums | DeThatBit
         <h1><a href="/albums/">Albums</a></h1>
         <div class="search_album">
             <form>
-                <input type="text" id="search-album">
+                <input type="text" id="search-album" onkeydown="if(event.keyCode==13){search();}"/>
                 <button type="button" onclick="search()">Search</button>
             </form>
         </div>

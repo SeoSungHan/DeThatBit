@@ -125,7 +125,20 @@ table tr td {
 }
 .contentBox_body {
   text-align: left;
-  padding: 0px 20px 0px 20px;
+}
+.like_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.like_wrapper .like {
+  font-size: 13px;
+  padding: 3px 7px;
+  margin-right: 20px;
+}
+.like_wrapper p {
+  margin: 2px 0px;
+  font-size: 13px;
 }
 
 /*Comment*/
@@ -213,6 +226,7 @@ button:hover {
 .hidden {
   display: none;
 }
+
 /*edit.html*/
 .new_post {
   background-color: white;
@@ -259,18 +273,4 @@ input#id_title {
 }
 .editBtns {
   padding: 5px;
-}
-.like_wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.like_wrapper .like {
-  font-size: 13px;
-  padding: 3px 7px;
-  margin-right: 20px;
-}
-.like_wrapper p {
-  margin: 2px 0px;
-  font-size: 13px;
 }
