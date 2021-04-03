@@ -10,46 +10,104 @@
 
 {% block contents%}
 <div class="content">
-        
     <h1><a href="/review/">Review Board</a></h1>
     <div class="contentBox">
-        <div class="updateBtns">
-            <button><a href="/review/{{review_post.pk}}/update/">Modify</a></button>
-            <button onclick="alert_del()"><a href="/review/{{review_post.pk}}/delete/">Delete</a></button>
-        </div>
         <div class="contentBox_header">
-            <img src="{{ review_post.album.cover }}">
-            <h2>{{review_post.title}}</h2>
-            <h3>{{review_post.album.album}}</h3>
-            <h4>{{review_post.rating}}</h4>
-            <h5>{{review_post.author}}</h5>
+            <div class="header_info">
+                <h2 class="title">
+                    <div class="title_album_name">[{{review_post.album.album}}]</div>
+                    <div class="title_title">{{review_post.title}}</div>
+                </h2>
+                <h5 class="author">{{review_post.author}}</h5>
+            </div>
+            <div class="updateBtns">
+                <button onclick="location.href='/review/{{review_post.pk}}/update/'">Modify</button>
+                <button onclick="alert_del(); location.href='/review/{{review_post.pk}}/delete/'">Delete</button>
+            </div>
         </div>
         <div class="contentBox_body">
-            <p>{{review_post.content}}</p>
+            <div class="album_info">
+                <img src="{{ review_post.album.cover }}">
+                <div class="album_info_spec">
+                    <div class="album_info_spec_album">{{review_post.album.a_type}} {{review_post.album.album}}</div>
+                    <div class="album_info_spec_artist">{{review_post.album.artist}}</div>
+                    <div class="album_info_spec_date">{{review_post.album.date}}</div>
+                    <div class="album_info_spec_rate">⭐ {{review_post.rating}}</div>
+                </div>
+            </div>
+            <div class="review_content">
+                <p>{{review_post.content}}</p>
+            </div>
+        </div>
+        <!--좋아요 부분-->
+        <div class="like_wrapper">
+            <button class="like" name="{{review_post.pk}}" value="추천">추천</button>
+            <p id="count-{{review_post.pk}}">🙏🏻 {{review_post.likes.all.count}}</p>
+        </div>
+    </div>
+
+    <div class="commentBox">
+        <div class="comment">
+            {% if review_post.review_comment_set.count > 0 %}
+            {% for comment in review_post.review_comment_set.all %}
+            <div id="comment-{{comment.pk}}" class="cm_row">
+                <div class="comment_box comment_box-{{comment.pk}}">
+                    <span class="cm_writer">{{ comment.writer }}</span>
+                    <p class="cm_text">{{ comment.text | linebreaks }}</p>
+                    <small class="cm_time">
+                        <div>{{ comment.created_at.month }}/{{ comment.created_at.day }}</div>
+                        {{comment.created_at.hour}}:{{comment.created_at.minute }}
+                    </small>
+                    {% if user.id == comment.writer.id%}
+                    <ul class="cm_btns">
+                        <li><button class="comment-modify-{{comment.pk}}" name="try-edit"
+                                value="{{comment.pk}}">Modify</button></li>
+                        <li><button onclick="location.href='/review/comment_delete/{{comment.pk}}/'">
+                                Delete
+                            </button></li>
+                    </ul>
+                    {% endif %}
+                </div>
+                <div class="comment-edit-form-{{comment.pk}} comment-edit-form hidden">
+                    <form action="/review/comment_update/{{comment.pk}}/" method="POST">
+                        {% csrf_token %}
+                        {{comment_form}}
+                        <button class="btn btn-info mt-3" type="submit"> Submit </button>
+                    </form>
+                    <button class="comment-edit-back" name="edit-back" value="{{comment.pk}}"> Back </button>
+                </div>
+            </div>
+            {% endfor%}
+            {% else %}
+            <h1>댓글 없음</h1>
+            {% endif %}
+        </div>
+        <div class="comment_form">
+            <form action="/review/{{review_post.pk}}/comment_create/" method="POST">
+                {% csrf_token %}
+                {{comment_form}}
+                <button class="btn btn-info mt-3 submitBtn" type="submit"> Submit </button>
+            </form>
         </div>
     </div>
 </div>
 
-<!--좋아요 부분-->
-<div>
-    <input type="button" class="like" name="{{review_post.pk}}" value="추천">
-    <p id="count-{{review_post.pk}}"> 좋아요&nbsp;{{free_post.likes.all.count}}개</p>
-</div>
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-    $(".like").click(function(){
-        const pk=$(this).attr('name')
+    $(".like").click(function () {
+        const pk = $(this).attr('name')
         $.ajax({
-            type:"POST",
-            url:"{% url 'review_post_like' %}",
-            data:{'pk':pk, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            type: "POST",
+            url: "{% url 'review_post_like' %}",
+            data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' },
             dataType: "json",
             success: function (response) {
                 alert(response.message);
-                $("#count-"+pk).html("좋아요&nbsp;"+ response.likes_cnt + "개");
+                $("#count-" + pk).html("좋아요&nbsp;" + response.likes_cnt + "개");
             },
-            error: function (request, status, error){
+            error: function (request, status, error) {
                 alert("로그인이 필요합니다")
                 window.location.replace("")
             },
@@ -57,51 +115,6 @@
     })
 </script>
 
-<div class="commentBox">
-    <div class="comment">
-        {% if review_post.review_comment_set.count > 0 %}
-        {% for comment in review_post.review_comment_set.all %}
-        <div id="comment-{{comment.pk}}" class="cm_row">
-            <div class="comment_box comment_box-{{comment.pk}}">
-                <span class="cm_writer">{{ comment.writer }}</span>
-                <p class="cm_text">{{ comment.text | linebreaks }}</p>
-                <small class="cm_time">
-                    <div>{{ comment.created_at.month }}/{{ comment.created_at.day }}</div>{{ comment.created_at.hour}}:{{comment.created_at.minute }}
-                </small>
-                {% if user.id == comment.writer.id%}
-                <ul class="cm_btns">
-                    <li><button class="comment-modify-{{comment.pk}}" name="try-edit"
-                            value="{{comment.pk}}">Modify</button></li>
-                    <li><button onclick="location.href='/review/comment_delete/{{comment.pk}}/'">
-                            Delete
-                        </button></li>
-                </ul>
-                {% endif %}
-            </div>
-            <div class="comment-edit-form-{{comment.pk}} comment-edit-form hidden">
-                <form action="/review/comment_update/{{comment.pk}}/" method="POST">
-                    {% csrf_token %}
-                    {{comment_form}}
-                    <button class="btn btn-info mt-3" type="submit"> Submit </button>
-                </form>
-                <button class="comment-edit-back" name="edit-back" value="{{comment.pk}}"> Back </button>
-            </div>
-
-            <hr>
-        </div>
-        {% endfor%}
-        {% else %}
-        <h1>댓글 없음</h1>
-        {% endif %}
-    </div>
-    <div class="comment_form">
-        <form action="/review/{{review_post.pk}}/comment_create/" method="POST">
-            {% csrf_token %}
-            {{comment_form}}
-            <button class="btn btn-info mt-3 submitBtn" type="submit"> Submit </button>
-        </form>
-    </div>
-</div>
 <script src="{% static 'review_board/comment_edit.js' %}"></script>
 <script>
     function alert_del() {

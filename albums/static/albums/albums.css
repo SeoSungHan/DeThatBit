@@ -50,7 +50,7 @@ li {
   height: 150px;
   width: 150px;
   border-radius: 5px;
-  box-shadow: 0px 0px 3px 1px black;
+  box-shadow: 0px 0px 3px 1px gray;
 }
 .album_meta_review {
   font-size: 13px;

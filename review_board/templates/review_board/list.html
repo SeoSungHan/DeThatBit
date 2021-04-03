@@ -26,7 +26,7 @@ Review Board | DeThatBit
             {%for p in review_post_list%}
             <tr>
                 <td class="td_num">{{p.pk}}</td>
-                <td class="td_title"><a href="{{p.get_review_url}}">{{p.title}}</a></td>
+                <td class="td_title"><a href="{{p.get_review_url}}">[{{p.album.album}}] {{p.title}}</a></td>
                 <!--<td class="td_content">{{p.content | truncatewords:30}}</td>-->
 
                 <td class="td_writer">{{p.author.username}}</td>
