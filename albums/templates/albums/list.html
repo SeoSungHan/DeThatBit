@@ -14,8 +14,8 @@ Albums | DeThatBit
     <div class="album_header">
         <h1><a href="/albums/">Albums</a></h1>
         <div class="search_album">
-            <form>
-                <input type="text" id="search-album" onkeydown="if(event.keyCode==13){search();}"/>
+            <form onsubmit="return false;">
+                <input type="text" id="search-album" onkeydown="enterkey()"/>
                 <button type="button" onclick="search()">Search</button>
             </form>
         </div>
@@ -84,6 +84,7 @@ Albums | DeThatBit
 <script>
     function search() {
         let val = document.getElementById('search-album').value.trim()
+        console.log(val);
         if (val.length > 1) {
             location.href = "/albums/search/" + val + "/"
         }
@@ -91,11 +92,17 @@ Albums | DeThatBit
             alert('검색어가 너무 짧습니다. 두글자 이상 입력해야합니다.')
         }
     }
-    document.getElementById('search-album').addEventListener('keyup', function(e){
-        if(e.key==='Enter'){
+    function enterkey() {
+        if (window.event.keyCode === 13) {
             search();
         }
-    });
+    }
+/*
+    document.getElementById('search-album').addEventListener('keydown', function(e){
+        if(e.keyCode==13){
+            search();
+        }
+    });*/
 </script>
 
 {% endblock %}
