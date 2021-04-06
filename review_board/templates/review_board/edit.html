@@ -47,10 +47,10 @@ New Post | DeThatBit
                     if (now == old) {
                         return;
                     }
-                    //console.log(now)
-                    old = now
+                    console.log(now)
                     // 여기까진 값이 바뀔때마다 인식하는 부분
                     const reset = document.getElementById('album-list')
+                    console.log("지운거",reset)
                     if (reset) {
                         document.getElementById('album').removeChild(reset)
                     }
@@ -60,15 +60,17 @@ New Post | DeThatBit
                         data: { 'q': now, 'csrfmiddlewaretoken': '{{ csrf_token }}' },
                         dataType: "json",
                         success: function (response) {
-                            //alert(response.album_select);
+                            if(now !== $(".album-select").val()){
+                                return
+                            }
                             if(response.album_select==""){
-                                return;
+                                return
                             }
                             album_select = response.album_select.split('\n')
                             let list = document.createElement('ul')
                             list.id = "album-list"
                             album_select.forEach(element => {
-                                console.log(element)
+                                //console.log(element)
                                 let li = document.createElement('li')
                                 let btn = document.createElement('button')
                                 btn.innerText = element
@@ -86,6 +88,7 @@ New Post | DeThatBit
                             window.location.replace("")
                         },
                     });
+                    old=now
                 })
             </script>
         </div>
