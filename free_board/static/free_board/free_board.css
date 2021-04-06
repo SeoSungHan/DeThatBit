@@ -14,7 +14,7 @@
 .freeBoard {
   text-align: center;
   width: 800px;
-  margin: 50px auto;
+  margin: 50px auto 20px auto;
   border: solid black 2px;
   border-radius: 15px;
   padding: 0px 10px;
@@ -38,7 +38,6 @@ table {
   margin: 0px auto 0px auto;
   background-color: white;
   border-radius: 5px;
-  box-shadow: 0px 0px 3px 2px white;
 }
 
 table tr th {
@@ -81,6 +80,18 @@ table tr td {
   transform: scale(0.9);
   color: white;
   animation: fadeIn 0.5s linear;
+}
+.wrapper_paginations {
+  text-align: center;
+}
+.paginations {
+  display: flex;
+  justify-content: center;
+  padding: 0px;
+}
+.paginations button {
+  margin: 10px;
+  padding: 10px 15px;
 }
 
 /*detail.html*/

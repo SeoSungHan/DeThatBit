@@ -116,7 +116,7 @@ Review Board | DeThatBit
         const toDay = nowDate.toLocaleDateString();
 
         for (let i = 0; i < postDate.length; i++) {
-            const postDateText = postDate[i].innerHTML;
+            const postDateText = postDate[i].innerText;
             if (postDateText === toDay) {
                 postDate[i].classList.add("hidden");
             }
