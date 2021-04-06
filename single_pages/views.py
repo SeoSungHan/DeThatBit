@@ -4,14 +4,23 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import UserForm
+from albums.models import Albums
+from review_board.models import Review_Post
+from free_board.models import Free_Post
 
 from django.views.decorators.http import require_http_methods
 # Create your views here.
 
 def landing(request):
+    recent_album=Albums.objects.all()[0:6]
+    recent_review=Review_Post.objects.all()[0:10]
+    recent_free=Free_Post.objects.all()[0:10]
     return render(
         request,
-        'single_pages/landing.html'
+        'single_pages/landing.html',
+        {'album': recent_album,
+        'review': recent_review,
+        'free': recent_free}
     )
 
 def about_this(request):

@@ -14,24 +14,11 @@ DeThatBit
     <div class="landing_albums">
         <h1>Recent Albums</h1>
         <li class="landing_albumList">
+            {% for a in album %}
             <ul>
-                <img class="album_cover" src="https://blog.kakaocdn.net/dn/SeRIx/btqyY2MhIPt/qLL3bznQuBCsrWTjotKicK/img.jpg" alt="albumname">
+                <img class="album_cover" src="{{a.cover}}" alt="{{a.album}}">
             </ul>
-            <ul>
-                <img class="album_cover" src="https://blog.kakaocdn.net/dn/SeRIx/btqyY2MhIPt/qLL3bznQuBCsrWTjotKicK/img.jpg" alt="albumname">
-            </ul>
-            <ul>
-                <img class="album_cover" src="https://blog.kakaocdn.net/dn/SeRIx/btqyY2MhIPt/qLL3bznQuBCsrWTjotKicK/img.jpg" alt="albumname">
-            </ul>
-            <ul>
-                <img class="album_cover" src="https://blog.kakaocdn.net/dn/SeRIx/btqyY2MhIPt/qLL3bznQuBCsrWTjotKicK/img.jpg" alt="albumname">
-            </ul>
-            <ul>
-                <img class="album_cover" src="https://blog.kakaocdn.net/dn/SeRIx/btqyY2MhIPt/qLL3bznQuBCsrWTjotKicK/img.jpg" alt="albumname">
-            </ul>
-            <ul>
-                <img class="album_cover" src="https://blog.kakaocdn.net/dn/SeRIx/btqyY2MhIPt/qLL3bznQuBCsrWTjotKicK/img.jpg" alt="albumname">
-            </ul>
+            {% endfor %}
         </li>
     </div>
     <div class="landing_board">
@@ -47,33 +34,17 @@ DeThatBit
                     </tr>
                 </thead>
                 <tbody>
+                    {% for f in free %}
                     <tr>
-                        <td class="td_num">1</td>
-                        <td class="td_title"><a href="https://www.naver.com">[albumname] title</a></td>
-                        <td class="td_writer">writer</td>
-                        <td class="td_time">
-                            <div class="td_time_date">날짜</div>
-                            <div class="td_time_time">시간</div>
-                        </td>
+                      <td class="td_num">{{f.pk}}</td>
+                      <td class="td_title"><a href="/free/{{f.pk}}">{{f.title}}</a></td>
+                      <td class="td_writer">{{f.author}}</td>
+                      <td class="td_time">
+                          <div class="td_time_date">{{f.created_at.month}}. {{f.created_at.day}}.</div>
+                          <div class="td_time_time">{{f.created_at.hour}}:{{f.created_at.minute}}</div>
+                      </td>
                     </tr>
-                    <tr>
-                        <td class="td_num">1</td>
-                        <td class="td_title"><a href="https://www.naver.com">[albumname] title</a></td>
-                        <td class="td_writer">writer</td>
-                        <td class="td_time">
-                            <div class="td_time_date">날짜</div>
-                            <div class="td_time_time">시간</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_num">1</td>
-                        <td class="td_title"><a href="https://www.naver.com">[albumname] title</a></td>
-                        <td class="td_writer">writer</td>
-                        <td class="td_time">
-                            <div class="td_time_date">날짜</div>
-                            <div class="td_time_time">시간</div>
-                        </td>
-                    </tr>
+                    {% endfor %}  
                 </tbody>
             </table>
         </div>
@@ -89,33 +60,17 @@ DeThatBit
                     </tr>
                 </thead>
                 <tbody>
+                    {% for r in review %}
                     <tr>
-                        <td class="td_num">1</td>
-                        <td class="td_title"><a href="https://www.naver.com">[albumname] title</a></td>
-                        <td class="td_writer">writer</td>
+                        <td class="td_num">{{r.pk}}</td>
+                        <td class="td_title"><a href="/review/{{r.pk}}">[{{r.album.album}}]{{r.title}}</a></td>
+                        <td class="td_writer">{{r.author}}</td>
                         <td class="td_time">
-                            <div class="td_time_date">날짜</div>
-                            <div class="td_time_time">시간</div>
+                            <div class="td_time_date">{{r.created_at.month}}. {{r.created_at.day}}.</div>
+                            <div class="td_time_time">{{r.created_at.hour}}:{{r.created_at.minute}}</div>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="td_num">1</td>
-                        <td class="td_title"><a href="https://www.naver.com">[albumname] title</a></td>
-                        <td class="td_writer">writer</td>
-                        <td class="td_time">
-                            <div class="td_time_date">날짜</div>
-                            <div class="td_time_time">시간</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_num">1</td>
-                        <td class="td_title"><a href="https://www.naver.com">[albumname] title</a></td>
-                        <td class="td_writer">writer</td>
-                        <td class="td_time">
-                            <div class="td_time_date">날짜</div>
-                            <div class="td_time_time">시간</div>
-                        </td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
