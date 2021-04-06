@@ -1,14 +1,85 @@
-.home{
+.home {
   padding: 50px;
   font-size: 80px;
 }
-.homeBox {
-  background-color: rgb(224, 220, 220);
+.landingBox {
+  border: black solid 2px;
+  display: grid;
+  grid-template-rows: 230px 1fr;
+  align-items: center;
+  border-radius: 5px;
   margin: 10px auto;
   width: 1200px;
-  height: 650px;
+  height: 700px;
 }
-.homeBox img {
-  height: 100%;
-  width: 100%;
+.landing_albums {
+  background-color: white;
+  border-radius: 5px;
+  margin: 10px;
+}
+.landing_albumList {
+  list-style: none;
+  display: flex;
+}
+.landing_albumList .album_cover {
+  width: 150px;
+  height: 150px;
+}
+.landing_board {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.landing_free_board,
+.landing_review_board {
+  background-color: white;
+  border-radius: 5px;
+  margin: 5px;
+  width: 585px;
+  height: 430px;
+}
+h1 {
+  font-size: 25px;
+  margin: 0px 10px;
+}
+table {
+  width: 580px;
+  margin: 10px auto 0px auto;
+  background-color: white;
+  box-shadow: 0px 0px 3px 2px white;
+  border-radius: 5px;
+}
+table tr {
+  border-bottom: solid black 50px;
+}
+table tbody tr {
+  padding-bottom: 50px;
+  border-bottom: solid red 50px;
+}
+table tr th {
+  border-bottom: solid black 1px;
+  text-align: left;
+}
+table tr td {
+  padding-top: 15px;
+  padding-bottom: 3px;
+  border-bottom: solid black 1px;
+}
+.th_num {
+  width: 50px;
+  padding-right: 0px;
+}
+.th_title {
+  width: 500px;
+  padding-right: 50px;
+}
+.th_writer {
+  width: 80px;
+  padding-right: 0px;
+}
+.th_time {
+  width: 80px;
+  font-size: 13px;
+  padding-right: 0px;
 }
