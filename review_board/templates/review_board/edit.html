@@ -29,6 +29,17 @@ New Post | DeThatBit
 
             <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
             <script type="text/javascript">
+                
+                let tmp=location.href.split('?')
+                
+                if (tmp.length>1){
+                    console.log(tmp[1])
+                    let tmp1=tmp[1].split(':')
+                    console.log(tmp1[1])
+                    document.getElementsByClassName("album-select")[0].value=tmp1[1]
+                    
+                }
+                
                 let old = ""
 
                 function albumClick(e) {
