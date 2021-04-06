@@ -7,7 +7,7 @@ class Albums_List(ListView):
     model = Albums
     template_name = 'albums/list.html'
     ordering = 'pk'
-    paginate_by=10
+    paginate_by=12
 
     def get_context_data(self, **kwargs):
         context = super(Albums_List, self).get_context_data(**kwargs)
@@ -30,7 +30,7 @@ class Albums_List(ListView):
         return context
 
 class Albums_Search(Albums_List):
-    paginate_by=10
+    paginate_by=12
 
     def get_queryset(self):
         q=self.kwargs['q']
