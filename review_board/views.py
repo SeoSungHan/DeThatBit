@@ -12,6 +12,59 @@ class Review_List(ListView):
     model = Review_Post
     template_name = 'review_board/list.html'
     ordering = '-pk'
+    paginate_by=10
+
+    def get_context_data(self, **kwargs):
+        context = super(Review_List, self).get_context_data(**kwargs)
+        paginator = context['paginator']
+        page_numbers_range = 5  # Display only 5 page numbers
+        max_index = len(paginator.page_range)
+
+        page = self.request.GET.get('page')
+        current_page = int(page) if page else 1
+
+        start_index = int((current_page - 1) / page_numbers_range) * page_numbers_range
+        end_index = start_index + page_numbers_range
+        if end_index >= max_index:
+            end_index = max_index
+
+        page_range = paginator.page_range[start_index:end_index]
+        context['page_range'] = page_range
+        context['start_page'] = start_index
+        context['last_page']=end_index
+        return context
+
+class Review_Search(Review_List):
+    paginate_by=10
+
+    def get_queryset(self):
+        q=self.kwargs['q']
+        t=int(self.kwargs['type'])
+
+        if t==1:
+            review_list=Review_Post.objects.filter(
+                Q(title__contains=q)
+            ).distinct()
+        elif t==2:
+            review_list=Review_Post.objects.filter(
+                Q(content__contains=q)
+            ).distinct()
+        elif t==3:
+            review_list=Review_Post.objects.filter(
+                Q(author__username__contains=q)
+            ).distinct()
+        elif t==4:
+            review_list=Review_Post.objects.filter(
+                Q(album__album__contains=q)
+            ).distinct()
+        return review_list
+
+    def get_context_data(self,**kwargs):
+        context=super(Review_Search,self).get_context_data()
+        q=self.kwargs['q']
+        context['search_info']=f'Search: {q} ({self.get_queryset().count()})'
+        
+        return context
 
 class Review_Detail(DetailView):
     model = Review_Post
@@ -34,7 +87,7 @@ def Album_Select(request):
         
         for i in range(limit):
             if i==limit-1:album_select+=results[i].album
-            else:album_select+=results[i].album + ','
+            else:album_select+=results[i].album + '\n'
 
         context={'album_select':album_select}
         return HttpResponse(json.dumps(context), content_type="application/json")
@@ -122,7 +175,7 @@ def Review_Post_Update(request, pk):
                 return redirect('../', pk=post.pk)
         else:
             form = PostForm(instance=post)
-            return render(request, 'review_board/edit.html', {'form': form})
+            return render(request, 'review_board/edit.html', {'album':post.album.album,'form': form})
     else: return redirect('../')
 
 @login_required

@@ -18,7 +18,7 @@ New Post | DeThatBit
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div>
-                    <input type="text" class="album-select" name="album" placeholder="Album_Search">
+                    <input type="text" class="album-select" name="album" placeholder="Album_Search" value="{{album}}">
                     <p id="album"></p>
                 </div>
                 <table>{{form.as_table}}</table>
@@ -29,6 +29,17 @@ New Post | DeThatBit
 
             <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
             <script type="text/javascript">
+                
+                let tmp=location.href.split('?')
+                
+                if (tmp.length>1){
+                    console.log(tmp[1])
+                    let tmp1=tmp[1].split(':')
+                    console.log(tmp1[1])
+                    document.getElementsByClassName("album-select")[0].value=tmp1[1]
+                    
+                }
+                
                 let old = ""
 
                 function albumClick(e) {
@@ -41,16 +52,16 @@ New Post | DeThatBit
 
                 $(".album-select").on("propertychange change keyup paste input", function () {
                     const now = $(this).val();
-                    if (now == old) {
-                        return;
-                    }
                     if (now == "") {
                         return;
                     }
-                    //console.log(now)
-                    old = now
+                    if (now == old) {
+                        return;
+                    }
+                    console.log(now)
                     // 여기까진 값이 바뀔때마다 인식하는 부분
                     const reset = document.getElementById('album-list')
+                    console.log("지운거",reset)
                     if (reset) {
                         document.getElementById('album').removeChild(reset)
                     }
@@ -60,12 +71,17 @@ New Post | DeThatBit
                         data: { 'q': now, 'csrfmiddlewaretoken': '{{ csrf_token }}' },
                         dataType: "json",
                         success: function (response) {
-                            //alert(response.message);
-                            album_select = response.album_select.split(',')
+                            if(now !== $(".album-select").val()){
+                                return
+                            }
+                            if(response.album_select==""){
+                                return
+                            }
+                            album_select = response.album_select.split('\n')
                             let list = document.createElement('ul')
                             list.id = "album-list"
                             album_select.forEach(element => {
-                                console.log(element)
+                                //console.log(element)
                                 let li = document.createElement('li')
                                 let btn = document.createElement('button')
                                 btn.innerText = element
@@ -83,6 +99,7 @@ New Post | DeThatBit
                             window.location.replace("")
                         },
                     });
+                    old=now
                 })
             </script>
         </div>

@@ -12,4 +12,5 @@ urlpatterns=[
     path('<int:pk>/delete/',views.Review_Post_Delete,name="review_delete"),
     path('like/',views.Review_Post_Like,name="review_post_like"),
     path('album_select/',views.Album_Select, name="album_select"),
+    path('search/<int:type>/<str:q>/',views.Review_Search.as_view()),
 ]

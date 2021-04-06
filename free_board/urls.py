@@ -10,5 +10,6 @@ urlpatterns=[
     path('create/',views.Free_Post_Create,name="free_create"),
     path('<int:pk>/update/',views.Free_Post_Update,name="free_update"),
     path('<int:pk>/delete/',views.Free_Post_Delete,name="free_delete"),
-    path('like/',views.Free_Post_Like, name="free_post_like")
+    path('like/',views.Free_Post_Like, name="free_post_like"),
+    path('search/<int:type>/<str:q>/',views.Free_Search.as_view()),
 ]

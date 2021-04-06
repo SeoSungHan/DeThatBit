@@ -25,14 +25,14 @@ Albums | DeThatBit
         <li class="albumList">
             {% for a in albums_list %}
             <ul class="albumContent">
-                <div class=album_image">
+                <div class="album_image">
                     <img class="album_cover" src="{{a.cover}}" alt="{{a.album}}">
                 </div>
                 <div class="album_meta">
                     <div class="wrapper_album_meta_review">
                         <li class="album_meta_review">
                             <ul class="album_rating">⭐ {{a.rating}}</ul>
-                            <ul class="album_reviews">💬 {{a.reviews}}</ul>
+                            <ul class="album_reviews"><a href="/review/search/4/{{a.album}}/">💬</a> {{a.reviews}}</ul>
                         </li>
                     </div>
                     <div class="wrapper_album_meta_info">
