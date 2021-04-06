@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="review_content">
-                <p>{{review_post.content}}</p>
+                <p>{{review_post.get_content_markdown|safe}}</p>
             </div>
         </div>
         <!--좋아요 부분-->
