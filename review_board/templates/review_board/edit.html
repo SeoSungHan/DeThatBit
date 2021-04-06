@@ -18,7 +18,7 @@ New Post | DeThatBit
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div>
-                    <input type="text" class="album-select" name="album" placeholder="Album_Search">
+                    <input type="text" class="album-select" name="album" placeholder="Album_Search" value="{{album}}">
                     <p id="album"></p>
                 </div>
                 <table>{{form.as_table}}</table>
@@ -41,10 +41,10 @@ New Post | DeThatBit
 
                 $(".album-select").on("propertychange change keyup paste input", function () {
                     const now = $(this).val();
-                    if (now == old) {
+                    if (now == "") {
                         return;
                     }
-                    if (now == "") {
+                    if (now == old) {
                         return;
                     }
                     //console.log(now)
@@ -61,7 +61,7 @@ New Post | DeThatBit
                         dataType: "json",
                         success: function (response) {
                             //alert(response.message);
-                            album_select = response.album_select.split(',')
+                            album_select = response.album_select.split('\n')
                             let list = document.createElement('ul')
                             list.id = "album-list"
                             album_select.forEach(element => {
@@ -73,7 +73,7 @@ New Post | DeThatBit
                                 li.appendChild(btn)
                                 list.appendChild(li)
                             });
-                            console.log(list)
+                            //console.log(list)
                             document.getElementById('album').appendChild(list);
                             //$("#album").html(response.album_select);
                             //console.log(album_select)

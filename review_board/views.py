@@ -34,7 +34,7 @@ def Album_Select(request):
         
         for i in range(limit):
             if i==limit-1:album_select+=results[i].album
-            else:album_select+=results[i].album + ','
+            else:album_select+=results[i].album + '\n'
 
         context={'album_select':album_select}
         return HttpResponse(json.dumps(context), content_type="application/json")
@@ -122,7 +122,7 @@ def Review_Post_Update(request, pk):
                 return redirect('../', pk=post.pk)
         else:
             form = PostForm(instance=post)
-            return render(request, 'review_board/edit.html', {'form': form})
+            return render(request, 'review_board/edit.html', {'album':post.album.album,'form': form})
     else: return redirect('../')
 
 @login_required
