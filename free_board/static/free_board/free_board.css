@@ -4,7 +4,13 @@
 .nav_free a {
   color: white;
 }
-
+.table_wrapper {
+  width: 800px;
+  margin: 0px auto 0px auto;
+  background-color: white;
+  box-shadow: 0px 0px 3px 2px white;
+  border-radius: 5px;
+}
 .freeBoard {
   text-align: center;
   width: 800px;
@@ -13,12 +19,23 @@
   border-radius: 15px;
   padding: 0px 10px;
 }
+.free_header {
+  display: flex;
+  justify-content: space-between;
+}
 .freeboard h1 {
   text-align: left;
 }
+.free_header .search_album {
+  display: flex;
+  align-items: flex-end;
+}
+.free_header .search_album form {
+  margin-bottom: 10px;
+}
 table {
   width: 800px;
-  margin: 10px auto 0px auto;
+  margin: 0px auto 0px auto;
   background-color: white;
   border-radius: 5px;
   box-shadow: 0px 0px 3px 2px white;
