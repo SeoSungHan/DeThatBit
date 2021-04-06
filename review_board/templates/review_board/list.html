@@ -44,6 +44,34 @@ Review Board | DeThatBit
     </table>
     <button class="create_btn" onclick="location.href='/review/create/'">Create</a></button>
 </div>
+<div class="wrapper_paginations">
+    {% if is_paginated %}
+    <ul class="paginations">
+        <li class="page-item">
+            <button onclick="location.href='?page=1'">
+                << </button>
+        </li>
+        {% if start_page %}
+        <li class="page-item">
+            <button onclick="location.href='?page={{start_page}}'">
+                < </button>
+        </li>
+        {% endif %}
+        {% for page in page_range %}
+        <li class="page-item">
+            <button onclick="location.href='?page={{ page }}'">{{ page }}</button>
+        </li>
+        {% endfor %}
+        {% if last_page < page_obj.paginator.num_pages %} <li class="page-item">
+            <button onclick="location.href='?page={{ last_page|add:1 }}'">></button>
+            </li>
+            {% endif %}
+            <li class="page-item">
+                <button onclick="location.href='?page={{ page_obj.paginator.num_pages }}'">>></button>
+            </li>
+    </ul>
+    {% endif %}
+</div>
 <script>
     function setTime(){
         const postDate = document.querySelectorAll(".td_time_date");

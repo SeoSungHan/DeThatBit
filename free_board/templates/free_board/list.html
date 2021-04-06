@@ -44,7 +44,65 @@ Free Board | DeThatBit
     </table>
     <button class="create_btn" onclick="location.href='/free/create/'">Create</a></button>
 </div>
+
+<div class="wrapper_paginations">
+    {% if is_paginated %}
+    <ul class="paginations">
+        <li class="page-item">
+            <button onclick="location.href='?page=1'">
+                << </button>
+        </li>
+        {% if start_page %}
+        <li class="page-item">
+            <button onclick="location.href='?page={{start_page}}'">
+                < </button>
+        </li>
+        {% endif %}
+        {% for page in page_range %}
+        <li class="page-item">
+            <button onclick="location.href='?page={{ page }}'">{{ page }}</button>
+        </li>
+        {% endfor %}
+        {% if last_page < page_obj.paginator.num_pages %} <li class="page-item">
+            <button onclick="location.href='?page={{ last_page|add:1 }}'">></button>
+            </li>
+            {% endif %}
+            <li class="page-item">
+                <button onclick="location.href='?page={{ page_obj.paginator.num_pages }}'">>></button>
+            </li>
+    </ul>
+    {% endif %}
+</div>
+
+<div class="search_album">
+    <form onsubmit="return false;">
+        <select id="search-type" name="type">
+            <option value="1">제목</option>
+            <option value="2">내용</option>
+            <option value="3">작가</option>
+        </select>
+        <input type="text" id="search-album" onkeydown="enterkey()"/>
+        <button type="button" onclick="search()">Search</button>
+    </form>
+</div>
+
 <script>
+    function search() {
+        let val = document.getElementById('search-album').value.trim()
+        let type = document.getElementById('search-type').value.trim()
+        console.log(val);
+        if (val.length > 1) {
+            location.href = "/free/search/" + type + "/" + val + "/"
+        }
+        else {
+            alert('검색어가 너무 짧습니다. 두글자 이상 입력해야합니다.')
+        }
+    }
+    function enterkey() {
+        if (window.event.keyCode === 13) {
+            search();
+        }
+    }
     function setTime(){
         const postDate = document.querySelectorAll(".td_time_date");
         const postTime = document.querySelectorAll(".td_time_time");
