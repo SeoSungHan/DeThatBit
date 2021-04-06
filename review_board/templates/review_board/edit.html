@@ -60,7 +60,10 @@ New Post | DeThatBit
                         data: { 'q': now, 'csrfmiddlewaretoken': '{{ csrf_token }}' },
                         dataType: "json",
                         success: function (response) {
-                            //alert(response.message);
+                            //alert(response.album_select);
+                            if(response.album_select==""){
+                                return;
+                            }
                             album_select = response.album_select.split('\n')
                             let list = document.createElement('ul')
                             list.id = "album-list"
@@ -73,7 +76,7 @@ New Post | DeThatBit
                                 li.appendChild(btn)
                                 list.appendChild(li)
                             });
-                            //console.log(list)
+                            console.log(list)
                             document.getElementById('album').appendChild(list);
                             //$("#album").html(response.album_select);
                             //console.log(album_select)
