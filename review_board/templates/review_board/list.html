@@ -72,7 +72,37 @@ Review Board | DeThatBit
     </ul>
     {% endif %}
 </div>
+
+<div class="search_album">
+    <form onsubmit="return false;">
+        <select id="search-type" name="type">
+            <option value="1">제목</option>
+            <option value="2">내용</option>
+            <option value="3">작가</option>
+            <option value="4">앨범</option>
+        </select>
+        <input type="text" id="search-album" onkeydown="enterkey()"/>
+        <button type="button" onclick="search()">Search</button>
+    </form>
+</div>
+
 <script>
+    function search() {
+        let val = document.getElementById('search-album').value.trim()
+        let type = document.getElementById('search-type').value.trim()
+        console.log(val);
+        if (val.length > 1) {
+            location.href = "/review/search/" + type + "/" + val + "/"
+        }
+        else {
+            alert('검색어가 너무 짧습니다. 두글자 이상 입력해야합니다.')
+        }
+    }
+    function enterkey() {
+        if (window.event.keyCode === 13) {
+            search();
+        }
+    }
     function setTime(){
         const postDate = document.querySelectorAll(".td_time_date");
         const postTime = document.querySelectorAll(".td_time_time");

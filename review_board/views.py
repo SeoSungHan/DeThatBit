@@ -34,6 +34,38 @@ class Review_List(ListView):
         context['last_page']=end_index
         return context
 
+class Review_Search(Review_List):
+    paginate_by=10
+
+    def get_queryset(self):
+        q=self.kwargs['q']
+        t=int(self.kwargs['type'])
+
+        if t==1:
+            review_list=Review_Post.objects.filter(
+                Q(title__contains=q)
+            ).distinct()
+        elif t==2:
+            review_list=Review_Post.objects.filter(
+                Q(content__contains=q)
+            ).distinct()
+        elif t==3:
+            review_list=Review_Post.objects.filter(
+                Q(author__username__contains=q)
+            ).distinct()
+        elif t==4:
+            review_list=Review_Post.objects.filter(
+                Q(album__album__contains=q)
+            ).distinct()
+        return review_list
+
+    def get_context_data(self,**kwargs):
+        context=super(Review_Search,self).get_context_data()
+        q=self.kwargs['q']
+        context['search_info']=f'Search: {q} ({self.get_queryset().count()})'
+        
+        return context
+
 class Review_Detail(DetailView):
     model = Review_Post
     template_name = 'review_board/detail.html'
