@@ -15,6 +15,10 @@ Albums | DeThatBit
         <h1><a href="/albums/">Albums</a></h1>
         <div class="search_album">
             <form onsubmit="return false;">
+                <select id="search-type" name="type">
+                    <option value="1">앨범</option>
+                    <option value="2">아티스트</option>
+                </select>
                 <input type="text" id="search-album" onkeydown="enterkey()"/>
                 <button type="button" onclick="search()">Search</button>
             </form>
@@ -84,9 +88,10 @@ Albums | DeThatBit
 <script>
     function search() {
         let val = document.getElementById('search-album').value.trim()
+        let type = document.getElementById('search-type').value.trim()
         console.log(val);
         if (val.length > 1) {
-            location.href = "/albums/search/" + val + "/"
+            location.href = "/albums/search/" + type + "/" + val + "/"
         }
         else {
             alert('검색어가 너무 짧습니다. 두글자 이상 입력해야합니다.')

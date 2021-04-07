@@ -12,7 +12,7 @@ from django.views.decorators.http import require_http_methods
 # Create your views here.
 
 def landing(request):
-    recent_album=Albums.objects.all()[0:6]
+    recent_album=Albums.objects.all().order_by('-date')[0:6]
     recent_review=Review_Post.objects.all().order_by('-pk')[0:10]
     recent_free=Free_Post.objects.all().order_by('-pk')[0:10]
     return render(

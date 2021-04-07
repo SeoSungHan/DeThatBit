@@ -130,13 +130,15 @@ def Review_Post_Like(request):
 def Review_Post_Create(request):
     if request.method == "POST":
         album = request.POST.get('album',None)
+        rating = float(request.POST.get('rating',None))/2.
         if album:
             result=Albums.objects.filter(Q(album=album))
             form = PostForm(request.POST)
             if form.is_valid():
                 post = form.save(commit=False)
-                post.album=result[0]
+                post.album = result[0]
                 post.author = request.user
+                post.rating = rating
                 post.save()
                 album=post.album
                 album.rating=album.rating*album.reviews + post.rating
@@ -162,20 +164,27 @@ def Review_Post_Update(request, pk):
             else: album.rating/=album.reviews
             album.save()
             #여기까진 잘 작동함
-            form = PostForm(request.POST, instance=post)
-            if form.is_valid():
-                post = form.save(commit=False)
-                post.author = request.user
-                post.save()
-                album=post.album
-                album.rating=album.rating*album.reviews+post.rating
-                album.reviews+=1
-                album.rating/=album.reviews
-                album.save()
-                return redirect('../', pk=post.pk)
+
+            album = request.POST.get('album',None)
+            rating = float(request.POST.get('rating',None))/2.
+            if album:
+                form = PostForm(request.POST, instance=post)
+                result=Albums.objects.filter(Q(album=album))
+                if form.is_valid():
+                    post = form.save(commit=False)
+                    post.album = result[0]
+                    post.author = request.user
+                    post.rating = rating
+                    post.save()
+                    album=post.album
+                    album.rating=album.rating*album.reviews+post.rating
+                    album.reviews+=1
+                    album.rating/=album.reviews
+                    album.save()
+                    return redirect('../', pk=post.pk)
         else:
             form = PostForm(instance=post)
-            return render(request, 'review_board/edit.html', {'album':post.album.album,'form': form})
+            return render(request, 'review_board/edit.html', {'rating':post.rating, 'album':post.album.album,'form': form})
     else: return redirect('../')
 
 @login_required

@@ -34,9 +34,18 @@ class Albums_Search(Albums_List):
 
     def get_queryset(self):
         q=self.kwargs['q']
-        albums_list=Albums.objects.filter(
-            Q(artist__contains=q) | Q(album__contains=q)
-        ).distinct()
+        t=self.kwargs['type']
+        
+        if t==1:
+            albums_list=Albums.objects.filter(
+                Q(album__contains=q)
+            ).distinct()
+
+        elif t==2:
+            albums_list=Albums.objects.filter(
+                Q(artist__contains=q)
+            ).distinct()
+
         return albums_list
 
     def get_context_data(self,**kwargs):
