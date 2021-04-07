@@ -16,7 +16,13 @@ DeThatBit
         <li class="landing_albumList">
             {% for a in album %}
             <ul>
-                <img class="album_cover" src="{{a.cover}}" alt="{{a.album}}">
+                <div class="album_cover" onmouseenter="mouseIn()" onmouseleave="mouseOut()"
+                    style='background-image:url("{{a.cover}}");background-size:cover;background-position:center'>
+                    <div class="landing_album_info hidden">
+                        <div>{{a.a_type}} {{a.album}}<br>{{a.artist}}</div>
+                    </div>
+                </div>
+                <!--<img class="album_cover" src="{{a.cover}}" alt="{{a.album}}">-->
             </ul>
             {% endfor %}
         </li>
@@ -36,15 +42,16 @@ DeThatBit
                 <tbody>
                     {% for f in free %}
                     <tr>
-                      <td class="td_num">{{f.pk}}</td>
-                      <td class="td_title"><a href="/free/{{f.pk}}">{{f.title}}</a></td>
-                      <td class="td_writer">{{f.author}}</td>
-                      <td class="td_time">
-                          <div class="td_time_date">{{f.created_at.month}}. {{f.created_at.day}}.</div>
-                          <div class="td_time_time">{{f.created_at.hour}}:{{f.created_at.minute}}</div>
-                      </td>
+                        <td class="td_num">{{f.pk}}</td>
+                        <td class="td_title"><a href="/free/{{f.pk}}">{{f.title}}</a></td>
+                        <td class="td_writer">{{f.author}}</td>
+                        <td class="td_time">
+                            <div class="td_time_date">{{f.created_at.year}}. {{f.created_at.month}}.
+                                {{f.created_at.day}}.</div>
+                            <div class="td_time_time">{{f.created_at.hour}}:{{f.created_at.minute}}</div>
+                        </td>
                     </tr>
-                    {% endfor %}  
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -66,7 +73,8 @@ DeThatBit
                         <td class="td_title"><a href="/review/{{r.pk}}">[{{r.album.album}}]{{r.title}}</a></td>
                         <td class="td_writer">{{r.author}}</td>
                         <td class="td_time">
-                            <div class="td_time_date">{{r.created_at.month}}. {{r.created_at.day}}.</div>
+                            <div class="td_time_date">{{r.created_at.year}}. {{r.created_at.month}}.
+                                {{r.created_at.day}}.</div>
                             <div class="td_time_time">{{r.created_at.hour}}:{{r.created_at.minute}}</div>
                         </td>
                     </tr>
@@ -76,6 +84,35 @@ DeThatBit
         </div>
     </div>
 </div>
+<script>
+    function mouseIn(){
+        event.target.style.color='white';
+        event.target.classList.add('grayscale');
+        const text = event.target.querySelector(".landing_album_info");
+        text.classList.remove('hidden');
+    }
+    function mouseOut(){
+        event.target.classList.remove('grayscale');
+        const text = event.target.querySelector(".landing_album_info");
+        text.classList.add('hidden');
+    }
+    function setTime() {
+        const postDate = document.querySelectorAll(".td_time_date");
+        const postTime = document.querySelectorAll(".td_time_time");
+        const nowDate = new Date();
+        const toDay = nowDate.toLocaleDateString();
+
+        for (let i = 0; i < postDate.length; i++) {
+            const postDateText = postDate[i].innerText;
+            if (postDateText === toDay) {
+                postDate[i].classList.add("hidden");
+            }
+            else {
+                postTime[i].classList.add("hidden");
+            }
+        }
+    }
+    setTime();
+</script>
 
 {% endblock %}
-

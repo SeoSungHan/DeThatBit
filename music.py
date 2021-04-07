@@ -1,4 +1,3 @@
-from albums.models import Albums
 import os
 import sys
 import json
@@ -7,17 +6,17 @@ import requests
 from typing import get_args
 import re
 import django
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "DeThatBit.settings")
-
-
 django.setup()
+
+#import albums
+from albums.models import Albums
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 header = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko'}
 
-url_melon = 'https://www.melon.com/genre/album_listPaging.htm?startIndex=1&pageSize=100&gnrCode=GN0300'
+url_melon = 'https://www.melon.com/genre/album_listPaging.htm?startIndex=1&pageSize=10000&gnrCode=GN0300'
 url_detail = 'https://www.melon.com/album/detail.htm?albumId='
 
 
@@ -55,10 +54,10 @@ if __name__ == '__main__':
     albums, artists = get_melon()
     print(albums)
     print(artists)
-    '''
+    
     for data in albums:
         tmp = data['date'].split('.')
         date_tmp = tmp[0]+'-'+tmp[1]+'-'+tmp[2]
         Albums(artist=data['artist'], a_type=data['type'],
                album=data['album'], date=date_tmp, cover=data['cover'], link=data['link']).save()
-'''
+

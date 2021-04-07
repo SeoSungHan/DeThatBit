@@ -21,6 +21,7 @@ li {
 }
 .album h1 {
   text-align: left;
+  margin: 10px 0px;
 }
 .search_album {
   display: flex;

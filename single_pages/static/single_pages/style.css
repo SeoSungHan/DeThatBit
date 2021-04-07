@@ -6,15 +6,16 @@
   border: black solid 2px;
   display: grid;
   grid-template-rows: 230px 1fr;
-  align-items: center;
+  align-items: baseline;
   border-radius: 5px;
   margin: 10px auto;
   width: 1200px;
-  height: 700px;
+  height: 750px;
 }
 .landing_albums {
   background-color: white;
   border-radius: 5px;
+  box-shadow: 0px 0px 3px 2px white;
   margin: 10px;
 }
 .landing_albumList {
@@ -24,20 +25,40 @@
 .landing_albumList .album_cover {
   width: 150px;
   height: 150px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px 2px gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.landing_album_info {
+  font-size: 14px;
+}
+
+.grayscale {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+.landing_album_info {
+  text-align: center;
+  color: white;
 }
 .landing_board {
   display: flex;
   flex-direction: row;
+  align-items: baseline;
   justify-content: center;
 }
 
 .landing_free_board,
 .landing_review_board {
   background-color: white;
+  box-shadow: 0px 0px 3px 2px white;
   border-radius: 5px;
   margin: 5px;
   width: 585px;
-  height: 430px;
+  height: 500px;
 }
 h1 {
   font-size: 25px;
@@ -55,7 +76,6 @@ table tr {
 }
 table tbody tr {
   padding-bottom: 50px;
-  border-bottom: solid red 50px;
 }
 table tr th {
   border-bottom: solid black 1px;
@@ -80,6 +100,8 @@ table tr td {
 }
 .th_time {
   width: 80px;
-  font-size: 13px;
   padding-right: 0px;
+}
+.td_time_date {
+  font-size: 14px;
 }
