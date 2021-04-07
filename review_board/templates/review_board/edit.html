@@ -22,6 +22,22 @@ New Post | DeThatBit
                     <p id="album"></p>
                 </div>
                 <table>{{form.as_table}}</table>
+                <div class="review_rating">
+                    <div>Rating</div>
+                    <div>
+                         <input type="range" class="slider" type="range" min="0" max="10" step="0.5" value="5"
+                            list="tickmarks" /> 
+                            <datalist id="tickmarks">
+                                <option value="0"></option>
+                                <option value="2"></option>
+                                <option value="4"></option>
+                                <option value="6"></option>
+                                <option value="8"></option>
+                                <option value="10"></option>
+                              </datalist>
+                            <span class="rating_num">⭐5</span>
+                    </div>
+                </div>
 
                 <button class="btn btn-info mt-3" type="submit"> Submit </button>
                 <button onclick="location.href='../'">Back</button>
@@ -29,17 +45,21 @@ New Post | DeThatBit
 
             <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
             <script type="text/javascript">
-                
-                let tmp=location.href.split('?')
-                
-                if (tmp.length>1){
-                    console.log(tmp[1])
-                    let tmp1=tmp[1].split(':')
-                    console.log(tmp1[1])
-                    document.getElementsByClassName("album-select")[0].value=tmp1[1]
-                    
+                const slider = document.querySelector(".slider");
+                slider.oninput = function () {
+                    const output = document.querySelector(".rating_num");
+                    rangeMax = this.value;
+                    output.innerHTML = `⭐${this.value}`;
                 }
-                
+                let tmp = location.href.split('?')
+
+                if (tmp.length > 1) {
+                    console.log(tmp[1])
+                    let tmp1 = tmp[1].split(':')
+                    console.log(tmp1[1])
+                    document.getElementsByClassName("album-select")[0].value = tmp1[1]
+                }
+
                 let old = ""
 
                 function albumClick(e) {
@@ -61,7 +81,7 @@ New Post | DeThatBit
                     console.log(now)
                     // 여기까진 값이 바뀔때마다 인식하는 부분
                     const reset = document.getElementById('album-list')
-                    console.log("지운거",reset)
+                    console.log("지운거", reset)
                     if (reset) {
                         document.getElementById('album').removeChild(reset)
                     }
@@ -71,10 +91,10 @@ New Post | DeThatBit
                         data: { 'q': now, 'csrfmiddlewaretoken': '{{ csrf_token }}' },
                         dataType: "json",
                         success: function (response) {
-                            if(now !== $(".album-select").val()){
+                            if (now !== $(".album-select").val()) {
                                 return
                             }
-                            if(response.album_select==""){
+                            if (response.album_select == "") {
                                 return
                             }
                             album_select = response.album_select.split('\n')
@@ -99,7 +119,7 @@ New Post | DeThatBit
                             window.location.replace("")
                         },
                     });
-                    old=now
+                    old = now
                 })
             </script>
         </div>

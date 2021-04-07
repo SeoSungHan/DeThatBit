@@ -46,8 +46,8 @@ DeThatBit
                         <td class="td_title"><a href="/free/{{f.pk}}">{{f.title}}</a></td>
                         <td class="td_writer">{{f.author}}</td>
                         <td class="td_time">
-                            <div class="td_time_date">{{f.created_at.year}}. {{f.created_at.month}}.
-                                {{f.created_at.day}}.</div>
+                            <div class="td_time_date hidden">{{f.created_at.year}}. {{f.created_at.month}}. {{f.created_at.day}}.</div>
+                            <div class="td_time_date_short hidden">{{f.created_at.month}}. {{f.created_at.day}}.</div>                                
                             <div class="td_time_time">{{f.created_at.hour}}:{{f.created_at.minute}}</div>
                         </td>
                     </tr>
@@ -73,8 +73,8 @@ DeThatBit
                         <td class="td_title"><a href="/review/{{r.pk}}">[{{r.album.album}}]{{r.title}}</a></td>
                         <td class="td_writer">{{r.author}}</td>
                         <td class="td_time">
-                            <div class="td_time_date">{{r.created_at.year}}. {{r.created_at.month}}.
-                                {{r.created_at.day}}.</div>
+                            <div class="td_time_date hidden">{{r.created_at.year}}. {{r.created_at.month}}. {{r.created_at.day}}.</div>
+                            <div class="td_time_date_short hidden">{{r.created_at.month}}. {{r.created_at.day}}.</div>                                
                             <div class="td_time_time">{{r.created_at.hour}}:{{r.created_at.minute}}</div>
                         </td>
                     </tr>
@@ -98,16 +98,19 @@ DeThatBit
     }
     function setTime() {
         const postDate = document.querySelectorAll(".td_time_date");
+        const postDateShort = document.querySelectorAll(".td_time_date_short");
         const postTime = document.querySelectorAll(".td_time_time");
         const nowDate = new Date();
         const toDay = nowDate.toLocaleDateString();
 
         for (let i = 0; i < postDate.length; i++) {
-            const postDateText = postDate[i].innerText;
+            const postDateText = postDate[i].innerText
+            //console.log(toDay, postDateText);
             if (postDateText === toDay) {
-                postDate[i].classList.add("hidden");
+                postDateShort[i].classList.add("hidden");
             }
             else {
+                postDateShort[i].classList.remove("hidden");
                 postTime[i].classList.add("hidden");
             }
         }
