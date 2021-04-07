@@ -6,7 +6,7 @@ from django.db.models import Q
 class Albums_List(ListView):
     model = Albums
     template_name = 'albums/list.html'
-    ordering = 'pk'
+    ordering = '-date'
     paginate_by=12
 
     def get_context_data(self, **kwargs):
