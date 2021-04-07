@@ -7,6 +7,7 @@ New Post | DeThatBit
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'review_board/review_board.css' %}" media="screen" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 {% endblock %}
 
 {% block contents%}
@@ -22,6 +23,35 @@ New Post | DeThatBit
                     <p id="album"></p>
                 </div>
                 <table>{{form.as_table}}</table>
+                <div class="review_rating">
+                    <div class="rating_title">Rating</div>
+                    <div class="review_rating rating_point">
+                        <div class="rating">
+                            <div class="ratefill"></div>
+                            <!-- [D] 해당 별점이 선택될 때 그 점수 이하의 input엘리먼트에 checked 클래스 추가 -->
+                            <input type="checkbox" name="rating" id="rating1" value="1" class="rate_radio" title="1점">
+                            <label for="rating1"></label>
+                            <input type="checkbox" name="rating" id="rating2" value="2" class="rate_radio rate_radio_right" title="2점">
+                            <label for="rating2"></label>
+                            <input type="checkbox" name="rating" id="rating3" value="3" class="rate_radio" title="3점" >
+                            <label for="rating3"></label>
+                            <input type="checkbox" name="rating" id="rating4" value="4" class="rate_radio rate_radio_right" title="4점">
+                            <label for="rating4"></label>
+                            <input type="checkbox" name="rating" id="rating5" value="5" class="rate_radio" title="5점">
+                            <label for="rating5"></label>
+                            <input type="checkbox" name="rating" id="rating6" value="6" class="rate_radio rate_radio_right" title="1점">
+                            <label for="rating6"></label>
+                            <input type="checkbox" name="rating" id="rating7" value="7" class="rate_radio" title="2점">
+                            <label for="rating7"></label>
+                            <input type="checkbox" name="rating" id="rating8" value="8" class="rate_radio rate_radio_right" title="3점" >
+                            <label for="rating8"></label>
+                            <input type="checkbox" name="rating" id="rating9" value="9" class="rate_radio" title="4점">
+                            <label for="rating9"></label>
+                            <input type="checkbox" name="rating" id="rating10" value="10" class="rate_radio rate_radio_right" title="5점">
+                            <label for="rating10"></label>
+                        </div>
+                    </div>
+                </div>
 
                 <button class="btn btn-info mt-3" type="submit"> Submit </button>
                 <button onclick="location.href='../'">Back</button>
@@ -29,17 +59,46 @@ New Post | DeThatBit
 
             <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
             <script type="text/javascript">
-                
-                let tmp=location.href.split('?')
-                
-                if (tmp.length>1){
-                    console.log(tmp[1])
-                    let tmp1=tmp[1].split(':')
-                    console.log(tmp1[1])
-                    document.getElementsByClassName("album-select")[0].value=tmp1[1]
-                    
+                document.addEventListener('DOMContentLoaded', function(){
+                    //별점선택 이벤트 리스너
+                    document.querySelector('.rating').addEventListener('click',function(e){
+                        let elem = e.target;
+                        if(elem.classList.contains('rate_radio')){
+                            console.log("elam.value=", elem.value);
+                            rating.setRate(parseInt(elem.value));
+                        }
+                    })
+                });
+                function Rating(){};
+                Rating.prototype.rate = 0;
+                Rating.prototype.setRate = function(newrate){
+                    //별점 마킹 - 클릭한 별 이하 모든 별 체크 처리
+                    console.log(typeof(newrate));
+                    this.rate = newrate;
+                    console.log(newrate);
+                    document.querySelector('.ratefill').style.width = parseInt(newrate * 30) + 'px';
+                    let items = document.querySelectorAll('.rate_radio');
+                    items.forEach(function(item, idx){
+                        if(idx < newrate){
+                            item.checked = true;
+                        }else{
+                            item.checked = false;
+                        }
+                    });
                 }
+                let rating = new Rating();
+                console.log(rating.rate)
                 
+
+                let tmp = location.href.split('?')
+
+                if (tmp.length > 1) {
+                    console.log(tmp[1])
+                    let tmp1 = tmp[1].split(':')
+                    console.log(tmp1[1])
+                    document.getElementsByClassName("album-select")[0].value = tmp1[1]
+                }
+
                 let old = ""
 
                 function albumClick(e) {
@@ -58,10 +117,10 @@ New Post | DeThatBit
                     if (now == old) {
                         return;
                     }
-                    console.log(now)
+                    //console.log(now)
                     // 여기까진 값이 바뀔때마다 인식하는 부분
                     const reset = document.getElementById('album-list')
-                    console.log("지운거",reset)
+                    console.log("지운거", reset)
                     if (reset) {
                         document.getElementById('album').removeChild(reset)
                     }
@@ -71,10 +130,10 @@ New Post | DeThatBit
                         data: { 'q': now, 'csrfmiddlewaretoken': '{{ csrf_token }}' },
                         dataType: "json",
                         success: function (response) {
-                            if(now !== $(".album-select").val()){
+                            if (now !== $(".album-select").val()) {
                                 return
                             }
-                            if(response.album_select==""){
+                            if (response.album_select == "") {
                                 return
                             }
                             album_select = response.album_select.split('\n')
@@ -99,7 +158,7 @@ New Post | DeThatBit
                             window.location.replace("")
                         },
                     });
-                    old=now
+                    old = now
                 })
             </script>
         </div>

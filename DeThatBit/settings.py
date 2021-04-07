@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'free_board',
     'review_board',
     'albums',
-    'artists',
 ]
 
 MIDDLEWARE = [
