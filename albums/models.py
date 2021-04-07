@@ -1,5 +1,6 @@
 from django.db import models
 import os
+import math
 
 
 class Albums(models.Model):
@@ -15,3 +16,6 @@ class Albums(models.Model):
 
     def __str__(self):
         return self.artist+'::'+self.album
+
+    def get_round_rating(self):
+        return round(self.rating,2)

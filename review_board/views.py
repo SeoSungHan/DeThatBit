@@ -1,4 +1,5 @@
 import json
+import math
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView
 from .models import Review_Post, Review_Comment
@@ -184,7 +185,7 @@ def Review_Post_Update(request, pk):
                     return redirect('../', pk=post.pk)
         else:
             form = PostForm(instance=post)
-            return render(request, 'review_board/edit.html', {'rating':post.rating, 'album':post.album.album,'form': form})
+            return render(request, 'review_board/edit.html', {'rating':round(post.rating,2), 'album':post.album.album,'form': form})
     else: return redirect('../')
 
 @login_required
