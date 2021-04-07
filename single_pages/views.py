@@ -13,8 +13,8 @@ from django.views.decorators.http import require_http_methods
 
 def landing(request):
     recent_album=Albums.objects.all()[0:6]
-    recent_review=Review_Post.objects.all()[0:10]
-    recent_free=Free_Post.objects.all()[0:10]
+    recent_review=Review_Post.objects.all().order_by('-pk')[0:10]
+    recent_free=Free_Post.objects.all().order_by('-pk')[0:10]
     return render(
         request,
         'single_pages/landing.html',
