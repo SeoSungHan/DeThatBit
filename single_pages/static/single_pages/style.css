@@ -50,6 +50,7 @@
   flex-direction: row;
   align-items: baseline;
   justify-content: center;
+  margin: 5px;
 }
 
 .landing_free_board,

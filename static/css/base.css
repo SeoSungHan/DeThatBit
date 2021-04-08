@@ -40,10 +40,10 @@ button {
 .loginBtns button {
   border: transparent;
   box-sizing: content-box;
-  font-size: 12px;
+  font-size: 14px;
   background-color: black;
   color: white;
-  width: 45px;
+  width: 50px;
   height: 20px;
   margin: 5px;
   padding: 3px 2px 3px 2px;
@@ -54,7 +54,6 @@ button {
   color: white;
   animation: fadeIn 0.5s linear;
   box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.5);
-  transform: scale(0.9);
 }
 
 .nav_bar {
