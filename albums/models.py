@@ -19,3 +19,4 @@ class Albums(models.Model):
 
     def get_round_rating(self):
         return round(self.rating,2)
+        
