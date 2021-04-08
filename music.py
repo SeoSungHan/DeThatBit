@@ -18,7 +18,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 header = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko'}
 
-url_melon = 'https://www.melon.com/genre/album_listPaging.htm?startIndex=1&pageSize=10&gnrCode=GN0300'
+url_melon = 'https://www.melon.com/genre/album_listPaging.htm?startIndex=1&pageSize=20&gnrCode=GN0300'
 url_detail = 'https://www.melon.com/album/detail.htm?albumId='
 
 

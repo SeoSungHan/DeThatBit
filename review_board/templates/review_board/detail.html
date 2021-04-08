@@ -72,9 +72,11 @@
                     <form action="/review/comment_update/{{comment.pk}}/" method="POST">
                         {% csrf_token %}
                         {{comment_form}}
-                        <button class="btn btn-info mt-3" type="submit"> Submit </button>
+                        <div class="comment-edit-form-btns">
+                            <button class="btn btn-info comment-submit-btn" type="submit"> Submit </button>
+                            <button class="comment-edit-back"  name="edit-back" value="{{comment.pk}}" type="button"> Cancel </button>
+                        </div>
                     </form>
-                    <button class="comment-edit-back" name="edit-back" value="{{comment.pk}}"> Back </button>
                 </div>
             </div>
             {% endfor%}
@@ -86,7 +88,9 @@
             <form action="/review/{{review_post.pk}}/comment_create/" method="POST">
                 {% csrf_token %}
                 {{comment_form}}
-                <button class="btn btn-info mt-3 submitBtn" type="submit"> Submit </button>
+                <div class="comment_form_btn">
+                    <button class="btn btn-info submitBtn" type="submit"> Submit </button>
+                </div>
             </form>
         </div>
     </div>
@@ -102,8 +106,7 @@
             data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' },
             dataType: "json",
             success: function (response) {
-                alert(response.message);
-                $("#count-" + pk).html("좋아요&nbsp;" + response.likes_cnt + "개");
+                $("#count-" + pk).html("🙏🏻&nbsp;" + response.likes_cnt);
             },
             error: function (request, status, error) {
                 alert("로그인이 필요합니다")
