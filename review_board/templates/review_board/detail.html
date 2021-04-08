@@ -117,9 +117,6 @@
 
 <script src="{% static 'review_board/comment_edit.js' %}"></script>
 <script>
-    function alert_del() {
-        alert("삭제하시겠습니까?");
-    }
     function isAuthor() {
         if ("{{review_post.author.id}}" != "{{user.id}}") {
             const btns = document.querySelector(".updateBtns");
