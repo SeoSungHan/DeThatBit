@@ -32,18 +32,19 @@
   justify-content: center;
 }
 .landing_album_info {
-  font-size: 14px;
+  text-align: center;
 }
 
+.landing_album_info_text {
+  background-color: rgb(46, 45, 45);
+  color: white;
+  font-size: 13px;
+}
 .grayscale {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
 }
 
-.landing_album_info {
-  text-align: center;
-  color: white;
-}
 .landing_board {
   display: flex;
   flex-direction: row;

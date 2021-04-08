@@ -19,10 +19,11 @@ DeThatBit
                 <div class="album_cover" onmouseenter="mouseIn()" onmouseleave="mouseOut()"
                     style='background-image:url("{{a.cover}}");background-size:cover;background-position:center'>
                     <div class="landing_album_info hidden">
-                        <div>{{a.a_type}} {{a.album}}<br>{{a.artist}}</div>
+                        <span class="landing_album_info_text">{{a.a_type}} {{a.album}}</span>
+                        <br>
+                        <span class="landing_album_info_text">{{a.artist}}</span>
                     </div>
                 </div>
-                <!--<img class="album_cover" src="{{a.cover}}" alt="{{a.album}}">-->
             </ul>
             {% endfor %}
         </li>
