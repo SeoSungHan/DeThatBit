@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from albums.models import Albums
 from django.db.models import Q
+from django.contrib import messages
 
 class Review_List(ListView):
     model = Review_Post
@@ -132,13 +133,12 @@ def Review_Post_Create(request):
     if request.method == "POST":
         album = request.POST.get('album',None)
         rating_tmp=request.POST.get('rating',None)
+        form = PostForm(request.POST)
         if not rating_tmp:
-            form = PostForm()
-            return render(request, 'review_board/edit.html', {'form': form, 'rating_error':True})
+            return render(request, 'review_board/edit.html', {'form': form, 'rating_error':True, 'album':album})
         rating = float(rating_tmp)/2.
         if album:
             result=Albums.objects.filter(Q(album=album))
-            form = PostForm(request.POST)
             if result and form.is_valid():
                 post = form.save(commit=False)
                 post.album = result[0]
@@ -152,10 +152,8 @@ def Review_Post_Create(request):
                 album.save()
                 return redirect('../', pk=post.pk)
             else:
-                form = PostForm() 
-                return render(request, 'review_board/edit.html', {'form': form, 'album_error':True })
-        else:
-            form = PostForm() 
+                return render(request, 'review_board/edit.html', {'form': form, 'album_error':True, 'album':album })
+        else: 
             return render(request, 'review_board/edit.html', {'form': form, 'album_error':True })
     else:
         form = PostForm()
@@ -179,14 +177,11 @@ def Review_Post_Update(request, pk):
             album = request.POST.get('album',None)
             rating_tmp = request.POST.get('rating',None)
 
-            if not rating_tmp:
-                form = PostForm(instance=post)
-                return render(request, 'review_board/edit.html', {'rating':round(post.rating,2), 'album':post.album.album,'form': form, 'rating_error':True})
-
+            form = PostForm(request.POST, instance=post)
             rating=float(rating_tmp)/2.
 
             if album:
-                form = PostForm(request.POST, instance=post)
+                #form = PostForm(request.POST, instance=post)
                 result=Albums.objects.filter(Q(album=album))
                 if result and form.is_valid():
                     post = form.save(commit=False)
@@ -201,10 +196,8 @@ def Review_Post_Update(request, pk):
                     album.save()
                     return redirect('../', pk=post.pk)
                 else: 
-                    form = PostForm(instance=post)
                     return render(request, 'review_board/edit.html', {'rating':round(post.rating,2), 'album':post.album.album,'form': form, 'album_error':True})
             else:
-                form = PostForm(instance=post)
                 return render(request, 'review_board/edit.html', {'rating':round(post.rating,2), 'album':post.album.album,'form': form, 'album_error': True})        
         else:
             form = PostForm(instance=post)
