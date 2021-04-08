@@ -12,7 +12,6 @@ Join | DeThatBit
 {% block contents %}
     <div class="signUpBox">
         <h3 class="signUpHeader">회원 가입</h3>
-        <hr>
         <form method="POST" class="signUpForm">{% csrf_token %}
             <div>
                 <label for="username">ID: </label>
@@ -28,17 +27,19 @@ Join | DeThatBit
             <div>
                 <label for="password2">Password Confirm: </label>
                 <input type="password" id="password2" name="password2" value="{{form.password2.value|default_if_none:''}}"
-                    placeholder="password">
+                    placeholder="password confirm">
+            </div>
+            
+            <div class="error_msg">
+                {% if messages %}
+                <div></div>
+                {% for message in messages %}
+                    <div>{{message}}</div>
+                {% endfor %}
+                {% endif %}
             </div>
             <div class=submitBtn>
                 <input type="submit" value="Submit"></input>
-            </div>
-            <div>
-                {% if messages %}
-                {% for message in messages %}
-                    <h1>{{message}}</h1>
-                {% endfor %}
-                {% endif %}
             </div>
         </form>
     </div>

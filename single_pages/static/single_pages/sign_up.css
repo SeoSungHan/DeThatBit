@@ -2,19 +2,20 @@
   margin: 150px auto;
   text-align: center;
   width: 300px;
-  height: 270px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 0px 5px 2px white;
 }
 .signUpHeader {
   padding: 10px;
+  border-bottom: black solid 1px;
   margin: 0;
 }
 .signUpForm {
   width: 200px;
   margin: 0 auto;
   text-align: left;
+  padding: 10px;
 }
 .signUpForm input {
   width: 200px;
@@ -46,4 +47,27 @@
 .join_condtion {
   font-size: 10px;
   color: darkgray;
+}
+.error_msg {
+  font-size: 10px;
+}
+.error_msg > div > .errorList {
+  padding: 0px;
+  margin: 0px;
+  color: darkgray;
+}
+.error_msg > div > .errorList > li {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 0px;
+}
+.error_msg > div > .errorList .errorList {
+  color: darkgray;
+}
+.error_msg > div > .errorList .errorList > li {
+  padding-bottom: 3px;
+  border-bottom: 1px dotted lightgray;
+}
+li {
+  list-style: none;
 }

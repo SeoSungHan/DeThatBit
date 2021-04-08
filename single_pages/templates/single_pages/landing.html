@@ -44,7 +44,10 @@ DeThatBit
                     {% for f in free %}
                     <tr>
                         <td class="td_num">{{f.pk}}</td>
-                        <td class="td_title"><a href="/free/{{f.pk}}">{{f.title}}</a></td>
+                        <td class="td_title">
+                            <a href="/free/{{f.pk}}">{{f.title}}</a>
+                            <span class="td_comment_num">{{f.free_comment_set.count}}</span>
+                        </td>
                         <td class="td_writer">{{f.author}}</td>
                         <td class="td_time">
                             <div class="td_time_date hidden">{{f.created_at.year}}. {{f.created_at.month}}. {{f.created_at.day}}.</div>
@@ -71,7 +74,10 @@ DeThatBit
                     {% for r in review %}
                     <tr>
                         <td class="td_num">{{r.pk}}</td>
-                        <td class="td_title"><a href="/review/{{r.pk}}">[{{r.album.album}}]{{r.title}}</a></td>
+                        <td class="td_title">
+                            <a href="/review/{{r.pk}}">[{{r.album.album}}] {{r.title}}</a>
+                            <span class="td_comment_num">{{r.review_comment_set.count}}</span>
+                        </td>
                         <td class="td_writer">{{r.author}}</td>
                         <td class="td_time">
                             <div class="td_time_date hidden">{{r.created_at.year}}. {{r.created_at.month}}. {{r.created_at.day}}.</div>
@@ -86,6 +92,20 @@ DeThatBit
     </div>
 </div>
 <script>
+    function check_comment(){
+        const comment_num = document.querySelectorAll(".td_comment_num");
+        for (let i = 0; i < comment_num.length; i++){
+            const num = parseInt(comment_num[i].innerText);
+            if (num === 0 ){
+                comment_num[i].classList.add("hidden");
+            }
+            else if (num > 0){
+                comment_num[i].classList.remove("hidden");
+                comment_num[i].innerText = `(${num})`;
+            }
+        }
+    }
+    check_comment();
     function mouseIn(){
         event.target.style.color='white';
         event.target.classList.add('grayscale');

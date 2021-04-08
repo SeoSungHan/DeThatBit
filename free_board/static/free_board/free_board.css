@@ -38,6 +38,7 @@ table {
   margin: 0px auto 0px auto;
   background-color: white;
   border-radius: 5px;
+  table-layout: fixed;
 }
 
 table tr th {
@@ -48,6 +49,9 @@ table tr td {
   padding-top: 15px;
   padding-bottom: 3px;
   border-bottom: solid black 1px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .th_num {
   width: 50px;
@@ -63,11 +67,10 @@ table tr td {
 }
 .th_time {
   width: 80px;
-  font-size: 13px;
   padding-right: 0px;
 }
 .td_comment_num {
-  color: red;
+  color: darkgray;
   font-size: 14px;
 }
 .create_btn {
