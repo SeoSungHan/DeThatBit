@@ -40,9 +40,10 @@ Free Board | DeThatBit
                 {%for p in free_post_list%}
                 <tr>
                     <td class="td_num">{{p.pk}}</td>
-                    <td class="td_title"><a href="{{p.get_free_url}}">{{p.title}}</a></td>
-                    <!--<td class="td_content">{{p.content | truncatewords:30}}</td>-->
-
+                    <td class="td_title">
+                        <a href="{{p.get_free_url}}">{{p.title}}</a>
+                        <span class="td_comment_num">{{p.free_comment_set.count}}</span>
+                    </td>
                     <td class="td_writer">{{p.author.username}}</td>
 
                     <td class="td_time">
@@ -93,6 +94,20 @@ Free Board | DeThatBit
 
 
 <script>
+    function check_comment(){
+        const comment_num = document.querySelectorAll(".td_comment_num");
+        for (let i = 0; i < comment_num.length; i++){
+            const num = parseInt(comment_num[i].innerText);
+            if (num === 0 ){
+                comment_num[i].classList.add("hidden");
+            }
+            else if (num > 0){
+                comment_num[i].classList.remove("hidden");
+                comment_num[i].innerText = `(${num})`;
+            }
+        }
+    }
+    check_comment();
     function search() {
         let val = document.getElementById('search-album').value.trim()
         let type = document.getElementById('search-type').value.trim()
