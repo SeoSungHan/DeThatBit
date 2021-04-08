@@ -9,6 +9,7 @@ from review_board.models import Review_Post
 from free_board.models import Free_Post
 
 from django.views.decorators.http import require_http_methods
+from django.contrib import messages
 # Create your views here.
 
 
@@ -45,7 +46,8 @@ def sign_up(request):
             return redirect('single_pages:landing')
         # redirect 시 urls.py의 <app_name>:<name>으로 요청을 보낸다.
         else:
-            redirect('/')
+            messages.error(request, form.errors)
+            #redirect('/')
     else:
         form = UserCreationForm()  # 비어있는 회원가입 폼을 생성한다.
     return render(request, 'single_pages/sign_up.html', {'form': form})

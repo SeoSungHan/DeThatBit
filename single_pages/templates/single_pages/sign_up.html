@@ -33,7 +33,13 @@ Join | DeThatBit
             <div class=submitBtn>
                 <input type="submit" value="Submit"></input>
             </div>
-            
+            <div>
+                {% if messages %}
+                {% for message in messages %}
+                    <h1>{{message}}</h1>
+                {% endfor %}
+                {% endif %}
+            </div>
         </form>
     </div>
     <script >
@@ -43,4 +49,5 @@ Join | DeThatBit
         }
         hideBtn();
     </script>
+
 {% endblock %}
