@@ -298,7 +298,7 @@ button:hover {
   text-align: center;
   margin: 10px auto;
   border-radius: 10px;
-  padding: 10px 0px;
+  padding: 10px 0px 0px 0px;
   box-shadow: 0px 0px 3px 2px white;
 }
 .contentBox_body {
@@ -352,8 +352,20 @@ p#album > ul {
 p#album li {
   margin: 1px 2px;
 }
+.review_rating_warpper {
+  display: flex;
+  border-bottom: black dashed 1px;
+}
 .review_rating {
   display: flex;
+}
+.rating_title {
+  width: 75px;
+  font-size: 16px;
+}
+.rating {
+  display: flex;
+  align-items: center;
 }
 .rating .rate_radio {
   display: none;
@@ -362,24 +374,32 @@ p#album li {
   position: relative;
   display: block;
   float: left;
-  width: 30px;
-  height: 60px;
-  background-image: url("/static/img/star_sung.png");
+  width: 15px;
+  height: 30px;
+  background-image: url("/static/img/starrate.png");
   background-repeat: no-repeat;
-  background-size: 60px 60px;
+  background-size: 30px 30px;
 
   cursor: pointer;
 }
 .rating .rate_radio_right + label {
-  background-image: url("/static/img/star_sung_half.png");
-  width: 30px;
-  height: 60px;
+  background-image: url("/static/img/starrate_right.png");
+  width: 15px;
+  height: 30px;
   background-repeat: no-repeat;
-  background-size: 30px 60px;
+  background-size: 15px 30px;
+}
+.fill_background {
+  background-color: rgb(238, 234, 234);
+  height: 30px;
+  width: 150px;
 }
 .rating .ratefill {
   background-color: gold;
   width: 0;
-  height: 60px;
+  height: 30px;
   position: absolute;
+}
+.editBtns {
+  padding: 5px;
 }
