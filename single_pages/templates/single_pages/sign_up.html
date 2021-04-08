@@ -20,9 +20,10 @@ Join | DeThatBit
                     placeholder="ID">
             </div>
             <div>
-                <label for="password1">Password: </label>
+                <label for="password1">Password: </label><span class="join_condtion">8글자 이상의 영어, 숫자, 특수문자 혼용</span>
                 <input type="password" id="password1" name="password1" value="{{form.password1.value|default_if_none:''}}"
                     placeholder="password">
+                
             </div>
             <div>
                 <label for="password2">Password Confirm: </label>
