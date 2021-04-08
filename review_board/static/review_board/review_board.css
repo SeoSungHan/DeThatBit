@@ -74,6 +74,10 @@ table tr td {
   font-size: 13px;
   padding-right: 0px;
 }
+.td_comment_num {
+  color: red;
+  font-size: 14px;
+}
 .create_btn {
   display: flex;
   justify-content: flex-end;
@@ -253,6 +257,7 @@ textarea#id_text {
   flex-direction: column;
   transition: all 0.75s cubic-bezier(0.19, 1, 0.22, 1);
 }
+
 ul {
   margin: 5px;
   list-style: none;
@@ -406,4 +411,13 @@ p#album li {
 }
 .editBtns {
   padding: 5px;
+}
+.album_warning,
+.rating_warning {
+  font-size: 12px;
+  color: red;
+}
+.rating_warning {
+  margin-left: 10px;
+  line-height: 50px;
 }
