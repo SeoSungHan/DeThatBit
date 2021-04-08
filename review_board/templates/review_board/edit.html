@@ -72,6 +72,18 @@ New Post | DeThatBit
             </form>
 
             <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+            {% if album_error %}
+            <script>
+                alert("입력하신 앨범이 없습니다. 앨범 이름을 완전히 입력해 주세요");
+            </script>
+            {% endif %}
+            {% if rating_error %}
+            <script>
+                alert("최저 별점은 0.5입니다. 별점을 입력해 주세요");
+            </script>
+            {% endif %}
+
             <script type="text/javascript">
                 document.addEventListener('DOMContentLoaded', function () {
                     //별점선택 이벤트 리스너
