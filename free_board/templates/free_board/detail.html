@@ -27,11 +27,12 @@
         </div>
         <!--좋아요 부분-->
         <div class="like_wrapper">
-            <button class="like" name="{{free_post.pk}}" value="추천">추천</button>
-            <p id="count-{{free_post.pk}}"> 🙏🏻 {{free_post.likes.all.count}}개</p>
+            <button class="like" id="custom-target" name="{{free_post.pk}}" value="추천">추천</button>
+            <p id="count-{{free_post.pk}}" class="like_cnt"> 🙏🏻 {{free_post.likes.all.count}}</p>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
     <script type="text/javascript">
         $(".like").click(function () {
             const pk = $(this).attr('name')
@@ -41,10 +42,10 @@
                 data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' },
                 dataType: "json",
                 success: function (response) {
-                    alert(response.message);
-                    $("#count-" + pk).html("좋아요&nbsp;" + response.likes_cnt + "개");
+                    $("#count-" + pk).html("🙏🏻&nbsp;" + response.likes_cnt);
                 },
                 error: function (request, status, error) {
+                    
                     alert("로그인이 필요합니다")
                     window.location.replace("")
                 },
@@ -75,12 +76,15 @@
                     {% endif %}
                 </div>
                 <div class="comment-edit-form-{{comment.pk}} comment-edit-form hidden">
-                    <form action="/free/comment_update/{{comment.pk}}/" method="POST">
+                    <form action="/free/comment_update/{{comment.pk}}/" method="POST" >
                         {% csrf_token %}
                         {{comment_form}}
-                        <button class="btn btn-info mt-3" type="submit"> Submit </button>
+                        <div class="comment-edit-form-btns">
+                            <button class="btn btn-info comment-submit-btn" type="submit"> Submit </button>
+                            <button class="comment-edit-back"  name="edit-back" value="{{comment.pk}}" type="button"> Cancel </button>
+                        </div>
                     </form>
-                    <button class="comment-edit-back" name="edit-back" value="{{comment.pk}}"> Back </button>
+                    
                 </div>
             </div>
             {% endfor%}
@@ -92,7 +96,9 @@
             <form action="/free/{{free_post.pk}}/comment_create/" method="POST">
                 {% csrf_token %}
                 {{comment_form}}
-                <button class="btn btn-info mt-3 submitBtn" type="submit"> Submit </button>
+                <div class="comment_form_btn">
+                    <button class="btn btn-info submitBtn" type="submit"> Submit </button>
+                </div>
             </form>
         </div>
     </div>
@@ -127,5 +133,8 @@
 		  }
 		})
 	}
+    function change_like_color(){
+        const like
+    }
 </script>
 {% endblock %}

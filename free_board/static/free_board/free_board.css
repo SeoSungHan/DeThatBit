@@ -184,6 +184,11 @@ table tr td {
   padding: 10px;
   border-radius: 10px;
 }
+.commentBox h1 {
+  text-align: center;
+  padding-bottom: 5px;
+  margin: 0px auto;
+}
 .comment {
   border-radius: 10px;
 }
@@ -199,14 +204,47 @@ textarea#id_text {
   height: 70px;
   border-radius: 5px;
 }
-.comment-edit-form {
+.comment-edit-form,
+.comment_form {
   margin: 0 auto;
+}
+.comment-edit-form > form,
+.comment_form > form {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+}
+.comment-edit-form > form > label,
+.comment_form > form > label {
+  line-height: 85px;
+  margin: 0px 10px;
+  font-size: 14px;
 }
 .comment_form textarea {
   margin: 10px;
   width: 450px;
   height: 70px;
   border-radius: 5px;
+}
+.comment-edit-form-btns,
+.comment_form_btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.comment-edit-form-btns button {
+  margin: 2px 0px;
+  font-size: 11px;
+}
+
+.comment-submit-btn:hover {
+  background-color: rgb(64, 64, 250);
+  color: white;
+}
+
+.comment-edit-back:hover {
+  background-color: red;
+  color: white;
 }
 .cm_row {
   display: flex;
@@ -225,6 +263,8 @@ textarea#id_text {
 .cm_row p:nth-child(3) {
   width: 390px;
   text-align: left;
+  word-break: break-all;
+  white-space: normal;
 }
 .cm_time {
   width: 50px;
