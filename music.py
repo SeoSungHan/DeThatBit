@@ -68,10 +68,4 @@ def main():
 
 if __name__ == '__main__':
 
-    while True:
-        t=time.time()
-        if int(t)%100==0:
-            print("music.py Work")
-            main()
-            time.sleep(50)
-
+    main()
