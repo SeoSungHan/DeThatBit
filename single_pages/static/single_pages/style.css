@@ -69,16 +69,12 @@ h1 {
 table {
   width: 580px;
   margin: 10px auto 0px auto;
+  table-layout: fixed;
   background-color: white;
   box-shadow: 0px 0px 3px 2px white;
   border-radius: 5px;
 }
-table tr {
-  border-bottom: solid black 50px;
-}
-table tbody tr {
-  padding-bottom: 50px;
-}
+
 table tr th {
   border-bottom: solid black 1px;
   text-align: left;
@@ -87,23 +83,35 @@ table tr td {
   padding-top: 15px;
   padding-bottom: 3px;
   border-bottom: solid black 1px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .th_num {
-  width: 50px;
+  width: 30px;
   padding-right: 0px;
 }
 .th_title {
-  width: 500px;
+  width: 340px;
   padding-right: 50px;
 }
 .th_writer {
-  width: 80px;
+  width: 70px;
   padding-right: 0px;
 }
+.td_num,
+.td_writer,
+.td_time {
+  font-size: 14px;
+}
 .th_time {
-  width: 80px;
+  width: 50px;
   padding-right: 0px;
 }
 .td_time_date {
+  font-size: 14px;
+}
+.td_comment_num {
+  color: darkgray;
   font-size: 14px;
 }

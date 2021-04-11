@@ -24,15 +24,18 @@
         <div class="loginBtns">
             {% if user.is_active %}
             <p>Welcome <span class="username">{{ user.username }}</span></p>
-            <button onclick="location.href='/accounts/logout/'">Log out</button>
+            <button onclick="location.href='/accounts/logout/'">Log Out</button>
             {% else %}
-            <button onclick="location.href='/accounts/login/'">Log in</button>
+            <button onclick="location.href='/accounts/login/'">Log In</button>
             <button onclick="location.href='/sign_up/'">Join</button>
             {% endif %}
         </div>
     </nav>
+    <div class="body_main">
     {% block contents %}{% endblock %}
+    </div>
     {% include './footer.html'%}
 </body>
+
 
 </html>

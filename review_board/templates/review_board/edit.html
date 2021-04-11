@@ -22,7 +22,7 @@ New Post | DeThatBit
                     <input type="text" class="album-select" name="album" placeholder="Album_Search" value="{{album}}">
                     <p id="album"></p>
                     {%if album_error %}
-                    <span class="album_warning">🙏🏻 앨범을 정확히 선택하시기 바랍니다.</span>
+                    <span class="album_warning">✔ 앨범을 정확히 선택하시기 바랍니다.</span>
                     {% endif %}
                 </div>
                 <table>{{form.as_table}}</table>
@@ -68,13 +68,12 @@ New Post | DeThatBit
                         <span class="rating_val hidden">{{rating}}</span>
                     </div>
                     {% if rating_error %}
-                    <span class="rating_warning">🙏🏻 별점을 선택하시기 바랍니다.</span>
+                    <span class="rating_warning">✔ 별점을 선택하시기 바랍니다.</span>
                     {% endif %}
                 </div>
                 <div class="editBtns">
                     <button class="btn btn-info mt-3" type="submit" onclick="check_error();">Submit</button>
                     <button onclick="location.href='../'">Back</button>
-                    {{album_error}}
                 </div>
             </form>
 
@@ -191,75 +190,4 @@ New Post | DeThatBit
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script>
-    function check_error(seq){
-        console.log({album_error});
-        if ({album_error}){
-            Swal.fire({
-            title: 'Wrong album and rating',
-            text: "앨범을 정확히 선택해주시기 바랍니다.",
-            icon: 'warning',
-            showCancelButton: false,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '삭제'
-            });
-        }
-        else if(album_error){
-            Swal.fire({
-                title: 'Wrong Album',
-                text: "앨범을 정확히 선택해주시기 바랍니다.",
-                icon: 'warning',
-                showCancelButton: false,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: '확인',
-            });
-        }
-        else if (rating_error){
-            Swal.fire({
-                title: 'No Rating',
-                text: "앨범을 정확히 선택해주시기 바랍니다.",
-                icon: 'warning',
-                showCancelButton: false,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: '확인',
-            });
-        }
-	}
-    function no_album(seq){
-		Swal.fire({
-		  title: 'Wrong album',
-		  text: "앨범을 정확히 선택해주시기 바랍니다.",
-		  icon: 'warning',
-		  showCancelButton: true,
-		  confirmButtonColor: '#3085d6',
-		  cancelButtonColor: '#d33',
-		  confirmButtonText: '삭제',
-		  cancelButtonText: '취소'
-		}).then((result) => {
-		  if (result.value) {
-              //"삭제" 버튼을 눌렀을 때 작업할 내용을 이곳에 넣어주면 된다. 
-		  }
-		})
-	}
-    function no_rating(seq){
-		Swal.fire({
-		  title: 'No rating',
-		  text: "별점을 선택해주시기 바랍니다.",
-		  icon: 'warning',
-		  showCancelButton: true,
-		  confirmButtonColor: '#3085d6',
-		  cancelButtonColor: '#d33',
-		  confirmButtonText: '삭제',
-		  cancelButtonText: '취소'
-		}).then((result) => {
-		  if (result.value) {
-              //"삭제" 버튼을 눌렀을 때 작업할 내용을 이곳에 넣어주면 된다. 
-		  }
-		})
-	}
-</script>
 {% endblock %}
