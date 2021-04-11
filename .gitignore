@@ -132,3 +132,6 @@ dmypy.json
 #pycharm
 .idea/
 migrations/
+
+.env.prod 
+.env.prod.db
