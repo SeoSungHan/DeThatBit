@@ -231,7 +231,7 @@ def Review_Post_Delete(request, pk):
         album = post.album
         album.rating = album.rating*album.reviews - post.rating
         album.reviews -= 1
-        album.rating /= album.reviews
+        if album.reviews: album.rating /= album.reviews
         album.save()
         post.delete()
         return redirect('../../')
