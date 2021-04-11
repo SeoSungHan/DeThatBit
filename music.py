@@ -15,59 +15,53 @@ django.setup()
 from albums.models import Albums
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-header = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko'}
+header = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko'}
+api_flo = 'https://www.music-flo.com/api/display/v1/browser/genre/newalbum/6?timestamp=1615814390181'
 
-url_melon = 'https://www.melon.com/genre/album_listPaging.htm?startIndex=1&pageSize=10000&gnrCode=GN0300'
-url_detail = 'https://www.melon.com/album/detail.htm?albumId='
+def get_flo():
+    req = requests.get(api_flo)
+    data = req.json()
+    new_albums = data['data']['albumList']
+    result = []
 
+    #print(new_albums[0])
 
-def get_melon():
-    result = requests.get(
-        url_melon, headers=header)
-    soup = BeautifulSoup(result.text, "html.parser")
-    albums = soup.find("div", {"class": "service_list_album"}).find("ul").find_all(
-        "li", recursive=False)
-    # print(albums)
-    album_list = []
-    artist_list = []
-    for album in albums:
-        link_ = album.find("a", {"class": "album_name"})["href"]
-        link_id = re.findall("\d+", link_)[0]
-        link = f'{url_detail}{link_id}'
+    for new_album in new_albums:
+        artist_str=""
 
-        cover = album.find("div", {"class": "thumb"}).find("img")["src"]
-        artist = album.find(
-            "span", {"class": "checkEllipsis"}).get_text(strip=True)
-        album_name = album.find(
-            "a", {"class": "album_name"}).get_text(strip=True)
-        type = album.find("span", {"class": "vdo_name"}).get_text(strip=True)
-        date = album.find("span", {"class": "reg_date"}).get_text(strip=True)
-        # save artists in artist_list
-        if artist not in artist_list:
-            artist_list.append(artist)
-        album_list.append(
-            {'link': link, 'cover': cover, 'artist': artist, 'type': type, 'album': album_name, 'date': date})
+        for i in range(len(new_album['artistList'])):
+            artist_str += new_album['artistList'][i]['name']
 
-    return album_list, artist_list
+            if i == len(new_album['artistList'])-1: continue
+            else: artist_str += ", "
+
+        result.append({
+            'type': new_album['type'],
+            'cover': new_album['imgList'][0]['url'],
+            'artist': artist_str,
+            'album': new_album['title'],
+            'date': new_album['releaseYmd']
+        })
+
+    return result
 
 
 if __name__ == '__main__':
-    albums, artists = get_melon()
-    #print(albums)
-    #print(artists)
+    albums = get_flo()
     
     for data in albums:
-        tmp = data['date'].split('.')
-        date_tmp = tmp[0]+'-'+tmp[1]+'-'+tmp[2]
-
+        tmp = data['date']
+        tmp0 = tmp[0:4]
+        tmp1 = tmp[4:6]
+        tmp2 = tmp[6:]
+        date_tmp = tmp0+'-'+tmp1+'-'+tmp2
+        print(data['artist'])
         exist=Albums.objects.filter(
                 Q(album=data['album']) & Q(artist=data['artist'] )
             ).distinct()
         if exist:
-            #print(data) 
+            #print(exist) 
             continue
-        #print(data)
         Albums(artist=data['artist'], a_type=data['type'],
-               album=data['album'], date=date_tmp, cover=data['cover'], link=data['link']).save()
+               album=data['album'], date=date_tmp, cover=data['cover']).save()
 
