@@ -1,0 +1,117 @@
+.home {
+  padding: 50px;
+  font-size: 80px;
+}
+.landingBox {
+  border: black solid 2px;
+  display: grid;
+  grid-template-rows: 230px 1fr;
+  align-items: baseline;
+  border-radius: 5px;
+  margin: 10px auto;
+  width: 1200px;
+  height: 750px;
+}
+.landing_albums {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px 2px white;
+  margin: 10px;
+}
+.landing_albumList {
+  list-style: none;
+  display: flex;
+}
+.landing_albumList .album_cover {
+  width: 150px;
+  height: 150px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px 2px gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.landing_album_info {
+  text-align: center;
+}
+
+.landing_album_info_text {
+  background-color: rgb(46, 45, 45);
+  color: white;
+  font-size: 13px;
+}
+.grayscale {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+.landing_board {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+  margin: 5px;
+}
+
+.landing_free_board,
+.landing_review_board {
+  background-color: white;
+  box-shadow: 0px 0px 3px 2px white;
+  border-radius: 5px;
+  margin: 5px;
+  width: 585px;
+  height: 500px;
+}
+h1 {
+  font-size: 25px;
+  margin: 0px 10px;
+}
+table {
+  width: 580px;
+  margin: 10px auto 0px auto;
+  table-layout: fixed;
+  background-color: white;
+  box-shadow: 0px 0px 3px 2px white;
+  border-radius: 5px;
+}
+
+table tr th {
+  border-bottom: solid black 1px;
+  text-align: left;
+}
+table tr td {
+  padding-top: 15px;
+  padding-bottom: 3px;
+  border-bottom: solid black 1px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.th_num {
+  width: 30px;
+  padding-right: 0px;
+}
+.th_title {
+  width: 340px;
+  padding-right: 50px;
+}
+.th_writer {
+  width: 70px;
+  padding-right: 0px;
+}
+.td_num,
+.td_writer,
+.td_time {
+  font-size: 14px;
+}
+.th_time {
+  width: 50px;
+  padding-right: 0px;
+}
+.td_time_date {
+  font-size: 14px;
+}
+.td_comment_num {
+  color: darkgray;
+  font-size: 14px;
+}
