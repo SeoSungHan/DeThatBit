@@ -4,9 +4,9 @@ import math
 
 
 class Albums(models.Model):
-    artist = models.CharField(max_length=30)
+    artist = models.CharField(max_length=500)
     a_type = models.CharField(max_length=10)
-    album = models.CharField(max_length=30)
+    album = models.CharField(max_length=500)
     date = models.DateField()
     cover = models.CharField(max_length=500)
     link = models.CharField(max_length=500, null=True)
