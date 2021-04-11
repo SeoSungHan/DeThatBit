@@ -3,9 +3,9 @@ version: '3'
 services:
   web:
     build: .
-    command:
-      #python music.py 
-      python manage.py runserver 0.0.0.0:8000
+    command: python music.py
+    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn DeThatBit.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - ./:/usr/src/app/
     ports:
@@ -21,10 +21,7 @@ services:
       - POSTGRES_USER=sungjoon
       - POSTGRES_PASSWORD=148bvc
       - POSTGRES_DB=dethatbit_dev
-
-  music:
-    command:
-      python music.py
+      
 volumes:
   postgres_data:
     

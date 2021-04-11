@@ -1,0 +1,73 @@
+.signUpBox {
+  margin: 150px auto;
+  text-align: center;
+  width: 300px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 2px white;
+}
+.signUpHeader {
+  padding: 10px;
+  border-bottom: black solid 1px;
+  margin: 0;
+}
+.signUpForm {
+  width: 200px;
+  margin: 0 auto;
+  text-align: left;
+  padding: 10px;
+}
+.signUpForm input {
+  width: 200px;
+  margin-bottom: 5px;
+  background-color: rgb(239, 239, 239);
+  border: transparent;
+  border-radius: 3px;
+  padding: 3px;
+}
+.signUpForm label {
+  display: block;
+}
+.submitBtn {
+  text-align: center;
+}
+.submitBtn > input {
+  margin: 10px auto 0px auto;
+  width: 60px;
+  padding: 3px;
+  border: transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.75s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.submitBtn > input:hover {
+  background-color: rgb(13, 60, 63);
+  color: white;
+}
+.join_condtion {
+  font-size: 10px;
+  color: darkgray;
+}
+.error_msg {
+  font-size: 10px;
+}
+.error_msg > div > .errorList {
+  padding: 0px;
+  margin: 0px;
+  color: darkgray;
+}
+.error_msg > div > .errorList > li {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 0px;
+}
+.error_msg > div > .errorList .errorList {
+  color: darkgray;
+}
+.error_msg > div > .errorList .errorList > li {
+  padding-bottom: 3px;
+  border-bottom: 1px dotted lightgray;
+}
+li {
+  list-style: none;
+}

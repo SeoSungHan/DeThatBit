@@ -1,0 +1,354 @@
+.nav_free {
+  background-color: black;
+}
+.nav_free a {
+  color: white;
+}
+.table_wrapper {
+  width: 800px;
+  margin: 0px auto 0px auto;
+  background-color: white;
+  box-shadow: 0px 0px 3px 2px white;
+  border-radius: 5px;
+}
+.freeBoard {
+  text-align: center;
+  width: 800px;
+  margin: 50px auto 20px auto;
+  border: solid black 2px;
+  border-radius: 15px;
+  padding: 0px 10px;
+}
+.free_header {
+  display: flex;
+  justify-content: space-between;
+}
+.freeboard h1 {
+  text-align: left;
+}
+.free_header .search_album {
+  display: flex;
+  align-items: flex-end;
+}
+.free_header .search_album form {
+  margin-bottom: 10px;
+}
+table {
+  width: 800px;
+  margin: 0px auto 0px auto;
+  background-color: white;
+  border-radius: 5px;
+  table-layout: fixed;
+}
+
+table tr th {
+  border-bottom: solid black 1px;
+  text-align: left;
+}
+table tr td {
+  padding-top: 15px;
+  padding-bottom: 3px;
+  border-bottom: solid black 1px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.th_num {
+  width: 50px;
+  padding-right: 0px;
+}
+.th_title {
+  width: 500px;
+  padding-right: 50px;
+}
+.th_writer {
+  width: 80px;
+  padding-right: 0px;
+}
+.th_time {
+  width: 80px;
+  padding-right: 0px;
+}
+.td_comment_num {
+  color: darkgray;
+  font-size: 14px;
+}
+.create_btn {
+  display: flex;
+  justify-content: flex-end;
+  border: transparent;
+  margin: 10px 92%;
+  padding: 5px 3px 5px 3px;
+  transition: all 0.75s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.create_btn:hover {
+  background-color: black;
+  box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.5);
+  color: white;
+  animation: fadeIn 0.5s linear;
+}
+.wrapper_paginations {
+  text-align: center;
+}
+.paginations {
+  display: flex;
+  justify-content: center;
+  padding: 0px;
+}
+.paginations button {
+  margin: 10px;
+  padding: 10px 15px;
+}
+
+/*detail.html*/
+.content {
+  text-align: center;
+  width: 600px;
+  margin: 50px auto 10px auto;
+  border: solid black 2px;
+  border-radius: 15px;
+  padding: 0px 10px;
+}
+.content h1 {
+  font-size: 20px;
+  text-align: left;
+}
+.contentBox {
+  width: 580px;
+  padding: 10px;
+  margin: 10px auto;
+  box-shadow: 0px 0px 3px 2px white;
+  background-color: white;
+  border-radius: 10px;
+}
+.contentBox p {
+  overflow: hidden;
+  word-wrap: break-word;
+}
+.contentBox_header {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  border-bottom: black dashed 2px;
+}
+
+.contentBox_header .updateBtns {
+  text-align: right;
+  margin-right: 5px;
+  transition: all 0.75s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.updateBtns button {
+  margin-bottom: 5px;
+}
+.updateBtns button:hover {
+  background-color: black;
+  box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.5);
+  color: white;
+  animation: fadeIn 0.5s linear;
+}
+.contentBox_header .title {
+  font-size: 35px;
+  width: 500px;
+  margin: 5px 0px;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+.contentBox_header .author {
+  margin: 10px 0px 10px 5px;
+}
+.contentBox_body {
+  text-align: left;
+}
+.like_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.like_wrapper .like {
+  font-size: 13px;
+  padding: 3px 7px;
+  margin-right: 20px;
+}
+.like_wrapper p {
+  margin: 2px 0px;
+  font-size: 13px;
+}
+
+/*Comment*/
+.commentBox {
+  text-align: center;
+  width: 580px;
+  margin: 10px auto;
+  background-color: white;
+  box-shadow: 0px 0px 3px 2px white;
+  padding: 10px;
+  border-radius: 10px;
+}
+.commentBox h1 {
+  text-align: center;
+  padding-bottom: 5px;
+  margin: 0px auto;
+}
+.comment {
+  border-radius: 10px;
+}
+.comment_box {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+textarea#id_text {
+  margin: 10px;
+  width: 450px;
+  height: 70px;
+  border-radius: 5px;
+}
+.comment-edit-form,
+.comment_form {
+  margin: 0 auto;
+}
+.comment-edit-form > form,
+.comment_form > form {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+}
+.comment-edit-form > form > label,
+.comment_form > form > label {
+  line-height: 85px;
+  margin: 0px 10px;
+  font-size: 14px;
+}
+.comment_form textarea {
+  margin: 10px;
+  width: 450px;
+  height: 70px;
+  border-radius: 5px;
+}
+.comment-edit-form-btns,
+.comment_form_btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.comment-edit-form-btns button {
+  margin: 2px 0px;
+  font-size: 11px;
+}
+
+.comment-submit-btn:hover {
+  background-color: rgb(64, 64, 250);
+  color: white;
+}
+
+.comment-edit-back:hover {
+  background-color: red;
+  color: white;
+}
+.cm_row {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1 10px;
+  border-bottom: 1px dotted black;
+}
+.cm_writer {
+  width: 75px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.cm_row p:nth-child(3) {
+  width: 390px;
+  text-align: left;
+  word-break: break-all;
+  white-space: normal;
+}
+.cm_time {
+  width: 50px;
+}
+.cm_btns {
+  position: sticky;
+  padding: 0;
+  transition: all 0.75s cubic-bezier(0.19, 1, 0.22, 1);
+}
+ul {
+  margin: 5px;
+  list-style: none;
+}
+.cm_btns button {
+  font-size: 10px;
+  margin: 2px;
+}
+.cm_btns li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+button:hover {
+  background-color: black;
+  box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.5);
+  color: white;
+  animation: fadeIn 0.5s linear;
+}
+.showing {
+  display: block;
+}
+.unshowing {
+  display: none;
+}
+.hidden {
+  display: none;
+}
+
+/*edit.html*/
+.new_post {
+  background-color: white;
+  box-shadow: 0px 0px 3px 2px white;
+  text-align: center;
+  margin: 10px auto;
+  border-radius: 10px;
+}
+.contentBox_body {
+  padding: 0;
+}
+.new_post table {
+  margin: 0;
+  width: 600px;
+}
+.new_post form {
+  margin: 0;
+}
+.new_post table th {
+  margin: 0;
+  width: 75px;
+  border-bottom: transparent;
+  padding: 10px 0;
+  text-align: center;
+}
+.new_post table td {
+  border-bottom: transparent;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+.new_post table tr {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  border-bottom: dashed 1px;
+}
+textarea#id_content {
+  width: 500px;
+  height: 400px;
+}
+input#id_title {
+  margin: auto 0px;
+  width: 300px;
+}
+.editBtns {
+  padding: 5px;
+}
