@@ -7,6 +7,7 @@ from typing import get_args
 import re
 import django
 from django.db.models import Q
+import time
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "DeThatBit.settings")
 django.setup()
@@ -45,8 +46,7 @@ def get_flo():
 
     return result
 
-
-if __name__ == '__main__':
+def main():
     albums = get_flo()
     
     for data in albums:
@@ -55,7 +55,7 @@ if __name__ == '__main__':
         tmp1 = tmp[4:6]
         tmp2 = tmp[6:]
         date_tmp = tmp0+'-'+tmp1+'-'+tmp2
-        print(data['artist'])
+        #print(data['artist'])
         exist=Albums.objects.filter(
                 Q(album=data['album']) & Q(artist=data['artist'] )
             ).distinct()
@@ -64,4 +64,14 @@ if __name__ == '__main__':
             continue
         Albums(artist=data['artist'], a_type=data['type'],
                album=data['album'], date=date_tmp, cover=data['cover']).save()
+
+
+if __name__ == '__main__':
+
+    while True:
+        t=time.time()
+        if int(t)%100==0:
+            print("music.py Work")
+            main()
+            time.sleep(50)
 
