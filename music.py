@@ -36,9 +36,11 @@ def get_flo():
             if i == len(new_album['artistList'])-1: continue
             else: artist_str += ", "
 
+        l=len(new_album['imgList'])-1
+
         result.append({
-            'type': new_album['type'],
-            'cover': new_album['imgList'][0]['url'],
+            'type': new_album['albumTypeStr'],
+            'cover': new_album['imgList'][l]['url'],
             'artist': artist_str,
             'album': new_album['title'],
             'date': new_album['releaseYmd']
