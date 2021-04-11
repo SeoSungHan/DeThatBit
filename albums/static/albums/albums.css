@@ -9,7 +9,7 @@ li {
 }
 .album {
   text-align: center;
-  width: 1300px;
+  width: 1200px;
   margin: 50px auto 10px auto;
   border: solid black 2px;
   border-radius: 15px;
@@ -33,7 +33,7 @@ li {
 .albumBox {
   background-color: white;
   border-radius: 5px;
-  width: 1300px;
+  width: 1200px;
   margin: 10px auto 0px auto;
   box-shadow: 0px 0px 3px 2px white;
 }
@@ -80,4 +80,49 @@ li {
 .paginations button {
   margin: 10px;
   padding: 10px 15px;
+}
+
+@media all and (max-width: 1000px) {
+  .album {
+    text-align: center;
+    width: 750px;
+    margin: 50px auto 10px auto;
+    border: solid black 2px;
+    border-radius: 15px;
+    padding: 0px 10px 10px 10px;
+  }
+  .albumBox {
+    border-radius: 5px;
+    width: 750px;
+  }
+  .albumList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    list-style: none;
+  }
+}
+.albumContent {
+  padding-left: 10px;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+}
+  .album_cover {
+    height: 100px;
+    width: 100px;
+
+  }
+  .album_meta_review {
+    font-size: 10px
+  }
+  .album_name{
+    font-size: 14px;
+  }
+  .album_meta .album_artist,
+  .album_date {
+    font-size: 11px;
+  }
+  .album_meta ul {
+    padding-left: 20px;
+    margin-top: 2px;
+  }
 }
