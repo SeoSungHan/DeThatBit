@@ -1,3 +1,3 @@
 # DeThatBit
 
-[dethatbit.com](http://www.drthatbit.com)
+URL: [dethatbit.com](http://www.drthatbit.com)
