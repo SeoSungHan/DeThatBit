@@ -57,7 +57,7 @@ def main():
         tmp1 = tmp[4:6]
         tmp2 = tmp[6:]
         date_tmp = tmp0+'-'+tmp1+'-'+tmp2
-        #print(data['artist'])
+        print(data['artist'])
         exist=Albums.objects.filter(
                 Q(album=data['album']) & Q(artist=data['artist'] )
             ).distinct()
