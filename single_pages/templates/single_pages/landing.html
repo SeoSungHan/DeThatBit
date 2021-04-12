@@ -12,14 +12,14 @@ DeThatBit
 {% block contents %}
 <div class="landingBox">
     <div class="landing_albums">
-        <h1>Recent Albums</h1>
+        <h1><a href="/albums/">Recent Albums</a></h1>
         <li class="landing_albumList">
             {% for a in album %}
             <ul>
                 <div class="album_cover" onmouseenter="mouseIn()" onmouseleave="mouseOut()"
                     style='background-image:url("{{a.cover}}");background-size:cover;background-position:center'>
                     <div class="landing_album_info hidden">
-                        <span class="landing_album_info_text">{{a.a_type}} {{a.album}}</span>
+                        <span class="landing_album_info_text">[{{a.a_type}}] {{a.album}}</span>
                         <br>
                         <span class="landing_album_info_text">{{a.artist}}</span>
                     </div>

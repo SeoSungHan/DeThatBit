@@ -42,31 +42,37 @@ li {
   grid-template-columns: 1fr 1fr 1fr;
   list-style: none;
 }
+
 .albumContent {
   padding-left: 10px;
   display: grid;
-  grid-template-columns: 160px 1fr;
+  grid-template-columns: 100px 1fr;
 }
 .album_cover {
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
   border-radius: 5px;
   box-shadow: 0px 0px 3px 1px gray;
 }
+
+.album_name {
+  font-size: 14px;
+}
 .album_meta_review {
-  font-size: 13px;
+  font-size: 10px;
   display: flex;
 }
 .album_meta_info {
   text-align: left;
 }
+
 .album_meta ul {
   padding-left: 20px;
-  margin-top: 5px;
+  margin-top: 2px;
 }
 .album_meta .album_artist,
 .album_date {
-  font-size: 14px;
+  font-size: 12px;
   color: rgb(41, 39, 39);
 }
 .wrapper_paginations {
@@ -80,6 +86,12 @@ li {
 .paginations button {
   margin: 10px;
   padding: 10px 15px;
+}
+
+button:hover {
+  background-color: black;
+  color: white;
+  animation: fadeIn 0.5s linear;
 }
 
 @media all and (max-width: 1000px) {
@@ -100,29 +112,8 @@ li {
     grid-template-columns: 1fr 1fr;
     list-style: none;
   }
-}
-.albumContent {
-  padding-left: 10px;
-  display: grid;
-  grid-template-columns: 100px 1fr;
-}
-  .album_cover {
-    height: 100px;
-    width: 100px;
-
-  }
-  .album_meta_review {
-    font-size: 10px
-  }
-  .album_name{
-    font-size: 14px;
-  }
   .album_meta .album_artist,
   .album_date {
     font-size: 11px;
-  }
-  .album_meta ul {
-    padding-left: 20px;
-    margin-top: 2px;
   }
 }

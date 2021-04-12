@@ -123,7 +123,7 @@ a {
   .nav_list {
     width: 100%;
     justify-content: space-around;
-    font-size: 20px;
+    font-size: 30px;
   }
   .nav_list li {
     text-align: center;
@@ -131,4 +131,7 @@ a {
     margin: 0;
     padding: 0;
   }
+}
+.now_btn {
+  background-color: darkgray;
 }

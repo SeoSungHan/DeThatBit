@@ -79,7 +79,7 @@ Review Board | DeThatBit
         {% endif %}
         {% for page in page_range %}
         <li class="page-item">
-            <button onclick="location.href='?page={{ page }}'">{{ page }}</button>
+            <button class='page_{{page}}' onclick="location.href='?page={{ page }}'">{{ page }}</button>
         </li>
         {% endfor %}
         {% if last_page < page_obj.paginator.num_pages %} <li class="page-item">
@@ -94,6 +94,26 @@ Review Board | DeThatBit
 </div>
 
 <script>
+    function pagination_now(){
+        const pagination = document.querySelector(".paginations");
+        if (pagination==null){
+            return;
+        }
+        const link = document.location.href;
+        const now_page = link.split("?")[1];
+        if (now_page == null){
+            const now_btn = pagination.querySelector('.page_1');
+            now_btn.classList.add("now_btn");
+            return;
+        }
+        const page_btn = now_page.split('=')[1];
+        if (page_btn){
+            const now_btn = pagination.querySelector(`.page_${page_btn}`);
+            now_btn.classList.add("now_btn");
+            return;
+        }
+    }
+    pagination_now();
     function check_comment(){
         const comment_num = document.querySelectorAll(".td_comment_num");
         for (let i = 0; i < comment_num.length; i++){
