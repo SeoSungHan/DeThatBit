@@ -41,7 +41,7 @@ Albums | DeThatBit
                     </div>
                     <div class="wrapper_album_meta_info">
                         <li class="album_meta_info">
-                            <ul class="album_name">{{a.a_type}} {{a.album}}</ul>
+                            <ul class="album_name">[{{a.a_type}}] {{a.album}}</ul>
                             <ul class="album_artist">{{a.artist}}</ul>
                             <ul class="album_date">{{a.date}}</ul>
                         </li>
@@ -69,7 +69,7 @@ Albums | DeThatBit
         {% endif %}
         {% for page in page_range %}
         <li class="page-item">
-            <button onclick="location.href='?page={{ page }}'">{{ page }}</button>
+            <button onclick="location.href='?page={{ page }}'" class='page_{{page}}'>{{ page }}</button>
         </li>
         {% endfor %}
         {% if last_page < page_obj.paginator.num_pages %} <li class="page-item">
@@ -83,9 +83,27 @@ Albums | DeThatBit
     {% endif %}
 </div>
 
-
-
 <script>
+    function pagination_now(){
+        const pagination = document.querySelector(".paginations");
+        if (pagination==null){
+            return;
+        }
+        const link = document.location.href;
+        const now_page = link.split("?")[1];
+        if (now_page == null){
+            const now_btn = pagination.querySelector('.page_1');
+            now_btn.classList.add("now_btn");
+            return;
+        }
+        const page_btn = now_page.split('=')[1];
+        if (page_btn){
+            const now_btn = pagination.querySelector(`.page_${page_btn}`);
+            now_btn.classList.add("now_btn");
+            return;
+        }
+    }
+    pagination_now();
     function search() {
         let val = document.getElementById('search-album').value.trim()
         let type = document.getElementById('search-type').value.trim()

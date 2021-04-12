@@ -1,6 +1,7 @@
 .home {
-  padding: 50px;
+  padding: 50px 0px;
   font-size: 80px;
+  width: 100%;
 }
 .landingBox {
   border: black solid 2px;
@@ -115,9 +116,10 @@ table tr td {
   color: darkgray;
   font-size: 14px;
 }
+
 @media all and (max-width: 1000px) {
   .home {
-    width: 11em;
+    width: 100%;
   }
   .landingBox {
     margin: 20px auto;
